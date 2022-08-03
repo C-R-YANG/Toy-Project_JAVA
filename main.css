@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap");
+/* font-family: 'Noto Sans KR', sans-serif; */
+
+@font-face { font-family: 'Material Icons'; font-style: normal; font-weight: 400; src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */ src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'), url(https://example.com/MaterialIcons-Regular.woff) format('woff'), url(https://example.com/MaterialIcons-Regular.ttf) format('truetype'); }
+
+.material-icons { font-family: 'Material Icons'; font-weight: normal; font-style: normal; font-size: 24px; /* Preferred icon size */ display: inline-block; line-height: 1; text-transform: none; letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr; /* Support for all WebKit browsers. */ -webkit-font-smoothing: antialiased; /* Support for Safari and Chrome. */ text-rendering: optimizeLegibility; /* Support for Firefox. */ -moz-osx-font-smoothing: grayscale; /* Support for IE. */ font-feature-settings: 'liga'; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flex {
+  display: flex;`
+}
+
+#main {
+  width: 1200px;
+  height: 100%;
+  margin: auto;
+}
+
+#header {
+  width: 100%;
+  height: 600px;
+  justify-content: space-between;
+}
+
+#body {
+  width: 100%;
+  height: 5000px;
+}
+
+#footer {
+  width: 100%;
+  height: 200px;
+  background-color: green;
+}
+
+/* Header_nav */
+.nav {
+  width: 90%;
+  height: 150px;
+  display: flex;
+  margin-left: 150px;
+}
+
+.logo {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.menu {
+  width: 70%;
+  height: 100%;
+}
+
+.menu_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 25px;
+}
+
+.header_right {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.login {
+  font-size: 25px;
+
+}
+
+/* Header_content */
+.header_content {
+  width: 100%;
+  height: 600px;
+  background-image: url('IMG/5481280.jpg');
+  background-size: 1500px 600px;
+}
+
+.header_text {
+  text-align: center;
+  padding-top: 80px;
+  font-size: 45px;
+}
+
+.header_text span {
+  color: #529A58;
+}
+
+.search_box {
+  display: flex;
+}
+
+
+.dropdown button {
+  width: 200px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: left;
+}
+
+
+.dropdown_content {
+  display: none;
+  background-color: white;
+  font-size: 20px;
+}
+
+.dropdown_content a {
+  display: block;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 12px 20px;
+}
+
+.dropdown_content a:hover{
+  background-color : #ececec
+}
+
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+
+.search {
+  width: 400px;
+}
+
+.search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 20px;
+}
+
+.search button {
+  width: 70px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+}
