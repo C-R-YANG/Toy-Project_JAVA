@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>보리댕댕</title>
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="index.css" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -31,17 +31,17 @@
           </p>
           <div class="search_box">
             <div class="dropdown">
-              <button>
-                전체<span class="material-icons dropdown_icon">
-                  expand_more
-                </span>
-              </button>
-              <div class="dropdown_content">
-                <a href="#">동구</a>
-                <a href="#">서구</a>
-                <a href="#">남구</a>
-                <a href="#">북구</a>
-                <a href="#">광산구</a>
+              <button>전체</button>
+              <span class="material-icons dropdown_icon">
+                expand_more
+              </span>
+              <div class="dropdown_content none">
+                <div>전체</div>
+                <div>동구</div>
+                <div>서구</div>
+                <div>남구</div>
+                <div>북구</div>
+                <div>광산구</div>
               </div>
             </div>
             <form action="" class="search">
@@ -58,17 +58,9 @@
           <div class="area_text">지역별 모아보기</div>
           <div class="area_image">
             <img src="/IMG/동구.png" alt="" />
-          </div>
-          <div class="area_image">
             <img src="/IMG/서구.png" alt="" />
-          </div>
-          <div class="area_image">
             <img src="/IMG/남구.png" alt="" />
-          </div>
-          <div class="area area_image">
             <img src="/IMG/북구.png" alt="" />
-          </div>
-          <div class="area area_image">
             <img src="/IMG/광산구.png" alt="" />
           </div>
         </div>
@@ -77,4 +69,6 @@
       <section id="footer"></section>
     </section>
   </body>
+
+  <script src="index.js"></script>
 </html>
