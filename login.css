@@ -1,0 +1,120 @@
+/*
+  #FFD88E
+  #CAC670
+  #90B45E
+  #4DA058
+  #008a5b
+  #007363 */
+
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url(https://example.com/MaterialIcons-Regular.woff2) format("woff2"),
+    url(https://example.com/MaterialIcons-Regular.woff) format("woff"),
+    url(https://example.com/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr; /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased; /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility; /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale; /* Support for IE. */
+  font-feature-settings: "liga";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "GmarketSansMedium";
+}
+
+.none {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  width: 150px;
+  padding: 5px;
+  border: none;
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 5px 10px 15px rgba(174, 171, 171, 0.2);
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+#login {
+  width: 1800px;
+  height: 3680px;
+  margin: auto;
+}
+
+#header {
+  width: 100%;
+  height: 60px;
+  justify-content: space-between;
+}
+
+#main {
+  width: 100%;
+  height: 800px;
+  background-color: blue;
+}
+
+#footer {
+  width: 100%;
+  height: 400px;
+  background-color: blueviolet;
+}
+
+/* Header_nav */
+.nav {
+  width: 80%;
+  height: 60px;
+  display: flex;
+  margin: 20px auto;
+}
+
+.logo {
+  width: 200px;
+  height: 100%;
+}
+
+.logo img {
+  width: 150px;
+}
+/* Footer */
