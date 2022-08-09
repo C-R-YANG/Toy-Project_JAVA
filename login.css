@@ -79,7 +79,7 @@
 
 #login {
   width: 1800px;
-  height: 3680px;
+  height: 1000px;
   margin: auto;
 }
 
@@ -91,13 +91,12 @@
 
 #main {
   width: 100%;
-  height: 800px;
-  background-color: blue;
+  height: 600px;
 }
 
 #footer {
   width: 100%;
-  height: 400px;
+  height: 100px;
   background-color: blueviolet;
 }
 
@@ -117,4 +116,53 @@
 .logo img {
   width: 150px;
 }
-/* Footer */
+/* Main */
+.login_form {
+  width: 400px;
+  height: 500px;
+  border: 1px solid;
+  margin: auto;
+}
+
+.login_form > h1 {
+  text-align: center;
+  font-size: 35px;
+  color: #008a5b;
+  font-weight: 600;
+  margin-bottom: 50px;
+  padding-top: 100px;
+}
+
+.int_area {
+  text-align: center;
+}
+
+.int_area > input {
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(245, 245, 245);
+  margin: 5px;
+  padding: 10px;
+}
+
+.remember_me {
+  margin-left: 55px;
+  font-size: 12px;
+}
+
+.btn_area {
+  text-align: center;
+}
+
+.login_form button {
+  width: 300px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: #008a5b;
+  margin: 5px;
+  padding: 10px;
+}
