@@ -78,7 +78,7 @@
 }
 
 #login {
-  width: 1800px;
+  width: 1100px;
   height: 1000px;
   margin: auto;
 }
@@ -103,19 +103,20 @@
 /* Header_nav */
 .nav {
   width: 80%;
-  height: 60px;
+  height: 50px;
   display: flex;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .logo {
-  width: 200px;
+  width: 120px;
   height: 100%;
 }
 
 .logo img {
-  width: 150px;
+  width: 120px;
 }
+
 /* Main */
 .login_form {
   width: 400px;

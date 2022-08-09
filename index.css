@@ -78,58 +78,59 @@
 }
 
 #home {
-  width: 1800px;
-  height: 3680px;
+  width: 1100px;
+  height: 2580px;
   margin: auto;
 }
 
 #header {
   width: 100%;
-  height: 880px;
+  height: 565px;
   justify-content: space-between;
 }
 
 #main {
   width: 100%;
-  height: 2400px;
+  height: 1900px;
 }
 
 #footer {
   width: 100%;
-  height: 400px;
+  height: 100px;
 }
 
 /* Header */
 /* Header_nav */
 .nav {
   width: 80%;
-  height: 60px;
+  height: 50px;
   display: flex;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .logo {
-  width: 200px;
+  width: 120px;
   height: 100%;
 }
 
 .logo img {
-  width: 150px;
+  width: 120px;
 }
 
 .menu_list {
-  width: 1600px;
+  width: 700px;
   height: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  font-size: 20px;
+  font-size: 14px;
   cursor: pointer;
 }
 
 .login {
-  width: 200px;
-  height: 100%;
+  width: 120px;
+  height: 75%;
+  margin-top: 5px;
   display: flex;
   justify-content: flex-end;
   transition: 0.25s;
@@ -137,16 +138,16 @@
 
 .login:hover {
   letter-spacing: 1px;
-  transform: scale(1.2);
+  transform: scale(1.1);
   cursor: pointer;
 }
 
 .login div {
-  width: 100px;
-  margin: 10px 20px 10px 0;
-  font-weight: 600;
+  width: 90px;
+  padding: 5px;
+  font-size: 14px;
   text-align: center;
-  line-height: 43px;
+  line-height: 30px;
   color: #fff;
   border-radius: 10px;
   background-color: #008a5b;
@@ -155,26 +156,26 @@
 /* Header_content */
 .header_content {
   width: 100%;
-  height: 800px;
+  height: 500px;
   background-image: url("IMG/puppy.jpg");
-  background-size: 1800px 800px;
+  background-size: 1100px 500px;
 }
 
 .header_text {
   text-align: center;
-  padding: 180px 0 30px 0;
-  font-size: 60px;
+  padding: 100px 0 30px 0;
+  font-size: 35px;
   font-weight: 600;
 }
 
 .header_text span {
-  color: #009977;
+  color: #008a5b;
 }
 
 .search_box {
   display: flex;
-  width: 620px;
-  height: 50px;
+  width: 600px;
+  height: 45px;
   margin: 0 auto;
 }
 
@@ -184,7 +185,7 @@
 
 .dropdown button {
   width: 110px;
-  height: 50px;
+  height: 45px;
   border-radius: 8px;
   background-color: white;
   border: none;
@@ -214,7 +215,7 @@
   display: block;
   text-decoration: none;
   font-size: 20px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 
@@ -224,13 +225,13 @@
 
 .search {
   width: 500px;
-  height: 50px;
+  height: 45px;
   margin: 0 auto;
 }
 
 .search input {
   width: 100%;
-  height: 50px;
+  height: 45px;
   border: none;
   outline: none;
   border-radius: 8px;
@@ -240,11 +241,12 @@
 
 .search button {
   width: 50px;
+  height: 45px;
   border: none;
   border-radius: 8px;
   background-color: white;
   position: relative;
-  top: -48px;
+  top: -45px;
   left: 450px;
 }
 
@@ -257,15 +259,15 @@
 /* Home_area_box */
 .area_box {
   width: 100%;
-  height: 600px;
+  height: 500px;
   margin: 0 auto;
 }
 
 .area_text {
   text-align: center;
-  font-size: 55px;
+  font-size: 30px;
   font-weight: 600;
-  margin: 150px;
+  padding: 100px;
 }
 
 .area_image {
@@ -275,14 +277,14 @@
 }
 
 .area_image img {
-  margin: 0 20px;
+  margin: 0 15px;
   cursor: pointer;
 }
 
 /* Home_banner */
 .home_banner {
-  width: 1800px;
-  height: 200px;
+  width: 1100px;
+  height: 150px;
   background-image: url("/IMG/main_banner.png");
   background-repeat: no-repeat;
   cursor: pointer;
@@ -292,7 +294,7 @@
 .home_content1 {
   width: 100%;
   display: flex;
-  height: 800px;
+  height: 500px;
 }
 
 .homee_content1_left {
@@ -304,14 +306,14 @@
 }
 
 .home_monitor img {
-  width: 700px;
-  height: 500px;
-  margin: 130px;
+  width: 500px;
+  height: 400px;
+  margin: 60px 30px;
 }
 
 .home_content1_text {
-  font-size: 50px;
-  margin-top: 200px;
+  font-size: 30px;
+  margin-top: 110px;
 }
 
 .home_content1_text span {
@@ -321,19 +323,19 @@
 .home_content1_image li {
   display: inline-block;
   position: relative;
-  top: 70px;
-  margin-right: 100px;
+  top: 50px;
+  margin-right: 70px;
 }
 
 .home_content1_image img {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
 }
 
 .home_content1_image span {
-  font-size: 25px;
+  font-size: 15px;
   position: absolute;
-  top: 95px;
+  top: 70px;
   left: 50%;
   transform: translate(-50%, 0);
 }
@@ -341,7 +343,7 @@
 /* Home_content2 */
 .home_content2 {
   width: 100%;
-  height: 800px;
+  height: 500px;
   display: flex;
 }
 
@@ -354,8 +356,8 @@
 }
 
 .home_content2_text {
-  font-size: 50px;
-  margin: 200px 0px 100px 200px;
+  font-size: 30px;
+  margin: 100px 0px 100px 150px;
 }
 
 .home_content2_text span {
@@ -366,18 +368,13 @@
 
 .footer1 {
   width: 100%;
-  height: 80px;
-  background-color: rgb(240, 240, 240);
+  height: 50px;
+  background-color: rgb(245, 245, 245);
 }
 
 .footer1 span {
-  font-size: 20px;
-  line-height: 80px;
-  margin-left: 30px;
+  font-size: 10px;
+  line-height: 50px;
+  margin-left: 15px;
   cursor: pointer;
-}
-
-.footer2 {
-  width: 100%;
-  height: 320px;
 }
