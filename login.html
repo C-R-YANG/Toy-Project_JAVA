@@ -8,39 +8,82 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/58c332dca9.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <section id="login" class="center">
-      <section id="header">
-        <div class="nav">
-          <div class="logo">
-            <img src="/IMG/보리댕댕.png" alt="보리댕댕" />
-          </div>
-      </section>
-      <section id="main">
-        <div class="login_form">
-          <h1>Login</h1>
-        <form action="">
-            <div class="int_area">
-                <input type="text" name="id" id="id" placeholder="Username" required>
+    <div class="container">
+      <div class="forms_container">
+        <div class="signin_signup">
+          <form action="#" class="sign_in_form flex">
+            <h2 class="title">Sign in</h2>
+            <div class="input_field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" />
             </div>
-            <div class="int_area">
-                <input type="password" name="pw" id="pw" placeholder="Password" required>
+            <div class="input_field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" />
             </div>
-            <div class="remember_me">
-            <input type="checkbox">Remember Me!
-          </div>
-            <div class="btn_area">
-                <button id="btn" type="submit">LOGIN</button>              
+            <input type="submit" class="btn solid" value="Login" />
+            <p class="social_text">Or Sign in</p>
+            <div class="social_media">
+              <a href="#" class="social_icon flex">
+                <i class="fab fa-google"></i>
+              </a>
             </div>
-        </form>
-        <div class="caption">
-            <a href="">Forgot?</a>
-            <a href="">회원가입</a>
+          </form>
         </div>
+        <div class="signup_signup">
+          <form action="#" class="sign_up_form flex">
+            <p class="title">Sign Up</p>
+            <div class="input_field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Username" />
+            </div>
+            <div class="input_field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Email" />
+            </div>
+            <div class="input_field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" />
+            </div>
+            <input type="submit" class="btn solid" value="login" />
+            <p class="social_text">Or Sign Up</p>
+            <div class="social_media">
+              <a href="#" class="social_icon flex">
+                <i class="fab fa-google"></i>
+              </a>
+            </div>
+          </form>
         </div>
-      </section>
-      <section id="footer"></section>
-    </section>
+      </div>
+      <div class="panels_container">
+        <div class="panel left_panel flex">
+          <div class="content">
+            <h3>New Here?</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
+              cumque rem sapiente ducimus!
+            </p>
+            <button class="btn transparent" id="sign_up_button">Sign Up</button>
+          </div>
+        </div>
+        <div class="panel right_panel flex">
+          <div class="content">
+            <h3>One of us</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
+              cumque rem sapiente ducimus!
+            </p>
+            <button class="btn transparent" id="sign_in_button">Sign In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/login.js"></script>
   </body>
 </html>
