@@ -127,6 +127,18 @@
   cursor: pointer;
 }
 
+.menu_list > div::after {
+  display: block;
+  content: "";
+  border-bottom: solid 3px #9bc76c;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.menu_list > div:hover::after {
+  transform: scaleX(1.1);
+}
+
 .login {
   width: 120px;
   height: 75%;
@@ -150,7 +162,7 @@
   line-height: 30px;
   color: #fff;
   border-radius: 10px;
-  background-color: #008a5b;
+  background-color: #9bc76c;
 }
 
 /* Header_content */

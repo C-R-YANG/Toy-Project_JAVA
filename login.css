@@ -144,7 +144,7 @@ form {
   color: #333;
 }
 
-.input_field input:placeholder-shown {
+.input_field input::placeholder-shown {
   font-weight: 500;
 }
 
