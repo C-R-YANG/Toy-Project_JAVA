@@ -63,6 +63,14 @@
   margin-right: auto;
 }
 
+.z_none{
+  z-index: 0 !important;
+}
+
+.z_display{
+  z-index: 999 !important;
+}
+
 .btn {
   width: 150px;
   padding: 5px;
@@ -125,6 +133,11 @@
   align-items: center;
   font-size: 14px;
   cursor: pointer;
+}
+
+.menu_list > div {
+  height: 100%;
+  line-height: 50px;
 }
 
 .menu_list > div::after {

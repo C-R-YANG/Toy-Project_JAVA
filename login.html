@@ -16,7 +16,7 @@
   <body>
     <div class="container">
       <div class="forms_container">
-        <div class="signin_signup">
+        <div class="signin_signup z_display">
           <form action="#" class="sign_in_form flex">
             <h2 class="title">Sign in</h2>
             <div class="input_field">
@@ -36,7 +36,7 @@
             </div>
           </form>
         </div>
-        <div class="signup_signup">
+        <div class="signin_signup z_none">
           <form action="#" class="sign_up_form flex">
             <p class="title">Sign Up</p>
             <div class="input_field">
@@ -62,24 +62,24 @@
         </div>
       </div>
       <div class="panels_container">
-        <div class="panel left_panel flex">
+        <div class="panel left_panel flex z_display">
           <div class="content">
             <h3>New Here?</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
               cumque rem sapiente ducimus!
             </p>
-            <button class="btn transparent" id="sign_up_button">Sign Up</button>
+            <button class="btn transparent" id="sign_up_button" onclick="sign_up_mode()">Sign Up</button>
           </div>
         </div>
-        <div class="panel right_panel flex">
+        <div class="panel right_panel flex z_none">
           <div class="content">
             <h3>One of us</h3>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
               cumque rem sapiente ducimus!
             </p>
-            <button class="btn transparent" id="sign_in_button">Sign In</button>
+            <button class="btn transparent" id="sign_in_button" onclick="sign_in_mode()">Sign In</button>
           </div>
         </div>
       </div>
