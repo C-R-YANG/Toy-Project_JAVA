@@ -67,6 +67,14 @@
   display: flex;
 }
 
+.z_none{
+  z-index: 0 !important;
+}
+
+.z_display{
+  z-index: 999 !important;
+}
+
 /* Login */
 .container {
   position: relative;
