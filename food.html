@@ -31,29 +31,76 @@
           <h3>FOOD</h3>
         </div>
         <hr class="line1">
-        <div class="search_wrap">
+      <div class="search_wrap">
         <div class="searchbar flex">
           <div class="search_keyword">
             <span>식당명</span>
             <input type="text" class="keyword_input">
           </div>
           <div class="search_area">
-            <button type="button">지역</button>
+            <span>지역</span>
+            <button type="button" class="area_btn btn">전체</button>
+            <span class="material-icons search_dropdown_icon"> expand_more </span>
+            <div class="area_dropdown_content none">
+              <div><input type="checkbox" id="area_all">
+                <label for="area_all">전체</label></div>
+              <div><input type="checkbox" id="donggu">
+                <label for="donggu">동구</label></div>
+              <div><input type="checkbox" id="seogu">
+                <label for="seogu">서구</label></div>
+              <div><input type="checkbox" id="namgu">
+                <label for="namgu">남구</label></div>
+              <div><input type="checkbox" id="bukgu">
+                <label for="bukgu">북구</label></div>
+              <div><input type="checkbox" id="gwangsangu">
+                <label for="gwangsangu">광산구</label></div>
+                <button class="area_apply_btn">적용</button>
+            </div>
           </div>
           <div class="search_sort">
-            <button type="button">음식 종류</button>
+            <span>종류</span>
+            <button type="button" class="sort_btn btn">전체</button>
+            <span class="material-icons search_dropdown_icon"> expand_more </span>
+            <div class="sort_dropdown_content none">
+              <div><input type="checkbox" id="sort_all">
+                <label for="sort_all">전체</label></div>
+              <div><input type="checkbox" id="check2">
+                <label for="check2">한식</label></div>
+              <div><input type="checkbox" id="check3">
+                <label for="check3">일식</label></div>
+              <div><input type="checkbox" id="check4">
+                <label for="check4">중식</label></div>
+              <div><input type="checkbox" id="check5">
+                <label for="check5">분식</label></div>
+              <div><input type="checkbox" id="check6">
+                <label for="check6">카페</label></div>
+              <button class="sort_apply_btn">적용</button>
+            </div>
           </div>
           <div class="search_parking">
-            <button type="button">주차</button>
+            <span>주차</span>
+            <button type="button" class="parking_btn btn">가능</button>
+            <span class="material-icons search_dropdown_icon"> expand_more </span>
+            <div class="parking_dropdown_content none">
+              <div><input type="checkbox" id="possible">
+                <label for="possible">가능</label></div>
+              <div><input type="checkbox" id="both">
+                <label for="both">상관없음</label></div>
+              <button class="parking_apply_btn">적용</button>
+            </div>
           </div>
-          <div class="reset">
-            <button type="button">초기화</button>
-          </div>
+          <div>
+          <span class="material-icons searchbar_reset_icon"> refresh </span>
         </div>
-        <div class="search_btn_">
-          <button type="button">SEARCH</button>
         </div>
+        <button type="button" class="search_btn">SEARCH</button>
       </div>
+    <div class="array_list flex">
+      <div>최신순</div>
+      <div>조회순</div>
+      <div>리뷰 많은순</div>
+    </div>
+    <hr>
       </section>
       <section id="footer">
       </section>
