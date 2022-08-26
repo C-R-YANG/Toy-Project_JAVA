@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
   importPage("header");
   importContentPage("home");
   importPage("footer");
@@ -9,21 +9,25 @@ async function fetchHtmlAsText(url) {
 }
 
 async function importPage(target) {
-  const tag       = document.querySelector("#" + target),
-        newScript = document.createElement("script");
+  const tag = document.querySelector("#" + target),
+    newScript = document.createElement("script");
 
-  tag.innerHTML = await fetchHtmlAsText("../" + target + "/" + target + ".html");
+  tag.innerHTML = await fetchHtmlAsText(
+    "../" + target + "/" + target + ".html"
+  );
 
-  newScript.src = "../" + target + "/" + target + ".js"; 
-  
+  newScript.src = "../" + target + "/" + target + ".js";
+
   tag.appendChild(newScript);
 }
 
 async function importContentPage(target) {
-  const content   = document.querySelector("#content"),
-        newScript = document.createElement("script");
+  const content = document.querySelector("#content"),
+    newScript = document.createElement("script");
 
-  content.innerHTML = await fetchHtmlAsText("../" + target + "/" + target + ".html");
+  content.innerHTML = await fetchHtmlAsText(
+    "../" + target + "/" + target + ".html"
+  );
 
   newScript.src = "../" + target + "/" + target + ".js";
 

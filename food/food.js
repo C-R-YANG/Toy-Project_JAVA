@@ -61,3 +61,13 @@ document.querySelector(".parking_apply_btn").addEventListener(
   },
   false
 );
+
+function array_click(obj) {
+  const parent = obj.parentNode;
+  const child = parent.children;
+
+  for (var i = 0; i < child.length; i++) {
+    child[i].className = "array_list";
+  }
+  obj.classList.add("array_list_click");
+}

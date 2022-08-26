@@ -55,11 +55,11 @@
   margin-right: auto;
 }
 
-.z_none{
+.z_none {
   z-index: 0 !important;
 }
 
-.z_display{
+.z_display {
   z-index: 999 !important;
 }
 
@@ -69,7 +69,6 @@
   border: none;
   border-radius: 20px;
   text-decoration: none;
-  box-shadow: 5px 10px 15px rgba(174, 171, 171, 0.2);
   cursor: pointer;
 }
 

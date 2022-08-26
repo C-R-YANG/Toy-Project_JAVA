@@ -8,10 +8,13 @@
 .logo {
   width: 120px;
   height: 100%;
+  position: relative;
+  top: 3px;
 }
 
 .logo img {
   width: 120px;
+  cursor: pointer;
 }
 
 .menu_list {
@@ -41,7 +44,7 @@
   transform: scaleX(1.1);
 }
 
-.login {
+#login {
   width: 120px;
   height: 75%;
   margin-top: 5px;
@@ -50,13 +53,13 @@
   transition: 0.25s;
 }
 
-.login:hover {
+#login:hover {
   letter-spacing: 1px;
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.login div {
+#login div {
   width: 90px;
   padding: 5px;
   font-size: 14px;

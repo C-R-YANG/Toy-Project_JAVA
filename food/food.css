@@ -12,7 +12,7 @@
 
 /* Main */
 .main_text {
-  margin: 50px auto;
+  margin: 40px auto;
 }
 
 .main_text > h2 {
@@ -217,13 +217,17 @@ input[id="possible"] {
   cursor: pointer;
 }
 
-.array_list {
+.array_wrap {
   width: 300px;
   line-height: 30px;
   margin-left: auto;
   display: flex;
   justify-content: space-evenly;
   cursor: pointer;
+}
+
+.array_list_click {
+  color: red;
 }
 
 /* Content */
