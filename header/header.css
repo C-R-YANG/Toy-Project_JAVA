@@ -8,13 +8,13 @@
 .logo {
   width: 120px;
   height: 100%;
-  position: relative;
-  top: 3px;
+  line-height: 50px;
 }
 
 .logo img {
   width: 120px;
   cursor: pointer;
+  vertical-align: middle;
 }
 
 .menu_list {

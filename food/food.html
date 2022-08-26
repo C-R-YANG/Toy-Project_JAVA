@@ -20,98 +20,98 @@
             </div>
             <div class="search_area">
               <span>지역</span>
-              <button type="button" class="area_btn btn">전체</button>
+              <button type="button" class="area_btn btn" onclick="showDropDown(this)">전체</button>
               <span class="material-icons search_dropdown_icon">
                 expand_more
               </span>
               <div class="area_dropdown_content none">
-                <div>
-                  <input type="checkbox" id="area_all" />
+                <div onclick="allCheck(this)">
+                  <input type="checkbox" id="area_all" checked="true"/>
                   <label for="area_all">전체</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="donggu" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="donggu" checked="true"/>
                   <label for="donggu">동구</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="seogu" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="seogu" checked="true"/>
                   <label for="seogu">서구</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="namgu" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="namgu" checked="true"/>
                   <label for="namgu">남구</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="bukgu" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="bukgu" checked="true"/>
                   <label for="bukgu">북구</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="gwangsangu" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="gwangsangu" checked="true"/>
                   <label for="gwangsangu">광산구</label>
                 </div>
-                <button class="area_apply_btn">적용</button>
+                <button class="area_apply_btn" onclick="hideDropDown(this)">적용</button>
               </div>
             </div>
             <div class="search_sort">
               <span>종류</span>
-              <button type="button" class="sort_btn btn">전체</button>
+              <button type="button" class="sort_btn btn" onclick="showDropDown(this)">전체</button>
               <span class="material-icons search_dropdown_icon">
                 expand_more
               </span>
               <div class="sort_dropdown_content none">
-                <div>
-                  <input type="checkbox" id="sort_all" />
+                <div onclick="allCheck(this)">
+                  <input type="checkbox" id="sort_all" checked="true"/>
                   <label for="sort_all">전체</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="check2" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check2" checked="true"/>
                   <label for="check2">한식</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="check3" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check3" checked="true"/>
                   <label for="check3">일식</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="check4" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check4" checked="true"/>
                   <label for="check4">중식</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="check5" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check5" checked="true"/>
                   <label for="check5">분식</label>
                 </div>
-                <div>
-                  <input type="checkbox" id="check6" />
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check6" checked="true"/>
                   <label for="check6">카페</label>
                 </div>
-                <button class="sort_apply_btn">적용</button>
+                <button class="sort_apply_btn" onclick="hideDropDown(this)">적용</button>
               </div>
             </div>
             <div class="search_parking">
               <span>주차</span>
-              <button type="button" class="parking_btn btn">가능</button>
+              <button type="button" class="parking_btn btn" onclick="showDropDown(this)">가능</button>
               <span class="material-icons search_dropdown_icon">
                 expand_more
               </span>
               <div class="parking_dropdown_content none">
                 <div>
-                  <input type="checkbox" id="possible" />
+                  <input type="radio" id="possible" name="parking" checked="true"/>
                   <label for="possible">가능</label>
                 </div>
                 <div>
-                  <input type="checkbox" id="both" />
+                  <input type="radio" id="both" name="parking" />
                   <label for="both">상관없음</label>
                 </div>
-                <button class="parking_apply_btn">적용</button>
+                <button class="parking_apply_btn" onclick="hideDropDown(this)">적용</button>
               </div>
             </div>
             <div>
-              <span class="material-icons searchbar_reset_icon"> refresh </span>
+              <span class="material-icons searchbar_reset_icon" onclick="refrestFilter()"> refresh </span>
             </div>
           </div>
           <button type="button" class="search_btn">SEARCH</button>
         </div>
         <div class="array_wrap flex">
-          <div class="array_list" onclick="array_click(this)">최신순</div>
+          <div class="array_list array_list_click" onclick="array_click(this)">최신순</div>
           <div class="array_list" onclick="array_click(this)">조회순</div>
           <div class="array_list" onclick="array_click(this)">리뷰 많은순</div>
         </div>
