@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>보리댕댕</title>
-    <link rel="stylesheet" href="../food/food.css" />
+    <link rel="stylesheet" href="../hospital/hospital.css" />
   </head>
   <body>
-    <section id="food" class="center">
+    <section id="hospital" class="center">
       <section id="main">
         <div class="main_text">
-          <h2>FOOD</h2>
+          <h2>HOSPITAL</h2>
         </div>
         <hr class="line1" />
         <div class="search_wrap">
           <div class="searchbar flex">
             <div class="search_keyword">
-              <span>식당명</span>
+              <span>병원명</span>
               <input type="text" class="keyword_input" />
             </div>
             <div class="search_area">
@@ -73,29 +73,25 @@
                 expand_more
               </span>
               <div class="sort_dropdown_content none">
-                <div onclick="allCheck(this)">
+                <div onclick="allCheck(this)" style="padding-right: 36px">
                   <input type="checkbox" id="sort_all" checked="true" />
                   <label for="sort_all">전체</label>
                 </div>
-                <div onclick="isCheck(this)">
+                <div onclick="isCheck(this)" style="padding-right: 12px">
                   <input type="checkbox" id="check2" checked="true" />
-                  <label for="check2">한식</label>
+                  <label for="check2">야간진료</label>
                 </div>
                 <div onclick="isCheck(this)">
                   <input type="checkbox" id="check3" checked="true" />
-                  <label for="check3">일식</label>
+                  <label for="check3">공휴일진료</label>
                 </div>
                 <div onclick="isCheck(this)">
                   <input type="checkbox" id="check4" checked="true" />
-                  <label for="check4">중식</label>
+                  <label for="check4">토요일진료</label>
                 </div>
                 <div onclick="isCheck(this)">
                   <input type="checkbox" id="check5" checked="true" />
-                  <label for="check5">분식</label>
-                </div>
-                <div onclick="isCheck(this)">
-                  <input type="checkbox" id="check6" checked="true" />
-                  <label for="check6">카페</label>
+                  <label for="check5">일요일진료</label>
                 </div>
                 <button class="sort_apply_btn" onclick="hideDropDown(this)">
                   적용
@@ -155,13 +151,13 @@
         <div class="content_wrap flex">
           <div class="content content1">
             <div class="content_image_wrap">
-              <img src="/IMG/시바카레.jpg" alt="시바카레" />
+              <img src="/IMG/본펫동물병원.jpg" alt="본펫동물병원" />
             </div>
             <div class="content_text_wrap">
-              <span class="content_title">시바카레</span>
-              <span class="content_sort">카레</span>
-              <p class="content_place">동구 / 장동</p>
-              <p class="content_closed">매주 수요일 휴무</p>
+              <span class="content_title">본펫동물병원</span>
+              <span class="content_sort">동물병원</span>
+              <p class="content_place">서구 / 광천동</p>
+              <p class="content_closed">매주 일요일 휴무</p>
             </div>
             <hr />
             <div class="content_footer flex">
