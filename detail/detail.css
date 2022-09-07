@@ -23,7 +23,7 @@
   font-style: normal;
   font-size: 24px; /* Preferred icon size */
   display: inline-block;
-  line-height: 1;
+  vertical-align: middle;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -285,21 +285,93 @@
 }
 
 /* modal */
-
-.review_modal {
-  position: absolute;
-  width: 700px;
-  height: 450px;
-  background-color: #fff;
+.review_modal_wrap {
+  position: fixed;
+  top:0; 
+  left: 0; 
+  bottom: 0; 
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
   z-index: 999;
 }
 
-#review_text {
+
+.review_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 450px;
+  padding: 30px 50px;
+  background-color: #fff;
+  
+}
+
+.review_title {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.review_food {
+  width: 100px;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 20px;
+}
+
+.review_text {
   width: 600px;
+  margin: 10px auto;
+}
+
+.review_text > textarea {
+  width: 100%;
   height: 150px;
   padding: 10px;
   outline: none;
   border: 1px solid #dcdcdc;
   border-radius: 10px;
   resize: none;
+}
+
+.review_img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.review_img > span:first-of-type {
+  width: 130px;
+  height: 30px;
+  padding: 7px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.review_img > span:last-of-type {
+  color: #aeaeae;
+  font-size: 12px;
+}
+
+.review_modal_btn {
+  margin-top: 20px;
+  float: right;
+}
+
+.review_modal_btn > button {
+  width: 80px;
+  font-size: 16px;
+  padding: 7px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.review_modal_btn > button:first-of-type {
+  background-color: #9bc76c;
+  color: #fff;
 }

@@ -78,32 +78,11 @@
               <p>공유하기</p>
             </div>
           </div>
-          <div class="review_btn">리뷰쓰기</div>
+          <div class="review_btn" onclick="review_modal()">리뷰쓰기</div>
           <div class="surround">
             <p>주변 맛집</p>
             <div class="surround_place"></div>
           </div>
-        </div>
-      </div>
-      <div class="review_modal layout">
-        <div>
-          <span class="material-icons">edit</span>
-          <span>리뷰쓰기</span>
-        </div>
-        <div>
-          <div>시바카레</div>
-          <div>★★★★★</div>
-        </div>
-        <div>
-          <textarea id="review_text"></textarea>
-        </div>
-        <div>
-          <span>사진첨부하기</span>
-          <span>최대3장</span>
-        </div>
-        <div>
-          <button>등록</button>
-          <button>닫기</button>
         </div>
       </div>
       <div class="review_wrap">
@@ -138,6 +117,29 @@
             <div class="star margin_bottom">★★★★★</div>
             <div>추천합니다.</div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="review_modal_wrap">
+      <div class="review_modal layout">
+        <div class="review_title">
+          <span class="material-icons">edit</span>
+          <span>리뷰쓰기</span>
+        </div>
+        <div class="review_food">
+          <div>시바카레</div>
+          <div>★★★★★</div>
+        </div>
+        <div class="review_text">
+          <textarea></textarea>
+        </div>
+        <div class="review_img">
+          <span>사진 첨부하기</span>
+          <span>최대 3장</span>
+        </div>
+        <div class="review_modal_btn">
+          <button>등록</button>
+          <button onclick="review_modal()">닫기</button>
         </div>
       </div>
     </div>
