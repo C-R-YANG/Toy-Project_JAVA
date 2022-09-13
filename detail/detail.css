@@ -1,12 +1,4 @@
 @font-face {
-  font-family: "GmarketSansMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
@@ -39,7 +31,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "GmarketSansMedium";
+  font-family: "NanumBarunGothicLight";
   list-style: none;
 }
 
@@ -172,6 +164,7 @@
 .info_wrap {
   padding: 20px 0px;
 }
+
 .info {
   margin-bottom: 30px;
 }
@@ -287,15 +280,14 @@
 /* modal */
 .review_modal_wrap {
   position: fixed;
-  top:0; 
-  left: 0; 
-  bottom: 0; 
+  top: 0;
+  left: 0;
+  bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.8);
   display: none;
   z-index: 999;
 }
-
 
 .review_modal {
   position: fixed;
@@ -306,7 +298,6 @@
   height: 450px;
   padding: 30px 50px;
   background-color: #fff;
-  
 }
 
 .review_title {

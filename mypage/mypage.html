@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../mypage/mypage.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section id="mypage">
+      <div class="title">
+        <h2>MY PAGE</h2>
+        <p>마이페이지</p>
+        <p>양초롱님 반가워요 :)</p>
+      </div>
+      <hr class="title_line" />
+      <div class="main_wrap">
+        <div class="menu_wrap">
+          <div>
+            <h3>관심 장소</h3>
+            <p class="menu menu_click" onclick="menu_click(this)">즐겨찾기</p>
+            <p class="menu" onclick="menu_click(this)">리뷰관리</p>
+          </div>
+          <div>
+            <h3>내 정보</h3>
+            <p onclick="menu_click(this)">정보수정</p>
+            <p onclick="menu_click(this)">회원탈퇴</p>
+          </div>
+        </div>
+        <div class="content_wrap">
+          <div class="array_wrap flex">
+            <div class="array" onclick="array_click(this)">전체</div>
+            <div class="array" onclick="array_click(this)">FOOD</div>
+            <div class="array" onclick="array_click(this)">CAFE</div>
+            <div class="array" onclick="array_click(this)">HOSPITAL</div>
+            <div class="array" onclick="array_click(this)">BEAUTY</div>
+          </div>
+          <div class="empty">즐겨찾기가 없습니다.</div>
+          <div class="content flex">
+            <div class="content_list"></div>
+            <div class="content_list"></div>
+            <div class="content_list"></div>
+            <div class="content_list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="./mypage.js"></script>
+  </body>
+</html>
