@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <title>보리댕댕</title>
-    <link rel="stylesheet" href="../beauty/beauty.css" />
+    <link rel="stylesheet" href="./content/food/food.css" />
   </head>
   <body>
-    <section id="beauty">
+    <section id="food">
       <section id="main">
         <div class="main_text">
-          <h2>BEAUTY</h2>
-          <p>미용</p>
+          <h2>FOOD</h2>
+          <p>식당</p>
         </div>
         <hr class="line1" />
         <div class="search_wrap">
           <div class="searchbar flex">
             <div class="search_keyword">
-              <span>매장명</span>
+              <span>식당명</span>
               <input type="text" class="keyword_input" />
             </div>
             <div class="search_area">
@@ -80,11 +80,23 @@
                 </div>
                 <div onclick="isCheck(this)">
                   <input type="checkbox" id="check2" checked="true" />
-                  <label for="check2">미용</label>
+                  <label for="check2">한식</label>
                 </div>
                 <div onclick="isCheck(this)">
                   <input type="checkbox" id="check3" checked="true" />
-                  <label for="check3">용품</label>
+                  <label for="check3">일식</label>
+                </div>
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check4" checked="true" />
+                  <label for="check4">중식</label>
+                </div>
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check5" checked="true" />
+                  <label for="check5">분식</label>
+                </div>
+                <div onclick="isCheck(this)">
+                  <input type="checkbox" id="check6" checked="true" />
+                  <label for="check6">카페</label>
                 </div>
                 <button class="sort_apply_btn" onclick="hideDropDown(this)">
                   적용
@@ -144,13 +156,13 @@
         <div class="content_wrap flex">
           <div class="content content1">
             <div class="content_image_wrap">
-              <img src="/IMG/더,예쁘개.jpg" alt="더,예쁘개" />
+              <img src="../../IMG/시바카레.jpg" alt="시바카레" />
             </div>
             <div class="content_text_wrap">
-              <span class="content_title">더,예쁘개</span>
-              <span class="content_sort">애견미용</span>
-              <p class="content_place">북구 / 일곡동</p>
-              <p class="content_closed">매주 월요일 휴무</p>
+              <span class="content_title">시바카레</span>
+              <span class="content_sort">카레</span>
+              <p class="content_place">동구 / 장동</p>
+              <p class="content_closed">매주 수요일 휴무</p>
             </div>
             <hr />
             <div class="content_footer flex">

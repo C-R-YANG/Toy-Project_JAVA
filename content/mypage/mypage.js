@@ -7,8 +7,8 @@
 // }
 
 function menu_click(obj) {
-  const parent = obj.parentNode;
-  const child = parent.children;
+  const parent = obj.parentNode.parentNode;
+  const child = parent.getElementsByTagName("p");
 
   for (let i = 0; i < child.length; i++) {
     child[i].className = "menu";

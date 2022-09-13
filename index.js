@@ -13,10 +13,10 @@ async function importPage(target) {
     newScript = document.createElement("script");
 
   tag.innerHTML = await fetchHtmlAsText(
-    "../" + target + "/" + target + ".html"
+    "./common/" + target + "/" + target + ".html"
   );
 
-  newScript.src = "../" + target + "/" + target + ".js";
+  newScript.src = "./common/" + target + "/" + target + ".js";
 
   tag.appendChild(newScript);
 }
@@ -26,10 +26,10 @@ async function importContentPage(target) {
     newScript = document.createElement("script");
 
   content.innerHTML = await fetchHtmlAsText(
-    "../" + target + "/" + target + ".html"
+    "./content/" + target + "/index.html"
   );
 
-  newScript.src = "../" + target + "/" + target + ".js";
+  newScript.src = "./content/" + target + "/" + target + ".js";
 
   content.appendChild(newScript);
 }
