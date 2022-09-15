@@ -79,18 +79,4 @@
   text-align: center;
   line-height: 500px;
   color: #acacac;
-  display: none;
-}
-
-.content {
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.content_list {
-  width: 200px;
-  height: 230px;
-  margin: 0px 50px 30px 0px;
-  border: 1px solid #ccc;
-  cursor: pointer;
 }

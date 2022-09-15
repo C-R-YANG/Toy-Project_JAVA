@@ -1,0 +1,26 @@
+.content_wrap {
+  width: 800px;
+  height: 100%;
+  margin-top: 80px;
+  float: left;
+}
+
+.main_wrap::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.content_list {
+  width: 200px;
+  height: 230px;
+  margin: 0px 50px 30px 0px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}

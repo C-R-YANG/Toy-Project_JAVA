@@ -28,10 +28,10 @@
     <div class="info_box">
       <div class="tit">비밀번호</div>
       <div>
-        <input type="password" placeholder="현재 비밀번호" maxlength="16">
+        <input type="password" id="pw" placeholder="현재 비밀번호" maxlength="16" onkeyup="pwValue(pw)">
       </div>
       <div>
-        <input type="password" placeholder="변경할 비밀번호" maxlength="16">
+        <input type="password" id="pw" placeholder="변경할 비밀번호" maxlength="16"  onkeyup="pwValue(pw)">
       </div>
       <div class="condition">* 8~16자리의 영문 대소문자, 숫자, 특수문자를 조합하여 설정</div>
     </div>
@@ -45,5 +45,6 @@
     </div>
     <div>회원탈퇴</div>
   </div>
+  <script src="./info.js"></script>
 </body>
 </html>
