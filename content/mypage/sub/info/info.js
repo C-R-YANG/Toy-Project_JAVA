@@ -1,16 +1,8 @@
-const reg = "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,16}$";
-const txt = "aaaa";
+const change = document.querySelector(".pw_change");
 
-if (!reg.test(txt)) {
-  alert("다시해");
-  return false;
-}
-
-function pwValue(pw) {
-  const pw = document.getElementById("pw").value;
-  const reg = "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,16}$";
-
-  if (!reg.test(pw)) {
-    alert("다시해");
-  }
+function pwNew(obj) {
+  const pwNew    = obj.value,
+        reg = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/.test(pwNew);
+  
+  reg ? change.style.color = "#acacac" : change.style.color = "red";
 }
