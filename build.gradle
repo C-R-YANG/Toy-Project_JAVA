@@ -1,0 +1,57 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'kr.co.bori'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'junit:junit:4.13.2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	/* Servlet */
+	implementation 'javax.servlet:javax.servlet-api:4.0.1'
+	implementation 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
+	implementation 'javax.servlet:jstl:1.2'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.67'
+
+	/* Security */
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.7.5'
+	implementation 'org.springframework.security:spring-security-taglibs:5.7.5'
+
+	/* lombok */
+	implementation 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+	/* MyBatis */
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+	/* MySql */
+	implementation 'mysql:mysql-connector-java:8.0.28'
+}
+
+//tasks.named('test') {
+//   useJUnitPlatform()
+//}
+
+tasks {
+	processResources { duplicatesStrategy = DuplicatesStrategy.INCLUDE }
+}
+
+sourceSets {
+	main{
+		resources{
+			srcDirs "src/main/resources", "src/main/java"
+		}
+	}
+}
