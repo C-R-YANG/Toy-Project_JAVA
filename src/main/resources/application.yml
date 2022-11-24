@@ -8,10 +8,17 @@ server:
       force: true
 
 mybatis:
-  mapper-locations: classpath*:kr/co/ch/boridaengdaeng/**/maps/*xml
+  mapper-locations: classpath*:kr/co/ch/bori/**/maps/*xml
 
 spring:
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  datasource:
+    hikari:
+      ssdb:
+        driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+        jdbc-url: jdbc:log4jdbc:mysql://211.227.199.181:3306/SSDB?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+        username: ssdb
+        password: '*%(ssdb)^('

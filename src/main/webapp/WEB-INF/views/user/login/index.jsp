@@ -319,18 +319,19 @@
     ></script>
 </head>
 <body>
+<img src="/webapp/resource/img/다운로드.png">
 <div class="container">
     <div class="forms_container">
         <div class="signin_signup z_display">
-            <form action="#" class="sign_in_form flex">
-                <h2 class="title">Sign in</h2>
+            <form action="/login" class="sign_in_form flex">
+                <h2 class="title">Log in</h2>
                 <div class="input_field">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Username" />
+                    <input type="text" id="userId" name="userId" placeholder="Username" />
                 </div>
                 <div class="input_field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password" />
+                    <input type="password" id="password" name="password" placeholder="Password" />
                 </div>
                 <input type="submit" class="btn solid" value="Login" />
                 <p class="social_text">Or Sign in</p>

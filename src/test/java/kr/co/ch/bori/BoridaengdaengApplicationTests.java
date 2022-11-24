@@ -1,4 +1,4 @@
-package kr.co.ch.boridaengdaeng;
+package kr.co.ch.bori;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
