@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
     @GetMapping("index")
     public String index() {
-        return "index";
+        return "main/index";
     }
 
     @GetMapping("login")
     public String login() {
-        return "user/login/index";
+        return "sub/common/user/login/index";
     }
 }

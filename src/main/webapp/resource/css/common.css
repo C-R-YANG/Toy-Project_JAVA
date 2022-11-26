@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#layout {
+    width: 1100px;
+    height: 100%;
+    margin: auto;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.z_none {
+    z-index: 0 !important;
+}
+
+.z_display {
+    z-index: 999 !important;
+}
+
+.btn {
+    width: 150px;
+    padding: 5px;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+}
+

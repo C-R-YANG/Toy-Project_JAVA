@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <logger name="root" level="info" />
+    <logger name="web" level="info" />
+    <logger name="org.mybatis" level="info" />
+    <logger name="org.apache" level="warn" />
+    <logger name="org.hibernate" level="info" />
+    <logger name="org.springframework" level="info" />
+    <logger name="_org.springframework" level="off" />
+    <logger name="com.zaxxer.hikari" level="warn" />
+    <logger name="org.apache.catalina.core.ContainerBase" level="warn" />
+    <logger name="org.mybatis.spring.mapper.ClassPathMapperScanner" level="error" />
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="debug" />
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="debug" />
+
+    <!-- 추가 할 내용은 아래에 적어주세요.-->
+    <logger name="jdbc.sqlonly" level="info"/>
+    <logger name="jdbc.sqltiming" level="OFF"/>
+    <logger name="jdbc.resultsettable" level="OFF"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+</included>

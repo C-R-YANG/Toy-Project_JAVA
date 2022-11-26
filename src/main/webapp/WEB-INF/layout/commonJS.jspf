@@ -1,0 +1,6 @@
+<c:set var="url" value="${pageContext.request.contextPath == '/' ? '' : pageContext.request.contextPath}" scope="application" />
+
+<script type="text/javascript" src="${url}/resource/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${url}/resource/js/common.js"></script>
+
+<link type="text/css" rel="stylesheet" href="${url}/resource/css/common.css">

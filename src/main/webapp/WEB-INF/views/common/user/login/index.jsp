@@ -319,7 +319,6 @@
     ></script>
 </head>
 <body>
-<img src="/webapp/resource/img/다운로드.png">
 <div class="container">
     <div class="forms_container">
         <div class="signin_signup z_display">
