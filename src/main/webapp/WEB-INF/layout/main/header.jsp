@@ -74,18 +74,32 @@
     }
 </style>
 
-<script type="text/javascript"></script>
+<script type="text/javascript">
+    let header;
 
-<div class="logo">
+    $("document").ready(function() {
+        header = $("#header");
+    })
+
+    function moveMenuUrl(obj) {
+        const opt = $(obj).data("opt");
+
+        location.href = "/contents/index?opt=" + opt;
+    }
+</script>
+
+<div class="logo" onclick="moveHomeUrl()">
     <img id="move_home" src="${url}/resource/img/보리댕댕.png" alt="보리댕댕" />
 </div>
+
 <div class="menu_list">
-    <div>FOOD</div>
-    <div>CAFE</div>
-    <div>HOSPITAL</div>
-    <div>BEAUTY</div>
-    <div>MYPAGE</div>
+    <div data-opt="0" onclick="moveMenuUrl(this);">FOOD</div>
+    <div data-opt="1" onclick="moveMenuUrl(this);">CAFE</div>
+    <div data-opt="2" onclick="moveMenuUrl(this);">HOSPITAL</div>
+    <div data-opt="3" onclick="moveMenuUrl(this);">BEAUTY</div>
+    <div data-opt="4" onclick="moveMenuUrl(this);">MYPAGE</div>
 </div>
-<div id="login" onclick="location.href=('../login/login.html')">
+
+<div id="login" onclick="location.href=('/login')">
     <div>LOGIN</div>
 </div>
