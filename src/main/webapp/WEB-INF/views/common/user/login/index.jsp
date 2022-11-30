@@ -51,6 +51,8 @@
         font-size: 16px;
         color: #333;
         width: 80%;
+        height: 18px;
+        padding: 0;
     }
 
     .save_login_box {
@@ -171,8 +173,8 @@
     }
 
     function hideJoinModal() {
-        $(".modal_bg").fadeOut(300);
-        $(".join_modal").fadeOut(300);
+        contents.find(".modal_bg").fadeOut(300);
+        contents.find(".join_modal").fadeOut(300);
     }
 
     function joinSubmit() {
