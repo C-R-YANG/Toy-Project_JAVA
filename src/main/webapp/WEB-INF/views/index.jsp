@@ -58,13 +58,15 @@
     font-size: 20px;
     width: 110px;
     position: relative;
-    top: -28px;
+    top: -36px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 
   .content1_dropdown_list > div {
     display: block;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     padding: 10px 20px;
     cursor: pointer;
   }
@@ -86,7 +88,7 @@
     outline: none;
     border-radius: 8px;
     padding: 20px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .content1_search button {

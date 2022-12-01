@@ -10,8 +10,7 @@
 
     .logo {
         width: 120px;
-        height: 100%;
-        line-height: 50px;
+        padding-top: 4px;
     }
 
     .logo img {

@@ -12,6 +12,10 @@
         padding: 30px 0;
     }
 
+    .logo img {
+        cursor: pointer;
+    }
+
     .content1 img {
         width: 300px;
         margin: 50px auto;
@@ -33,7 +37,7 @@
     .login_title {
         font-size: 30px;
         font-weight: bold;
-        padding: 50px 0 25px 0;
+        padding: 40px 0 30px 0;
     }
 
     .login_input_box {
@@ -63,7 +67,7 @@
     }
 
     .login_btn {
-        margin: 30px;
+        margin: 50px;
         width: 200px;
         height: 50px;
         background-color: #9bc76c;
@@ -98,7 +102,7 @@
         cursor: pointer;
     }
 
-    .join_modal {
+    .modal {
         width: 500px;
         height: 600px;
         background: #ffffff;
@@ -110,13 +114,13 @@
         border-radius: 10px;
     }
 
-    .join_modal_title {
+    .modal_title {
         font-size: 30px;
         font-weight: bold;
         margin: 50px;
     }
 
-    .join_modal_input_box {
+    .modal_input_box {
         width: 60%;
         height: 40px;
         background-color: #f0f0f0;
@@ -124,7 +128,7 @@
         border-radius: 50px;
     }
 
-    .join_modal_input_box input {
+    .modal_input_box input {
         background: none;
         outline: none;
         border: none;
@@ -166,6 +170,9 @@
         contents = $("#contents");
     })
 
+    // move_login_page
+
+
     // join_modal
     function showJoinModal() {
         contents.find(".modal_bg").fadeIn(300);
@@ -179,20 +186,20 @@
 
     function joinSubmit() {
         // id
-        const newId = $("#new_id"),
+        const newId = contents.find("#new_id"),
               idVal = newId.val(),
               idValCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,12}$/;
 
         // pwd
-        const newPwd       = $("#new_pwd"),
-              newPwdChk    = $("#new_pwd_chk"),
+        const newPwd       = contents.find("#new_pwd"),
+              newPwdChk    = contents.find("#new_pwd_chk"),
               pwdVal       = newPwd.val(),
               newPwdChkVal = newPwdChk.val(),
               pwdValCheck  = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,12}$/;
 
         //email
-        const newEmail = $("#new_email"),
-              emailVal = newEmail.val(),
+        const newEmail      = contents.find("#new_email"),
+              emailVal      = newEmail.val(),
               emailValCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
         const nChkId    = !idValCheck.test(idVal),
@@ -219,31 +226,40 @@
     }
 
     function pwChk() {
-        if($("#new_pwd").val() == $("#new_pwd_chk").val()){
-            $(".pwd_chk_msg").html("* 패스워드가 일치합니다.");
-            $(".pwd_chk_msg").css("color","#008a5b");
+        if(contents.find("#new_pwd").val() == contents.find("#new_pwd_chk").val()){
+            contents.find(".pwd_chk_msg").html("* 패스워드가 일치합니다.");
+            contents.find(".pwd_chk_msg").css("color","#008a5b");
         }else{
-            $(".pwd_chk_msg").html("* 패스워드가 일치하지 않습니다.");
-            $(".pwd_chk_msg").css("color","red");
+            contents.find(".pwd_chk_msg").html("* 패스워드가 일치하지 않습니다.");
+            contents.find(".pwd_chk_msg").css("color","red");
         }
     }
 
-    // find_id_modal
-    function showFindIdModal() {
-        $(".modal_bg").fadeIn(300);
-        $(".find_id_modal").fadeIn(300);
+    // show_hide_modal
+    // 회원가입 클릭하면      ? 회원가입 모달 :
+    //                       아이디찾기 클릭하면 ? 아이디찾기 모달 :
+    //                       비밀번호 찾기 클릭하면 ? 비밀번호 찾기 모달 : ""
+
+
+    function showModal() {
+        contents.find(".modal_bg").fadeIn(300);
+        contents.find(".find_id").find("div:eq(0)");
+
+        // contents.find(".bottom_join") ? contents.find(".join modal").fadeIn(300) :
+        //                                 contents.find(".bottom_find_id") ? contents.find(".find_id modal").fadeIn(300) :
+        //                                 contents.find(".bottom_find_pwd") ? contents.find(".find_pwd modal").fadeIn(300) : ""
     }
 
-    function hideFindPwdModal() {
-        $(".modal_bg").fadeOut(300);
-        $(".find_id_modal").fadeOut(300);
+    function hideModal() {
+        contents.find(".modal_bg").fadeOut(300);
+        contents.find(".find_id_modal").fadeOut(300);
     }
 
 
 </script>
 
 <div class="logo">
-    <img src="${url}/resource/img/보리댕댕.png" alt="보리댕댕"/>
+    <img src="${url}/resource/img/보리댕댕.png" alt="보리댕댕" onclick="location.href=('/login')"/>
 </div>
 
 <hr/>
@@ -268,31 +284,31 @@
 </div>
 
 <div class="bottom">
-    <span class="bottom_join"     onclick="showJoinModal()">회원가입</span>
-    <span class="bottom_find_id"  onclick="showFindIdModal()">아이디 찾기</span>
-    <span class="bottom_find_pwd" onclick="showFindPwdModal()">비밀번호 찾기</span>
+    <span class="bottom_join"     onclick="showModal()">회원가입</span>
+    <span class="bottom_find_id"  onclick="showModal()">아이디 찾기</span>
+    <span class="bottom_find_pwd" onclick="showModal()">비밀번호 찾기</span>
 </div>
 
 <div class="join">
     <div class="modal_bg none">
-        <div class="join_modal z_display none">
+        <div class="modal z_display none">
             <form action="">
-                <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideJoinModal();">
-                <h2 class="join_modal_title">회원가입</h2>
-                <div class="join_modal_input_box">
+                <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal(this);">
+                <h2 class="modal_title">회원가입</h2>
+                <div class="modal_input_box">
                     <input type="text" id="new_id" placeholder="아이디">
                     <p class="join_condition"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
                 </div>
-                <div class="join_modal_input_box">
+                <div class="modal_input_box">
                     <input type="password" id="new_pwd" placeholder="비밀번호">
                     <p class="join_condition"> * 비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다.</p>
 
                 </div>
-                <div class="join_modal_input_box">
+                <div class="modal_input_box">
                     <input type="password" id="new_pwd_chk" onkeyup="pwChk();" placeholder="비밀번호 확인">
                     <div class="pwd_chk_msg"></div>
                 </div>
-                <div class="join_modal_input_box">
+                <div class="modal_input_box">
                     <input type="email" id="new_email" placeholder="이메일 주소">
                 </div>
                 <input type="submit" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
@@ -303,11 +319,11 @@
 
 <div class="find_id">
     <div class="modal_bg none">
-        <div class="find_id_modal none">
+        <div class="modal none">
             <form action="">
-                <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideJoinModal();">
-                <h2 class="find_id_modal_title">아이디 찾기</h2>
-                <div class="modal_input_box">
+                <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal(this);">
+                <h2 class="modal_title">아이디 찾기</h2>
+                <div class="input_box">
                     <input type="email" id="find_id_modal_email" placeholder="이메일 주소">
                 </div>
                 <input type="submit" class="btn join_btn" value="회원가입" onclick="joinSubmit();">
