@@ -71,6 +71,7 @@
         width: 200px;
         height: 50px;
         background-color: #9bc76c;
+        font-size: 18px;
     }
 
     .login_btn:hover {
@@ -94,18 +95,18 @@
     }
 
     .icon_close {
-        height: 30px;
-        width: 30px;
+        height: 35px;
+        width: 35px;
         position: relative;
         top: 20px;
-        left: 209px;
+        left: 250px;
         cursor: pointer;
     }
 
     .modal {
-        width: 500px;
-        height: 600px;
-        background: #ffffff;
+        width: 600px;
+        height: 650px;
+        background: #fff;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -117,38 +118,63 @@
     .modal_title {
         font-size: 30px;
         font-weight: bold;
-        margin: 50px;
+    }
+
+    .modal_box {
+        width: 400px;
+        margin: 50px auto 0px;
     }
 
     .modal_input_box {
-        width: 60%;
-        height: 40px;
-        background-color: #f0f0f0;
-        margin: 40px auto;
-        border-radius: 50px;
+        position: relative;
+        width: 100%;
+        height: 90px;
+    }
+
+    .modal_contents {
+        margin-top: 30px;
+    }
+
+    .modal_input_sub_box {
+        border-bottom: 1px solid #CCC;
+        align-items: center;
     }
 
     .modal_input_box input {
-        background: none;
         outline: none;
         border: none;
+        width: 100%;
         font-size: 16px;
         color: #333;
-        height: 40px;
-        width: 80%;
+        height: 45px;
+        padding-left: 10px;
+    }
+
+    .db_chk {
+        width: 100px;
+        height: 30px;
+        border: 1px solid #9bc76c;
+        background-color: #fff;
+        border-radius: 50px;
+        outline: none;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+
     }
 
     .join_condition {
-        padding-top: 5px;
-        text-align: left;
+        padding: 10px;
         color: #008a5b;
         font-size: 12px;
+        text-align: left;
     }
 
     .join_btn {
         width: 150px;
         height: 50px;
-        background-color: #9bc76c
+        background-color: #9bc76c;
+        font-size: 16px
     }
 
     .join_btn:hover {
@@ -156,10 +182,22 @@
     }
 
     .pwd_chk_msg {
-        padding-top: 5px;
-        text-align: left;
+        padding: 10px;
         color: #008a5b;
         font-size: 12px;
+        text-align: left;
+    }
+
+    .send_num {
+        width: 145px;
+        height: 30px;
+        border: 1px solid #9bc76c;
+        background-color: #fff;
+        border-radius: 50px;
+        outline: none;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer
     }
 </style>
 
@@ -171,18 +209,6 @@
     })
 
     // move_login_page
-
-
-    // join_modal
-    function showJoinModal() {
-        contents.find(".modal_bg").fadeIn(300);
-        contents.find(".join_modal").fadeIn(300);
-    }
-
-    function hideJoinModal() {
-        contents.find(".modal_bg").fadeOut(300);
-        contents.find(".join_modal").fadeOut(300);
-    }
 
     function joinSubmit() {
         // id
@@ -227,11 +253,13 @@
 
     function pwChk() {
         if(contents.find("#new_pwd").val() == contents.find("#new_pwd_chk").val()){
-            contents.find(".pwd_chk_msg").html("* 패스워드가 일치합니다.");
+            contents.find(".pwd_chk_msg").html("* 비밀번호가 일치합니다.");
             contents.find(".pwd_chk_msg").css("color","#008a5b");
+            contents.find(".pwd_chk_msg").css("font-size","12px");
         }else{
-            contents.find(".pwd_chk_msg").html("* 패스워드가 일치하지 않습니다.");
+            contents.find(".pwd_chk_msg").html("* 비밀번호가 일치하지 않습니다.");
             contents.find(".pwd_chk_msg").css("color","red");
+            contents.find(".pwd_chk_msg").css("font-size","12px");
         }
     }
 
@@ -241,18 +269,24 @@
     //                       비밀번호 찾기 클릭하면 ? 비밀번호 찾기 모달 : ""
 
 
-    function showModal() {
+    function showJoinModal() {
         contents.find(".modal_bg").fadeIn(300);
-        contents.find(".find_id").find("div:eq(0)");
+        contents.find(".join .modal").fadeIn(300);
+    }
 
-        // contents.find(".bottom_join") ? contents.find(".join modal").fadeIn(300) :
-        //                                 contents.find(".bottom_find_id") ? contents.find(".find_id modal").fadeIn(300) :
-        //                                 contents.find(".bottom_find_pwd") ? contents.find(".find_pwd modal").fadeIn(300) : ""
+    function showFindIdModal() {
+        contents.find(".modal_bg").fadeIn(300);
+        contents.find(".find_id .modal").fadeIn(300);
+    }
+
+    function showFindPwdModal() {
+        contents.find(".modal_bg").fadeIn(300);
+        contents.find(".find_pwd .modal").fadeIn(300);
     }
 
     function hideModal() {
         contents.find(".modal_bg").fadeOut(300);
-        contents.find(".find_id_modal").fadeOut(300);
+        contents.find(".modal").fadeOut(300);
     }
 
 
@@ -284,58 +318,95 @@
 </div>
 
 <div class="bottom">
-    <span class="bottom_join"     onclick="showModal()">회원가입</span>
-    <span class="bottom_find_id"  onclick="showModal()">아이디 찾기</span>
-    <span class="bottom_find_pwd" onclick="showModal()">비밀번호 찾기</span>
+    <span class="bottom_join"     onclick="showJoinModal()">회원가입</span>
+    <span class="bottom_find_id"  onclick="showFindIdModal()">아이디 찾기</span>
+    <span class="bottom_find_pwd" onclick="showFindPwdModal()">비밀번호 찾기</span>
 </div>
 
 <div class="join">
     <div class="modal_bg none">
         <div class="modal z_display none">
-            <form action="">
-                <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal(this);">
+            <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
+            <div class="modal_box">
                 <h2 class="modal_title">회원가입</h2>
-                <div class="modal_input_box">
-                    <input type="text" id="new_id" placeholder="아이디">
-                    <p class="join_condition"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
-                </div>
-                <div class="modal_input_box">
-                    <input type="password" id="new_pwd" placeholder="비밀번호">
-                    <p class="join_condition"> * 비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다.</p>
-
-                </div>
-                <div class="modal_input_box">
-                    <input type="password" id="new_pwd_chk" onkeyup="pwChk();" placeholder="비밀번호 확인">
-                    <div class="pwd_chk_msg"></div>
-                </div>
-                <div class="modal_input_box">
-                    <input type="email" id="new_email" placeholder="이메일 주소">
+                <div class="modal_contents">
+                    <form action="">
+                        <div class="modal_input_box">
+                            <div class="modal_input_sub_box flex">
+                                <input type="text" id="new_id" placeholder="아이디">
+                                <button class="db_chk">중복 확인</button>
+                            </div>
+                            <p class="join_condition"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
+                        </div>
+                        <div class="modal_input_box ">
+                            <div class="modal_input_sub_box">
+                                <input type="password" id="new_pwd" placeholder="비밀번호">
+                            </div>
+                            <p class="join_condition"> * 비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다.</p>
+                        </div>
+                        <div class="modal_input_box">
+                            <div class="modal_input_sub_box">
+                                <input type="password" id="new_pwd_chk" onkeyup="pwChk();" placeholder="비밀번호 확인">
+                            </div>
+                            <div class="pwd_chk_msg"></div>
+                        </div>
+                        <div class="modal_input_box">
+                            <div class="modal_input_sub_box flex">
+                                <input type="email" id="new_email" placeholder="이메일">
+                                <button class="db_chk">중복 확인</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <input type="submit" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="find_id">
     <div class="modal_bg none">
-        <div class="modal none">
-            <form action="">
-                <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal(this);">
+        <div class="modal z_display none">
+            <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
+            <div class="modal_box">
                 <h2 class="modal_title">아이디 찾기</h2>
-                <div class="input_box">
-                    <input type="email" id="find_id_modal_email" placeholder="이메일 주소">
+                <div class="modal_contents">
+                    <form action="">
+                        <div class="modal_input_box">
+                            <div class="modal_input_sub_box flex">
+                                <input type="email"placeholder="이메일" />
+                                <button class="send_num" onclick="sendNum();">인증번호 전송<button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <input type="submit" class="btn join_btn" value="회원가입" onclick="joinSubmit();">
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="find_pwd">
     <div class="modal_bg none">
-        <div class="find_pwd_modal">
-
+        <div class="modal z_display none">
+            <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
+            <div class="modal_box">
+                <h2 class="modal_title">비밀번호 찾기</h2>
+                <div class="modal_contents">
+                    <form action="">
+                        <div class="modal_input_box ">
+                            <div class="modal_input_sub_box">
+                                <input type="text" placeholder="아이디">
+                            </div>
+                        </div>
+                        <div class="modal_input_box">
+                            <div class="modal_input_sub_box flex">
+                                <input type="email" placeholder="이메일 주소" />
+                                <button class="send_num" onclick="sendNum();">인증번호 전송<button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
