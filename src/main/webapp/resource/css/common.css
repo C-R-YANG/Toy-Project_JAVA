@@ -11,7 +11,7 @@
 }
 
 .none {
-    display: none;
+    display: none !important;
 }
 
 .block {
@@ -34,7 +34,7 @@
 .btn {
     outline: none;
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     background-color: #9bc76c;
     color: white;
     text-decoration: none;
@@ -47,6 +47,12 @@
 
 .flex {
     display: flex;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .flex_column {
@@ -67,5 +73,6 @@ input[type=text] {
     padding: 5px;
     border: 1px solid #acacac;
     border-radius: 3px;
+    outline: none;
 }
 
