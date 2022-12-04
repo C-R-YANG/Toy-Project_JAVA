@@ -86,9 +86,9 @@
         background-color: #008a5b;
     }
 
-    .search_list > div:first-of-type > input:first-child {
-        pointer-events : none;
-    }
+    /*.search_list > div:first-of-type > input:first-child {*/
+    /*    pointer-events : none;*/
+    /*}*/
 
 </style>
 
@@ -110,14 +110,20 @@
 
     function allChk(obj) {
         const paramObj  = $(obj),
-              inputList = paramObj.parent().children("div:nth-child(n+2):nth-child(-n+6)").children("input"),
-              isChk     = paramObj.children("input").is(":checked");
+              inputList = paramObj.parent().parent().children("div:nth-child(n+2):nth-child(-n+6)").children("input"),
+              isChk     = paramObj.is(":checked");
 
-        paramObj.children("input").prop("checked", !isChk);
-
-        inputList.prop("checked", !isChk);
+        inputList.prop("checked", isChk);
     }
 
+    function checkBox(obj) {
+        const paramObj           = $(obj),
+              divList            = paramObj.parent().parent().children("div:nth-child(n+2):nth-child(-n+6)"),
+              checkboxList       = divList.children("input"),
+              allChk             = paramObj.parent().parent().children("div:first").children("input");
+
+        allChk.prop("checked", checkboxList.length == divList.children("input:checked").length);
+    }
 
 </script>
 
@@ -137,28 +143,28 @@
             <div class="search_dropdown">
                 <div class="search_title" onclick="showDropDown(this)">전체</div>
                 <div class="search_list flex_column flex_space_between none">
-                    <div class="dropdown_list" onclick="allChk(this)">
-                        <input id="area_all" type="checkbox" checked/>
+                    <div class="dropdown_list" >
+                        <input id="area_all" type="checkbox" onclick="allChk(this)" checked/>
                         <label for="area_all">전체</label>
                     </div>
-                    <div class="dropdown_list">
-                        <input id="list_east" type="checkbox" checked/>
+                    <div class="dropdown_list" >
+                        <input id="list_east" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_east">동구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_west" type="checkbox" checked/>
+                        <input id="list_west" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_west">서구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_south" type="checkbox" checked/>
+                        <input id="list_south" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_south">남구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_north" type="checkbox" checked/>
+                        <input id="list_north" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_north">북구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_other" type="checkbox" checked/>
+                        <input id="list_other" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_other">광산구</label>
                     </div>
                     <div class="btn">적용</div>
@@ -170,28 +176,28 @@
             <div class="search_dropdown">
                 <div class="search_title" onclick="showDropDown(this)">전체</div>
                 <div class="search_list flex_column flex_space_between none">
-                    <div class="dropdown_list" onclick="allChk(this)">
-                        <input id="list_all" type="checkbox" checked/>
+                    <div class="dropdown_list">
+                        <input id="list_all" type="checkbox" onclick="allChk(this)" checked/>
                         <label for="list_all">전체</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_korean" type="checkbox" checked/>
+                        <input id="list_korean" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_korean">한식</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_chinese" type="checkbox" checked/>
+                        <input id="list_chinese" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_chinese">중식</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_japanese" type="checkbox" checked/>
+                        <input id="list_japanese" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_japanese">일식</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_western" type="checkbox" checked/>
+                        <input id="list_western" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_western">양식</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_snack" type="checkbox" checked/>
+                        <input id="list_snack" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="list_snack">분식</label>
                     </div>
                     <div class="btn">적용</div>
@@ -203,15 +209,15 @@
             <div class="search_dropdown">
                 <div class="search_title" onclick="showDropDown(this)">전체</div>
                 <div class="search_list flex_column flex_space_between none">
-                    <div class="dropdown_list" onclick="allChk(this)">
-                        <input id="parking_all" type="checkbox" checked/>
+                    <div class="dropdown_list">
+                        <input id="parking_all" type="checkbox" onclick="allChk(this)" checked/>
                         <label for="parking_all">전체</label>
                     </div><div class="dropdown_list">
-                        <input id="possible" type="checkbox" checked/>
+                        <input id="possible" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="possible">가능</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="impossble" type="checkbox" checked/>
+                        <input id="impossble" type="checkbox" onclick="checkBox(this)" checked/>
                         <label for="impossble">불가능</label>
                     </div>
                     <div class="btn">적용</div>
