@@ -153,6 +153,7 @@
     .db_chk {
         width: 100px;
         height: 30px;
+        line-height: 27px;
         border: 1px solid #9bc76c;
         background-color: #fff;
         border-radius: 50px;
@@ -165,7 +166,6 @@
 
     .join_condition {
         padding: 10px;
-        color: #008a5b;
         font-size: 12px;
         text-align: left;
     }
@@ -263,33 +263,56 @@
         }
     }
 
-    // show_hide_modal
-    // 회원가입 클릭하면      ? 회원가입 모달 :
-    //                       아이디찾기 클릭하면 ? 아이디찾기 모달 :
-    //                       비밀번호 찾기 클릭하면 ? 비밀번호 찾기 모달 : ""
-
-
     function showJoinModal() {
-        contents.find(".modal_bg").fadeIn(300);
-        contents.find(".join .modal").fadeIn(300);
+        console.log("dd");
+        contents.find(".modal_bg").removeClass("none");
+        contents.find(".join .modal").removeClass("none");
     }
 
     function showFindIdModal() {
-        contents.find(".modal_bg").fadeIn(300);
-        contents.find(".find_id .modal").fadeIn(300);
+        contents.find(".modal_bg").removeClass("none");
+        contents.find(".find_id .modal").removeClass("none");
     }
 
     function showFindPwdModal() {
-        contents.find(".modal_bg").fadeIn(300);
-        contents.find(".find_pwd .modal").fadeIn(300);
+        contents.find(".modal_bg").removeClass("none");
+        contents.find(".find_pwd .modal").removeClass("none");
     }
 
     function hideModal() {
-        contents.find(".modal_bg").fadeOut(300);
-        contents.find(".modal").fadeOut(300);
+        contents.find(".modal_bg").addClass("none");
+        contents.find(".modal").addClass("none");
     }
 
+    function chkOverlap() {
+        const url   = "/overlap",
+              param = { "id" : $("#new_id").val() };
 
+        $.post(url, param, function(data){
+            data ? $("#hint_id").text("중복된 아이디가 존재합니다.") && $("#hint_id").css("color", "red") && $("#new_id").focus():
+                   $("#hint_id").text("사용 가능한 아이디 입니다.") && $("#hint_id").css("color", "#008a5b") && $("#new_pwd").focus();
+        })
+    }
+
+    function testLogin() {
+        const url   = "/login/chk",
+              param = { "id" : $("#userId").val(), "pwd" : $("#password").val()};
+
+        $.post(url, param, function(data) {
+            data ? alert("성공") : alert("실패");
+        })
+
+        console.log(param);
+    }
+
+    function testJoin() {
+        const url   = "/login/join",
+              param = { "id" : $("#new_id").val(), "pwd" : $("#new_pwd").val(), "email" : $("#new_email").val() };
+
+        $.post(url, param, function(data) {
+            data ? alert("성공") : "";
+        })
+    }
 </script>
 
 <div class="logo">
@@ -312,7 +335,7 @@
             <input type="checkbox" id="save_login">
             <label for="save_login">로그인 정보 저장</label>
         </div>
-
+        <div class="test_login btn" onclick="testLogin()">로그인</div>
         <input type="submit" class="btn login_btn" value="로그인">
     </form>
 </div>
@@ -334,9 +357,9 @@
                         <div class="modal_input_box">
                             <div class="modal_input_sub_box flex">
                                 <input type="text" id="new_id" placeholder="아이디">
-                                <button class="db_chk">중복 확인</button>
+                                <div class="db_chk" onclick="chkOverlap();">중복 확인</div>
                             </div>
-                            <p class="join_condition"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
+                            <p id="hint_id" class="join_condition green"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
                         </div>
                         <div class="modal_input_box ">
                             <div class="modal_input_sub_box">
@@ -353,12 +376,13 @@
                         <div class="modal_input_box">
                             <div class="modal_input_sub_box flex">
                                 <input type="email" id="new_email" placeholder="이메일">
-                                <button class="db_chk">중복 확인</button>
+                                <div class="db_chk">중복 확인</div>
                             </div>
                         </div>
                     </form>
                 </div>
                 <input type="submit" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
+                <div class="test_join btn" onclick="testJoin()">회원가입2</div>
             </div>
         </div>
     </div>

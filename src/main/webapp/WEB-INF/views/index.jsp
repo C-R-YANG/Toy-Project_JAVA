@@ -22,7 +22,7 @@
 
   .content1_search_box {
     display: flex;
-    width: 600px;
+    width: 550px;
     height: 45px;
     margin: 0 auto;
   }
@@ -32,12 +32,12 @@
   }
 
   .content1_dropdown button {
-    width: 110px;
+    width: 95px;
     height: 45px;
     border-radius: 8px;
     background-color: white;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     padding-left: 20px;
     text-align: left;
@@ -49,14 +49,14 @@
     display: block !important;
     position: relative;
     top: -36px;
-    left: 65px;
+    left: 59px;
     cursor: pointer;
   }
 
   .content1_dropdown_list {
     background-color: white;
     font-size: 20px;
-    width: 110px;
+    width: 95px;
     position: relative;
     top: -36px;
     border-bottom-left-radius: 8px;
@@ -78,7 +78,6 @@
   .content1_search {
     width: 500px;
     height: 45px;
-    margin: 0 auto;
   }
 
   .content1_search input {
@@ -99,7 +98,7 @@
     background-color: white;
     position: relative;
     top: -45px;
-    left: 450px;
+    left: 320px;
   }
 
   .content1_search img {
@@ -228,8 +227,9 @@
     content2 = contents.children(".home_content2");
   });
 
-  function showDropDown() {
-    const dropDown = content1.find(".content1_dropdown_list"),
+  function showDropDown(obj) {
+    const paramObj = $(obj),
+          dropDown = paramObj.children(":last"),
           isHide   = dropDown.hasClass("none");
 
     isHide ? dropDown.removeClass("none") : dropDown.addClass("none");
@@ -238,8 +238,9 @@
   // 드롭다운 리스트 안에 있는 div를 클릭하면
   // 클릭한 div의 텍스트로 드롭다운 버튼의 텍스트가 변경된다.
   function dropDownText(obj) {
-    const text   = $(obj).text(),
-          button = content1.find(".content1_dropdown").children("button");
+    const paramObj = $(obj),
+          text     = paramObj.text(),
+          button   = paramObj.parent().parent().children("button");
 
     button.text(text);
   }
@@ -251,7 +252,7 @@
     반려동물과 <span>"같이"</span> 가고 싶은 곳을 검색해보세요.
   </h2>
   <div class="content1_search_box">
-    <div class="content1_dropdown" onclick="showDropDown();">
+    <div class="content1_dropdown" onclick="showDropDown(this);">
       <button>전체</button>
       <img src="${url}/resource/img/dropdown.png" alt="dropdown"/>
       <div class="content1_dropdown_list none">
@@ -261,6 +262,18 @@
         <div onclick="dropDownText(this)">남구</div>
         <div onclick="dropDownText(this)">북구</div>
         <div onclick="dropDownText(this)">광산구</div>
+      </div>
+    </div>
+    <div class="content1_dropdown" onclick="showDropDown(this);">
+      <button>전체</button>
+      <img src="${url}/resource/img/dropdown.png" alt="dropdown"/>
+      <div class="content1_dropdown_list none">
+        <div onclick="dropDownText(this)">전체</div>
+        <div onclick="dropDownText(this)">한식</div>
+        <div onclick="dropDownText(this)">중식</div>
+        <div onclick="dropDownText(this)">일식</div>
+        <div onclick="dropDownText(this)">양식</div>
+        <div onclick="dropDownText(this)">분식</div>
       </div>
     </div>
     <form action="" class="content1_search">

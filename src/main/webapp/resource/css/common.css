@@ -76,3 +76,10 @@ input[type=text] {
     outline: none;
 }
 
+.green {
+    color: #008a5b;
+}
+
+.red {
+    color: red;
+}
