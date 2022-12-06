@@ -246,9 +246,27 @@
             focusTag.focus();
 
             alert(errMsg);
-
-            event.preventDefault();
+        } else {
+            insUserData();
         }
+    }
+
+    function insUserData() {
+        const url = "/join";
+
+        const param = {
+            "id"    : contents.find("#new_id").val(),
+            "pw"    : contents.find("#new_pwd").val(),
+            "email" : contents.find("#new_email").val(),
+        }
+
+        $.post(url, param, function() {
+            hideModal();
+
+            $("#userId").focus();
+
+            alert("회원가입이 완료되었습니다.");
+        })
     }
 
     function pwChk() {
@@ -306,13 +324,33 @@
     }
 
     function testJoin() {
-        const url   = "/login/join",
-              param = { "id" : $("#new_id").val(), "pwd" : $("#new_pwd").val(), "email" : $("#new_email").val() };
+        const url   = "/join",
+              param = { "id" : $("#new_id").val(), "pw" : $("#new_pwd").val(), "email" : $("#new_email").val() };
 
         $.post(url, param, function(data) {
             data ? alert("성공") : "";
         })
     }
+
+    function testFindId() {
+        const url   = "/find/id",
+              param = { "email" : $("#find_id_email").val() }
+
+        $.post(url, param, function(data) {
+            data ? alert("아이디는 (" + data + ") 입니다.") : alert("이메일을 다시 확인해주세요.");
+        })
+    }
+
+    function testFindPwd() {
+        const url   = "/find/pw",
+              param = { "id" : $("#find_pwd_id").val(), "email" : $("#find_pwd_email").val()}
+
+        $.post(url, param, function(data) {
+            data ? alert("비밀번호는 (" + data + ") 입니다.") : alert("아이디 또는 이메일을 다시 확인해주세요.");
+        })
+    }
+
+
 </script>
 
 <div class="logo">
@@ -353,36 +391,33 @@
             <div class="modal_box">
                 <h2 class="modal_title">회원가입</h2>
                 <div class="modal_contents">
-                    <form action="">
-                        <div class="modal_input_box">
-                            <div class="modal_input_sub_box flex">
-                                <input type="text" id="new_id" placeholder="아이디">
-                                <div class="db_chk" onclick="chkOverlap();">중복 확인</div>
-                            </div>
-                            <p id="hint_id" class="join_condition green"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
+                    <div class="modal_input_box">
+                        <div class="modal_input_sub_box flex">
+                            <input type="text" id="new_id" name="id" placeholder="아이디">
+                            <div class="db_chk" onclick="chkOverlap();">중복 확인</div>
                         </div>
-                        <div class="modal_input_box ">
-                            <div class="modal_input_sub_box">
-                                <input type="password" id="new_pwd" placeholder="비밀번호">
-                            </div>
-                            <p class="join_condition"> * 비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다.</p>
+                        <p id="hint_id" class="join_condition green"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
+                    </div>
+                    <div class="modal_input_box ">
+                        <div class="modal_input_sub_box">
+                            <input type="password" id="new_pwd" name="pw" placeholder="비밀번호">
                         </div>
-                        <div class="modal_input_box">
-                            <div class="modal_input_sub_box">
-                                <input type="password" id="new_pwd_chk" onkeyup="pwChk();" placeholder="비밀번호 확인">
-                            </div>
-                            <div class="pwd_chk_msg"></div>
+                        <p class="join_condition"> * 비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다.</p>
+                    </div>
+                    <div class="modal_input_box">
+                        <div class="modal_input_sub_box">
+                            <input type="password" id="new_pwd_chk" onkeyup="pwChk();" placeholder="비밀번호 확인">
                         </div>
-                        <div class="modal_input_box">
-                            <div class="modal_input_sub_box flex">
-                                <input type="email" id="new_email" placeholder="이메일">
-                                <div class="db_chk">중복 확인</div>
-                            </div>
+                        <div class="pwd_chk_msg"></div>
+                    </div>
+                    <div class="modal_input_box">
+                        <div class="modal_input_sub_box flex">
+                            <input type="email" id="new_email" name="email" placeholder="이메일">
+                            <div class="db_chk">중복 확인</div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <input type="submit" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
-                <div class="test_join btn" onclick="testJoin()">회원가입2</div>
+                <input type="button" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
             </div>
         </div>
     </div>
@@ -398,9 +433,10 @@
                     <form action="">
                         <div class="modal_input_box">
                             <div class="modal_input_sub_box flex">
-                                <input type="email"placeholder="이메일" />
+                                <input type="email" id="find_id_email" placeholder="이메일" />
                                 <button class="send_num" onclick="sendNum();">인증번호 전송<button>
                             </div>
+                            <div class="btn" onclick="testFindId();">아이디 찾기</div>
                         </div>
                     </form>
                 </div>
@@ -419,14 +455,15 @@
                     <form action="">
                         <div class="modal_input_box ">
                             <div class="modal_input_sub_box">
-                                <input type="text" placeholder="아이디">
+                                <input type="text" id="find_pwd_id"placeholder="아이디">
                             </div>
                         </div>
                         <div class="modal_input_box">
                             <div class="modal_input_sub_box flex">
-                                <input type="email" placeholder="이메일 주소" />
+                                <input type="email" id="find_pwd_email"placeholder="이메일 주소" />
                                 <button class="send_num" onclick="sendNum();">인증번호 전송<button>
                             </div>
+                            <div class="btn" onclick="testFindPwd();">비밀번호찾기</div>
                         </div>
                     </form>
                 </div>

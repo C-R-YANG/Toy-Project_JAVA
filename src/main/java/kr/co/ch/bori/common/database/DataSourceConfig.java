@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataSourceConfig {
     @Bean
-    @ConfigurationProperties("spring.datasource.hikari.ssdb")
-    public DataSource ssdbSrouce() {
+    @ConfigurationProperties("spring.datasource.hikari.boridaengdaeng")
+    public DataSource boridaengdaengDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 }

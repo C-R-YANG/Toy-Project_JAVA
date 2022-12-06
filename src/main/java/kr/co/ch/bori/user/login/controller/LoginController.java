@@ -1,8 +1,13 @@
 package kr.co.ch.bori.user.login.controller;
 
+import kr.co.ch.bori.user.login.dto.LoginDto;
 import kr.co.ch.bori.user.login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.XSlf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +43,20 @@ public class LoginController {
     }
 
     @ResponseBody
-    @PostMapping("login/join")
-    public boolean testJoin(String id, String pwd, String email) {
-        return loginService.testJoin(id, pwd, email);
+    @PostMapping("join")
+    public void insUser(LoginDto loginDto) {
+        loginService.insUser(loginDto);
+    }
+
+    @ResponseBody
+    @PostMapping("find/id")
+    public String selId(String email) {
+        return loginService.selId(email);
+    }
+
+    @ResponseBody
+    @PostMapping("find/pw")
+    public String selPw(LoginDto loginDto) {
+        return loginService.selPw(loginDto);
     }
 }
