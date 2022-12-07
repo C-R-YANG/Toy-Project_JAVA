@@ -1,4 +1,4 @@
-package kr.co.ch.bori.user.login.dto;
+package kr.co.ch.bori.common.util.user.login.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

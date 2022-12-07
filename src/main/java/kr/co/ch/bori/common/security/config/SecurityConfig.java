@@ -16,7 +16,7 @@ public class SecurityConfig {
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/resource/img/**", "/resource/js/**", "/resource/css/**").permitAll()
-                .antMatchers("/index", "/contents/index", "/overlap", "/login/chk", "/join", "/find/id", "/find/pw").permitAll()
+                .antMatchers("/index", "/contents/index", "/overlapId", "/overlapEmail", "/login/chk", "/join", "/find/id", "/find/pw", "/find/pw/change").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

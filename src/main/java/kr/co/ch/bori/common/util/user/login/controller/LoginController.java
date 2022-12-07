@@ -1,13 +1,8 @@
-package kr.co.ch.bori.user.login.controller;
+package kr.co.ch.bori.common.util.user.login.controller;
 
-import kr.co.ch.bori.user.login.dto.LoginDto;
-import kr.co.ch.bori.user.login.service.LoginService;
+import kr.co.ch.bori.common.util.user.login.dto.LoginDto;
+import kr.co.ch.bori.common.util.user.login.service.LoginService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,9 +26,15 @@ public class LoginController {
     }
 
     @ResponseBody
-    @PostMapping("overlap")
-    public boolean chkOverlap(String id) {
-        return loginService.chkOverlap(id);
+    @PostMapping("overlapId")
+    public boolean overlapId(String id) {
+        return loginService.overlapId(id);
+    }
+
+    @ResponseBody
+    @PostMapping("overlapEmail")
+    public boolean overlapEmail(String email) {
+        return loginService.overlapEmail(email);
     }
 
     @ResponseBody
@@ -58,5 +59,11 @@ public class LoginController {
     @PostMapping("find/pw")
     public String selPw(LoginDto loginDto) {
         return loginService.selPw(loginDto);
+    }
+
+    @ResponseBody
+    @PostMapping("find/pw/change")
+    public void updatePw(LoginDto loginDto) {
+        loginService.updatePw(loginDto);
     }
 }
