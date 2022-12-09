@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Login">
+<mapper namespace="User">
+    <select id="login" parameterType="kr.co.ch.bori.common.user.dto.UserDto" resultType="String">
+        SELECT id, pw FROM user WHERE id=#{id} AND pw=#{pw}
+    </select>
+
+    <select id="getUserData" parameterType="String" resultType="kr.co.ch.bori.common.user.dto.UserDto">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            id = #{userId}
+    </select>
+
     <select id="overlapId" parameterType="String" resultType="int">
         SELECT
             COUNT(id) AS CNT
@@ -18,7 +31,7 @@
         WHERE
             email=#{email}
     </select>
-    <insert id="insUser" parameterType="kr.co.ch.bori.common.util.user.login.dto.LoginDto" >
+    <insert id="insUser" parameterType="kr.co.ch.bori.common.user.dto.UserDto" >
         INSERT INTO user
         (id, pw, email, use_yn, role)
         VALUES
@@ -29,11 +42,11 @@
         SELECT id FROM user WHERE email=#{email}
     </select>
 
-    <select id="selPw" parameterType="kr.co.ch.bori.common.util.user.login.dto.LoginDto" resultType="String">
+    <select id="selPw" parameterType="kr.co.ch.bori.common.user.dto.UserDto" resultType="String">
         SELECT pw FROM user WHERE id=#{id} AND email=#{email}
     </select>
 
-    <update id="updatePw" parameterType="kr.co.ch.bori.common.util.user.login.dto.LoginDto">
+    <update id="updatePw" parameterType="kr.co.ch.bori.common.user.dto.UserDto">
         UPDATE user SET pw=#{pw} WHERE id=#{id}
     </update>
 </mapper>

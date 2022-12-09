@@ -1,4 +1,4 @@
-package kr.co.ch.bori.common.util.user.login.dto;
+package kr.co.ch.bori.common.user.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class LoginDto {
+public class UserDto {
     private int role = 0;
 
     private boolean useYn = false;

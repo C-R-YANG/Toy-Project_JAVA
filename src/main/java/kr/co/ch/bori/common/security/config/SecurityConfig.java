@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class SecurityConfig {
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/resource/img/**", "/resource/js/**", "/resource/css/**").permitAll()
-                .antMatchers("/index", "/contents/index", "/overlapId", "/overlapEmail", "/login/chk", "/join", "/find/id", "/find/pw", "/find/pw/change").permitAll()
+                .antMatchers("/index", "/contents/index", "/user/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
@@ -27,9 +29,14 @@ public class SecurityConfig {
                 .passwordParameter("password")
                 .permitAll()
                 .and()
-            .logout();
-//                .logoutUrl("/logout");
+            .logout()
+                .logoutUrl("/logout");
 
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

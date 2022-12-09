@@ -46,7 +46,7 @@
         transform: scaleX(1.1);
     }
 
-    #login {
+    #login, #logout{
         width: 120px;
         height: 75%;
         margin-top: 5px;
@@ -55,13 +55,13 @@
         transition: 0.25s;
     }
 
-    #login:hover {
+    #login:hover, #logout:hover {
         letter-spacing: 1px;
         transform: scale(1.1);
         cursor: pointer;
     }
 
-    #login div {
+    #login div, #logout div {
         width: 90px;
         padding: 5px;
         font-size: 14px;
@@ -101,4 +101,7 @@
 
 <div id="login" onclick="location.href=('/login')">
     <div>LOGIN</div>
+</div>
+<div id="logout" onclick="location.href=('/logout')">
+    <div>LOGOUT</div>
 </div>

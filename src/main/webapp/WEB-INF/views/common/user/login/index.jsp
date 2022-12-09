@@ -229,7 +229,6 @@
         contents = $("#contents");
     })
 
-    // move_login_page
 
     function joinSubmit() {
         // id
@@ -306,14 +305,25 @@
 
     }
 
+    function chkLogin() {
+        const url = "/login";
+
+        const param = { "id" : contents.find("#userId").val(), "pw" : contents.find("#password").val()};
+
+        $.post(url, param, function() {
+           data ? alert("아이디 또는 비밀번호를 확인해주세요.") : "";
+        })
+    }
+
+
     function insUserData() {
-        const url = "/join";
+        const url = "/user/join";
 
         const param = {
             "id"    : contents.find("#new_id").val(),
             "pw"    : contents.find("#new_pw").val(),
             "email" : contents.find("#new_email").val(),
-        }
+        };
 
         $.post(url, param, function() {
             hideModal();
@@ -325,7 +335,7 @@
     }
 
     function overlapId() {
-        const url   = "/overlapId",
+        const url   = "/user/overlapId",
               param = { "id" : $("#new_id").val() };
 
         $.post(url, param, function(data){
@@ -335,7 +345,7 @@
     }
 
     function overlapEmail() {
-        const url   = "/overlapEmail",
+        const url   = "/user/overlapEmail",
               param = { "email" : $("#new_email").val() };
 
         $.post(url, param, function(data){
@@ -344,28 +354,8 @@
         })
     }
 
-    function testLogin() {
-        const url   = "/login/chk",
-              param = { "id" : $("#userId").val(), "pw" : $("#password").val()};
-
-        $.post(url, param, function(data) {
-            data ? alert("성공") : alert("실패");
-        })
-
-        console.log(param);
-    }
-
-    function testJoin() {
-        const url   = "/join",
-              param = { "id" : $("#new_id").val(), "pw" : $("#new_pw").val(), "email" : $("#new_email").val() };
-
-        $.post(url, param, function(data) {
-            data ? alert("성공") : "";
-        })
-    }
-
     function findId() {
-        const url   = "/find/id",
+        const url   = "/user/find/id",
               param = { "email" : $("#find_id_email").val() }
 
         $.post(url, param, function(data) {
@@ -374,8 +364,8 @@
     }
 
     function findPw() {
-        const url   = "/find/pw",
-              param = { "id" : $("#find_pw_id").val(), "email" : $("#find_pw_email").val()}
+        const url   = "/user/find/pw",
+              param = { "id" : $("#find_pw_id").val(), "email" : $("#find_pw_email").val()};
 
         $.post(url, param, function(data) {
             data ? $("#key_input").removeClass("none") : alert("아이디 또는 이메일을 다시 확인해주세요.");
@@ -383,7 +373,7 @@
     }
 
     function changePw() {
-        const url   = "/find/pw/change",
+        const url   = "/user/find/pw/change",
               param = { "pw" : $("#change_pw").val()}
 
         $.post(url, param, function() {
@@ -446,21 +436,20 @@
 <hr/>
 
 <div id="login_layout">
-    <form action="" class="login_form">
+    <form action="/login" method="post" class="login_form">
         <h2 class="login_title">로그인</h2>
         <div class="login_input_box">
-            <input type="text" id="userId" placeholder="아이디">
+            <input type="text" id="userId" name="userId" placeholder="아이디">
         </div>
         <div class="login_input_box">
-            <input type="password" id="password" placeholder="비밀번호">
+            <input type="password" id="password" name="password" placeholder="비밀번호">
         </div>
 
         <div class="save_login_box">
             <input type="checkbox" id="save_login">
             <label for="save_login">로그인 정보 저장</label>
         </div>
-        <div class="test_login btn" onclick="testLogin()">로그인</div>
-        <input type="submit" class="btn login_btn" value="로그인">
+        <input type="submit" class="btn login_btn" value="로그인" onclick="chkLogin();">
     </form>
 </div>
 
