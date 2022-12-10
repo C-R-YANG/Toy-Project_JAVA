@@ -4,6 +4,7 @@ import kr.co.ch.bori.common.user.dto.UserDto;
 import kr.co.ch.bori.common.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,12 +36,6 @@ public class UserController {
     @PostMapping("user/overlapEmail")
     public boolean overlapEmail(String email) {
         return loginService.overlapEmail(email);
-    }
-
-    @ResponseBody
-    @PostMapping("user/login/chk")
-    public boolean chkLogin(String id, String pwd) {
-        return loginService.chkLogin(id, pwd);
     }
 
     @ResponseBody

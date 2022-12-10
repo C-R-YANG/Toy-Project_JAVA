@@ -15,9 +15,6 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserDao userDAO;
 
-    public String chklogin(UserDto userDto) {
-        return userDAO/.
-    }
     public UserDto getUserData(String userId) {
         return userDAO.getUserData(userId);
     }

@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style type="text/css">
     #header {
@@ -99,9 +101,14 @@
     <div data-opt="4" onclick="moveMenuUrl(this);">MYPAGE</div>
 </div>
 
-<div id="login" onclick="location.href=('/login')">
-    <div>LOGIN</div>
-</div>
-<div id="logout" onclick="location.href=('/logout')">
-    <div>LOGOUT</div>
-</div>
+<sec:authorize access="isAuthenticated()">
+    <div id="logout" onclick="location.href=('/logout')">
+        <div>LOGOUT</div>
+    </div>
+</sec:authorize>
+
+<sec:authorize access="isAnonymous()">
+    <div id="login" onclick="location.href=('/login')">
+        <div>LOGIN</div>
+    </div>
+</sec:authorize>
