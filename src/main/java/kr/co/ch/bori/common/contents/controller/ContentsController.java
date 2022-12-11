@@ -28,4 +28,9 @@ public class ContentsController {
     public String list() {
         return "contents/list/index";
     }
+
+    @GetMapping("/detail")
+    public String detail() {
+        return "main/contents/detail/index";
+    }
 }

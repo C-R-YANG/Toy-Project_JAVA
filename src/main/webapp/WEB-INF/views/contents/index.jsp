@@ -105,10 +105,12 @@
 
 <script type="text/javascript">
     let contents,
+        contentsFlag,
         listLayout;
 
     $(document).ready(function() {
         contents = $("#contents");
+        contentsFlag = contents.children("#contents_flag");
         listLayout = contents.children("#list_layout");
 
         setLayoutList();
@@ -170,6 +172,10 @@
         paramObj.parent().addClass("none");
     }
 </script>
+
+<div id="contents_flag">
+    <input type="hidden" id="opt" value="${contentsDto.opt}">
+</div>
 
 <div id="title_layout">
     <h2>${contentsDto.engNm}</h2>

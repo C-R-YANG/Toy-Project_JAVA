@@ -83,6 +83,7 @@
     })
 
     function moveMenuUrl(obj) {
+
         const opt = $(obj).data("opt");
 
         location.href = "/contents/index?opt=" + opt;

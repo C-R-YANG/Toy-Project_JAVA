@@ -35,32 +35,56 @@
         height: 100px;
         padding: 15px 20px 0px;
     }
-    .content_text > title {
+    .content_text > .title {
 
     }
 
-    .content_text > sort {
+    .content_text > .sort {
         font-size: 12px;
         color: #acacac;
     }
 
-    .content_text > address {
+    .content_text > .address {
         font-size: 14px;
         padding-top: 5px;
     }
 
-    .content_text > closed {
+    .content_text > .closed {
         padding-top: 5px;
         color: red;
         font-size: 14px;
     }
+
+    .content_bottom {
+        width: 100%;
+        height: 33px;
+        padding: 5px 0px 5px 20px;
+        border-top: 1px solid #CCC;
+    }
+
+    .content_bottom > img {
+        width: 15px;
+        height: 15px;
+        vertical-align: middle;
+    }
+
+    .content_bottom > span {
+        font-size: 14px;
+        padding-right: 5px;
+    }
 </style>
 
 <script type="text/javascript">
+
+    function moveDetailUrl(obj) {
+        const opt = contentsFlag.children("#opt").val();
+
+        location.href = "/contents/detail?opt=" + opt;
+    }
 </script>
 
 <div class="list_box flex">
-    <div class="list_content">
+    <div class="list_content" onclick="moveDetailUrl(this)">
         <div class="content_img">
             <img src="/resource/img/시바카레.jpg" alt="시바카레">
         </div>
@@ -70,7 +94,12 @@
             <p class="address">동구 / 장동</p>
             <p class="closed">매주 수요일 휴무</p>
         </div>
-        <div class="content_bottom"></div>
+        <div class="content_bottom">
+            <img src="/resource/img/eye.png" alt="">
+            <span>50</span>
+            <img src="/resource/img/favorite.png" alt="">
+            <span>10</span>
+        </div>
     </div>
     <div class="list_content"></div>
     <div class="list_content"></div>
