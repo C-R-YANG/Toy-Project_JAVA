@@ -6,6 +6,7 @@
         width: 300px;
     }
     .list_box {
+        justify-content: space-around;
         flex-wrap: wrap;
         align-items: center;
     }
@@ -71,6 +72,10 @@
     .content_bottom > span {
         font-size: 14px;
         padding-right: 5px;
+    }
+
+    .list_btn {
+        width: 120px;
     }
 </style>
 

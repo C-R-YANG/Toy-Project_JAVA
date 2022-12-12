@@ -81,20 +81,42 @@
         height: 40px;
         margin: auto;
         display: block;
+        font-size: 14px;
     }
 
     .search_btn:hover {
-        background-color: #008a5b;
+        letter-spacing: 1px;
+        transform: scale(1.1);
     }
 
-    .sub_search_box {
-        width: 230px;
+    .sub_box {
+        width: 100%;
+        justify-content: space-between;
+        padding: 50px 10px 10px;
+    }
+
+    .sub_box_btn {
+        width: 85px;
+        height: 35px;
+        line-height: 35px;
+        background: #E8995B;
+        font-size: 14px;
+    }
+
+    .sub_box_btn:hover {
+        letter-spacing: 1px;
+        transform: scale(1.1);
+    }
+
+    .sub_box_array {
+        width: 250px;
+        height: 35px;
         justify-content: space-around;
-        margin: 80px 0 10px auto;
     }
 
-    .sub_search_box > div {
+    .sub_box_array > div {
         cursor: pointer;
+        line-height: 34px;
     }
 
     .array_click {
@@ -170,6 +192,12 @@
         divText.text(textVal);
 
         paramObj.parent().addClass("none");
+    }
+
+    function moveRegisterUrl(obj) {
+            const opt = contentsFlag.children("#opt").val();
+
+            location.href = "/contents/register?opt=" + opt;
     }
 </script>
 
@@ -265,10 +293,14 @@
 
     <button type="button" class="search_btn btn">SEARCH</button>
 
-    <div class="sub_search_box flex">
-        <div class="array array_click">최신순</div>
-        <div class="array">조회순</div>
-        <div class="array">리뷰 많은순</div>
+    <div class="sub_box flex">
+        <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl(this)">
+        <div class="sub_box_array flex">
+            <div class="array array_click">최신순</div>
+            <div class="array">조회순</div>
+            <div class="array">리뷰 많은순</div>
+        </div>
+
     </div>
     <hr/>
 </div>

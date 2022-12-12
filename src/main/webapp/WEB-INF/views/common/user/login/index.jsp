@@ -150,46 +150,15 @@
         padding-left: 10px;
     }
 
-    .db_chk {
-        width: 100px;
-        height: 30px;
-        line-height: 27px;
-        border: 1px solid #9bc76c;
-        background-color: #fff;
-        border-radius: 50px;
-        outline: none;
-        text-decoration: none;
-        font-size: 14px;
-        cursor: pointer;
-
-    }
-
-    .join_condition {
-        padding: 10px;
-        font-size: 12px;
-        text-align: left;
-    }
-
-    .join_btn, .find_btn{
+    .find_btn{
         width: 150px;
         height: 50px;
         background-color: #9bc76c;
         font-size: 16px
     }
 
-    .join_btn:hover {
-        background-color: #5FB27A;
-    }
-
     .find_btn:hover {
-        background-color: #5FB27A;
-    }
-
-    .pw_chk_msg {
-        padding: 10px;
-        color: #008a5b;
-        font-size: 12px;
-        text-align: left;
+        background-color: #66B875;
     }
 
     .send_num {
@@ -197,7 +166,7 @@
         height: 30px;
         border: 1px solid #9bc76c;
         background-color: #fff;
-        border-radius: 50px;
+        border-radius: 10px;
         outline: none;
         text-decoration: none;
         font-size: 14px;
@@ -229,63 +198,18 @@
         contents = $("#contents");
     })
 
-
-    function joinSubmit() {
-        // id
-        const newId = contents.find("#new_id"),
-              idVal = newId.val(),
-              idValCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{6,12}$/;
-
-        // pw
-        const newPw       = contents.find("#new_pw"),
-              newPwChk    = contents.find("#new_pw_chk"),
-              pwVal       = newPw.val(),
-              newPwChkVal = newPwChk.val(),
-              pwValCheck  = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,12}$/;
-
-        //email
-        const newEmail      = contents.find("#new_email"),
-              emailVal      = newEmail.val(),
-              emailValCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-
-        const nChkId    = !idValCheck.test(idVal),
-              nChkPw    = !pwValCheck.test(pwVal),
-              diffChkPw = pwVal !== newPwChkVal,
-              nChkEmail = !emailValCheck.test(emailVal);
-
-        const isErr    = nChkId || nChkPw || diffChkPw || nChkEmail,
-              focusTag = nChkId              ? newId  :
-                         nChkPw || diffChkPw ? newPw :
-                         nChkEmail           ? newEmail : null,
-              errMsg   = nChkId    ? "아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다."  :
-                         nChkPw    ? "비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다." :
-                         diffChkPw ? "비밀번호가 일치하지 않습니다." :
-                         nChkEmail ? "올바른 이메일 형식이 아닙니다" : "";
-
-        if (isErr) {
-            focusTag.focus();
-
-            alert(errMsg);
-        } else {
-            insUserData();
-        }
-    }
-
-    function pwChk() {
-        if(contents.find("#new_pw").val() == contents.find("#new_pw_chk").val()){
-            contents.find(".pw_chk_msg").html("* 비밀번호가 일치합니다.");
-            contents.find(".pw_chk_msg").css("color","#008a5b");
-            contents.find(".pw_chk_msg").css("font-size","12px");
-        }else{
-            contents.find(".pw_chk_msg").html("* 비밀번호가 일치하지 않습니다.");
-            contents.find(".pw_chk_msg").css("color","red");
-            contents.find(".pw_chk_msg").css("font-size","12px");
-        }
-    }
-
     function showJoinModal() {
-        contents.find(".modal_bg").removeClass("none");
-        contents.find(".join .modal").removeClass("none");
+        const url = "/user/join/index";
+
+        $.post(url, {}, function (data) {
+            $.smartPop.open({
+                title  : "회원가입",
+                id     : "join_modal",
+                width  : 600,
+                height : 650,
+                html   : data,
+            })
+        })
     }
 
     function showFindIdModal() {
@@ -312,45 +236,6 @@
 
         $.post(url, param, function() {
            data ? alert("아이디 또는 비밀번호를 확인해주세요.") : "";
-        })
-    }
-
-
-    function insUserData() {
-        const url = "/user/join";
-
-        const param = {
-            "id"    : contents.find("#new_id").val(),
-            "pw"    : contents.find("#new_pw").val(),
-            "email" : contents.find("#new_email").val(),
-        };
-
-        $.post(url, param, function() {
-            hideModal();
-
-            $("#userId").focus();
-
-            alert("회원가입이 완료되었습니다.");
-        })
-    }
-
-    function overlapId() {
-        const url   = "/user/overlapId",
-              param = { "id" : $("#new_id").val() };
-
-        $.post(url, param, function(data){
-            data ? $("#hint_id").text("* 중복된 아이디가 존재합니다.") && $("#hint_id").css("color", "red") && $("#new_id").focus():
-                   $("#hint_id").text("* 사용 가능한 아이디 입니다.") && $("#hint_id").css("color", "#008a5b") && $("#new_pw").focus();
-        })
-    }
-
-    function overlapEmail() {
-        const url   = "/user/overlapEmail",
-              param = { "email" : $("#new_email").val() };
-
-        $.post(url, param, function(data){
-            data ? $("#hint_email").html("* 중복된 이메일이 존재합니다.") && $("#hint_email").css("color", "red") :
-                   $("#hint_email").html("* 사용 가능한 이메일 입니다.") && $("#hint_email").css("color", "#008a5b");
         })
     }
 
@@ -463,38 +348,7 @@
     <div class="modal_bg none">
         <div class="modal z_display none">
             <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
-            <div class="modal_box">
-                <h2 class="modal_title">회원가입</h2>
-                <div class="modal_contents">
-                    <div class="modal_input_box">
-                        <div class="modal_input_sub_box flex">
-                            <input type="text" id="new_id" name="id" placeholder="아이디">
-                            <div class="db_chk" onclick="overlapId();">중복 확인</div>
-                        </div>
-                        <p id="hint_id" class="join_condition green"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
-                    </div>
-                    <div class="modal_input_box ">
-                        <div class="modal_input_sub_box">
-                            <input type="password" id="new_pw" name="pw" placeholder="비밀번호">
-                        </div>
-                        <p class="join_condition green"> * 비밀번호는 영문, 숫자 포함 8 ~ 12자여야 합니다.</p>
-                    </div>
-                    <div class="modal_input_box">
-                        <div class="modal_input_sub_box">
-                            <input type="password" id="new_pw_chk" onkeyup="pwChk();" placeholder="비밀번호 확인">
-                        </div>
-                        <div class="pw_chk_msg"></div>
-                    </div>
-                    <div class="modal_input_box">
-                        <div class="modal_input_sub_box flex">
-                            <input type="email" id="new_email" name="email" placeholder="이메일">
-                            <div class="db_chk" onclick="overlapEmail()">중복 확인</div>
-                        </div>
-                        <div id="hint_email" class="join_condition"></div>
-                    </div>
-                </div>
-                <input type="button" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
-            </div>
+
         </div>
     </div>
 </div>
@@ -541,7 +395,7 @@
                         <div class="modal_input_sub_box flex">
                             <input type="text" id="find_pw_key"placeholder="인증번호 입력" />
                             <div id="timer"></div>
-                            <button class="send_num" onclick="chkKey();">확인<button>
+                            <button class="send_num" onclick="chkKey();">확인</button>
                         </div>
                     </div>
                     <div class="modal_input_box none" id="change_pw_input">

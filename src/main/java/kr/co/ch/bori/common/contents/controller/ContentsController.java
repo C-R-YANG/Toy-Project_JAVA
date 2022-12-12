@@ -33,4 +33,9 @@ public class ContentsController {
     public String detail() {
         return "main/contents/detail/index";
     }
+
+    @GetMapping("/register")
+    public String register() {
+        return "main/contents/register/index";
+    }
 }

@@ -44,6 +44,11 @@ public class UserController {
         loginService.insUser(userDto);
     }
 
+    @PostMapping("user/join/index")
+    public String join() {
+        return "common/user/join/index";
+    }
+
     @ResponseBody
     @PostMapping("user/find/id")
     public String selId(String email) {
