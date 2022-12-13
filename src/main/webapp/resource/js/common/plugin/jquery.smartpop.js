@@ -165,8 +165,8 @@
 
                 var obj = this;
                 var smartPop_overlay = $('<div />').attr('id',this.opts.id+'_overlay').css({
-                    opacity : this.opts.opacity,
-                    background : this.opts.background
+                    opacity : this.opts.opacity
+                    // background : this.opts.background
                 }).addClass("smartPop_overlay");
                 var smartPop = $('<div />').attr('id', this.opts.id).addClass("smartPop");
                 var smartPop_container = $('<div />').attr('id',

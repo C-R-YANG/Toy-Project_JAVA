@@ -115,15 +115,13 @@
         border-radius: 10px;
     }
 
-    .modal_title {
-        font-size: 30px;
-        font-weight: bold;
-    }
-
     .modal_box {
         width: 400px;
-        margin: 50px auto 0px;
+        height: 100%;
+        margin: 0px auto;
+        padding-top: 80px;
     }
+
 
     .modal_input_box {
         position: relative;
@@ -150,16 +148,7 @@
         padding-left: 10px;
     }
 
-    .find_btn{
-        width: 150px;
-        height: 50px;
-        background-color: #9bc76c;
-        font-size: 16px
-    }
 
-    .find_btn:hover {
-        background-color: #66B875;
-    }
 
     .send_num {
         width: 145px;
@@ -205,29 +194,41 @@
             $.smartPop.open({
                 title  : "회원가입",
                 id     : "join_modal",
-                width  : 600,
-                height : 650,
+                width  : 610,
+                height : 630,
                 html   : data,
             })
         })
     }
 
     function showFindIdModal() {
-        contents.find(".modal_bg").removeClass("none");
-        contents.find(".find_id .modal").removeClass("none");
+        const url = "/user/find/findId";
+
+        $.post(url, {}, function (data) {
+            $.smartPop.open({
+                title  : "아이디 찾기",
+                id     : "find_id_modal",
+                width  : 600,
+                height : 500,
+                html   : data,
+            })
+        })
     }
 
     function showFindPwModal() {
-        contents.find(".modal_bg").removeClass("none");
-        contents.find(".find_pw .modal").removeClass("none");
+        const url = "/user/find/findPw";
+
+        $.post(url, {}, function (data) {
+            $.smartPop.open({
+                title  : "비밀번호 찾기",
+                id     : "find_pw_modal",
+                width  : 610,
+                height : 630,
+                html   : data,
+            })
+        })
     }
 
-    function hideModal() {
-        contents.find(".modal_bg").addClass("none");
-        contents.find(".modal").addClass("none");
-        contents.find(".modal_input_sub_box input").val("");
-
-    }
 
     function chkLogin() {
         const url = "/login";
@@ -237,80 +238,6 @@
         $.post(url, param, function() {
            data ? alert("아이디 또는 비밀번호를 확인해주세요.") : "";
         })
-    }
-
-    function findId() {
-        const url   = "/user/find/id",
-              param = { "email" : $("#find_id_email").val() }
-
-        $.post(url, param, function(data) {
-            data ? alert("아이디는 (" + data + ") 입니다.") : alert("이메일을 다시 확인해주세요.");
-        })
-    }
-
-    function findPw() {
-        const url   = "/user/find/pw",
-              param = { "id" : $("#find_pw_id").val(), "email" : $("#find_pw_email").val()};
-
-        $.post(url, param, function(data) {
-            data ? $("#key_input").removeClass("none") : alert("아이디 또는 이메일을 다시 확인해주세요.");
-        })
-    }
-
-    function changePw() {
-        const url   = "/user/find/pw/change",
-              param = { "pw" : $("#change_pw").val()}
-
-        $.post(url, param, function() {
-            hideModal();
-
-            alert("비밀번호가 변경되었습니다.");
-        })
-    }
-
-    // 인증번호 타이머
-    let timer     = null,
-        isRunning = false;
-
-    function sendKey() {
-        let display   = contents.find("#timer"),
-            leftSec   = 180;
-
-        if(isRunning) {
-            clearInterval(timer);
-            display.html("");
-            startTimer(leftSec, display);
-        } else {
-            startTimer(leftSec, display);
-        }
-
-        function startTimer(count, display) {
-            let minutes,
-                seconds;
-
-            timer = setInterval(function () {
-                minutes = parseInt(count / 60, 10);
-                seconds = parseInt(count % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.html(minutes + ":" + seconds);
-
-                // 타이머 끝
-                if (--count < 0) {
-                    clearInterval(timer);
-                    alert("입력시간이 초과되었습니다.");
-                    display.html("");
-                }
-            }, 1000);
-            isRunning = true;
-        }
-    }
-
-    function chkKey() {
-        $("#change_pw_input").removeClass("none");
-        $(".change_btn").removeClass("none");
     }
 </script>
 
@@ -344,68 +271,22 @@
     <span class="bottom_find_pw" onclick="showFindPwModal()">비밀번호 찾기</span>
 </div>
 
-<div class="join">
-    <div class="modal_bg none">
-        <div class="modal z_display none">
-            <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
+<%--<div class="join">--%>
+<%--    <div class="modal_bg none">--%>
+<%--        <div class="modal z_display none">--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
-        </div>
-    </div>
-</div>
-
-<div class="find_id">
-    <div class="modal_bg none">
-        <div class="modal z_display none">
-            <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
-            <div class="modal_box">
-                <h2 class="modal_title">아이디 찾기</h2>
-                <div class="modal_contents">
-                    <div class="modal_input_box">
-                        <div class="modal_input_sub_box flex">
-                            <input type="email" id="find_id_email" placeholder="이메일" />
-                            <button class="send_num" onclick="sendKey();">인증번호 전송<button>
-                        </div>
-                    </div>
-                </div>
-                <input type="button" class="btn find_btn" value="아이디 찾기" onclick="findId();">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="find_pw">
-    <div class="modal_bg none">
-        <div class="modal z_display none">
-            <img src="${url}/resource/img/close.png" class="icon_close" alt="close" onclick="hideModal();">
-            <div class="modal_box">
-                <h2 class="modal_title">비밀번호 찾기</h2>
-                <div class="modal_contents">
-                    <div class="modal_input_box ">
-                        <div class="modal_input_sub_box">
-                            <input type="text" id="find_pw_id"placeholder="아이디">
-                        </div>
-                    </div>
-                    <div class="modal_input_box">
-                        <div class="modal_input_sub_box flex">
-                            <input type="email" id="find_pw_email"placeholder="이메일 주소" />
-                            <button class="send_num" onclick="sendKey(); findPw();">인증번호 전송<button>
-                        </div>
-                    </div>
-                    <div class="modal_input_box none" id="key_input">
-                        <div class="modal_input_sub_box flex">
-                            <input type="text" id="find_pw_key"placeholder="인증번호 입력" />
-                            <div id="timer"></div>
-                            <button class="send_num" onclick="chkKey();">확인</button>
-                        </div>
-                    </div>
-                    <div class="modal_input_box none" id="change_pw_input">
-                        <div class="modal_input_sub_box flex">
-                            <input type="text" id="change_pw"placeholder="새 비밀번호" />
-                        </div>
-                    </div>
-                </div>
-                <input type="button" class="btn change_btn none" value="비밀번호 변경하기" onclick="changePw();">
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="find_id">--%>
+<%--    <div class="modal_bg none">--%>
+<%--        <div class="modal z_display none">--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<div class="find_pw">--%>
+<%--    <div class="modal_bg none">--%>
+<%--        <div class="modal z_display none">--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>

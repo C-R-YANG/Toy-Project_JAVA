@@ -14,6 +14,11 @@
         text-align: left;
     }
 
+    .modal_title {
+        width: 100%;
+        text-align: center;
+    }
+
     .pw_chk_msg {
         padding: 10px;
         color: #008a5b;
@@ -40,47 +45,17 @@
     }
 
     .join_bottom {
-        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+        padding-top: 20px;
     }
 </style>
 
 <script type="text/javascript">
     let modal;
     $(document).ready(function () {
-        modal = null;
+        modal = $("#join_modal");
     })
-
-    function overlapId() {
-        const url   = "/user/overlapId",
-            param = { "id" : $("#new_id").val() };
-
-        $.post(url, param, function(data){
-            data ? $("#hint_id").text("* 중복된 아이디가 존재합니다.") && $("#hint_id").css("color", "red") && $("#new_id").focus():
-                   $("#hint_id").text("* 사용 가능한 아이디 입니다.") && $("#hint_id").css("color", "#008a5b") && $("#new_pw").focus();
-        })
-    }
-
-    function pwChk() {
-        if(modal.find("#new_pw").val() == modal.find("#new_pw_chk").val()){
-            modal.find(".pw_chk_msg").html("* 비밀번호가 일치합니다.");
-            modal.find(".pw_chk_msg").css("color","#008a5b");
-            modal.find(".pw_chk_msg").css("font-size","12px");
-        }else{
-            modal.find(".pw_chk_msg").html("* 비밀번호가 일치하지 않습니다.");
-            modal.find(".pw_chk_msg").css("color","red");
-            modal.find(".pw_chk_msg").css("font-size","12px");
-        }
-    }
-
-    function overlapEmail() {
-        const url   = "/user/overlapEmail",
-              param = { "email" : $("#new_email").val() };
-
-        $.post(url, param, function(data){
-            data ? $("#hint_email").html("* 중복된 이메일이 존재합니다.") && $("#hint_email").css("color", "red") :
-                   $("#hint_email").html("* 사용 가능한 이메일 입니다.") && $("#hint_email").css("color", "#008a5b");
-        })
-    }
 
     function joinSubmit() {
         // id
@@ -123,6 +98,39 @@
         }
     }
 
+    function overlapId() {
+        const url   = "/user/overlapId",
+              param = { "id" : $("#new_id").val() };
+
+        $.post(url, param, function(data){
+            data ? $("#hint_id").text("* 중복된 아이디가 존재합니다.") && $("#hint_id").css("color", "red") && $("#new_id").focus():
+                   $("#hint_id").text("* 사용 가능한 아이디 입니다.") && $("#hint_id").css("color", "#008a5b") && $("#new_pw").focus();
+        })
+    }
+
+    function overlapEmail() {
+        const url   = "/user/overlapEmail",
+              param = { "email" : $("#new_email").val() };
+
+        $.post(url, param, function(data){
+            data ? $("#hint_email").html("* 중복된 이메일이 존재합니다.") && $("#hint_email").css("color", "red") && $("#new_email").focus():
+                   $("#hint_email").html("* 사용 가능한 이메일 입니다.") && $("#hint_email").css("color", "#008a5b");
+        })
+    }
+
+
+    function pwChk() {
+        if(modal.find("#new_pw").val() == modal.find("#new_pw_chk").val()){
+            modal.find(".pw_chk_msg").html("* 비밀번호가 일치합니다.");
+            modal.find(".pw_chk_msg").css("color","#008a5b");
+            modal.find(".pw_chk_msg").css("font-size","12px");
+        }else{
+            modal.find(".pw_chk_msg").html("* 비밀번호가 일치하지 않습니다.");
+            modal.find(".pw_chk_msg").css("color","red");
+            modal.find(".pw_chk_msg").css("font-size","12px");
+        }
+    }
+
     function insUserData() {
         const url = "/user/join";
 
@@ -143,7 +151,9 @@
 </script>
 
 <div class="modal_box">
-    <h2 class="modal_title">회원가입</h2>
+    <div class="modal_title">
+        <h2>회원가입</h2>
+    </div>
     <div class="modal_contents">
         <div class="modal_input_box">
             <div class="modal_input_sub_box flex">

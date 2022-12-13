@@ -18,7 +18,7 @@ public class ContentsController {
     private final ContentsService contentsService;
 
     @GetMapping("/index")
-    public String index(@RequestParam(value = "opt", required = false)int opt, Model model){
+    public String index(@RequestParam(value = "opt", required = false)int opt, Model model) {
         model.addAttribute("contentsDto", contentsService.getBaseDto(opt));
 
         return "main/contents/index";
@@ -35,7 +35,9 @@ public class ContentsController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(@RequestParam(value = "opt", required = false)int opt, Model model) {
+        model.addAttribute("opt", opt);
+
         return "main/contents/register/index";
     }
 }

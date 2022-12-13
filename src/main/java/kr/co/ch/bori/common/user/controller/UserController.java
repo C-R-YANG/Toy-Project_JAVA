@@ -49,10 +49,20 @@ public class UserController {
         return "common/user/join/index";
     }
 
+    @PostMapping("user/find/findId")
+    public String findId() {
+        return "common/user/find/findId";
+    }
+
     @ResponseBody
     @PostMapping("user/find/id")
     public String selId(String email) {
         return loginService.selId(email);
+    }
+
+    @PostMapping("user/find/findPw")
+    public String findPw() {
+        return "common/user/find/findPw";
     }
 
     @ResponseBody

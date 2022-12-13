@@ -330,11 +330,6 @@
             <div class="text_box">
                 <h4>영업시간</h4>
                 <p>11:30 - 21:00</p>
-                <p class="last">Last Order : 20:15</p>
-            </div>
-            <div class="text_box">
-                <h4>휴게시간</h4>
-                <p>15:30 - 17:00</p>
             </div>
             <div class="text_box">
                 <h4>휴뮤</h4>

@@ -131,9 +131,9 @@
         listLayout;
 
     $(document).ready(function() {
-        contents = $("#contents");
+        contents     = $("#contents");
         contentsFlag = contents.children("#contents_flag");
-        listLayout = contents.children("#list_layout");
+        listLayout   = contents.children("#list_layout");
 
         setLayoutList();
     })
