@@ -43,7 +43,6 @@
     color: white;
     text-decoration: none;
     text-transform: uppercase;
-    box-shadow: 5px 10px 15px rgb(174 171 171 / 20%);
     cursor: pointer;
     transition: all 0.5s;
 }
@@ -71,7 +70,7 @@
 .bdt1 {border-top: 1px solid #acacac;}
 .bdt2 {border-top: 2px solid #acacac;}
 
-input[type=text] {
+input {
     height: 30px;
     padding: 5px;
     border: 1px solid #acacac;

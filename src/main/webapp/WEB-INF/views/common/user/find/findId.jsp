@@ -32,7 +32,7 @@
     })
     function findId() {
         const url   = "/user/find/id",
-            param = { "email" : $("#find_id_email").val() }
+              param = { "email" : $("#find_id_email").val() }
 
         $.post(url, param, function(data) {
             data ? alert("아이디는 (" + data + ") 입니다.") : alert("이메일을 다시 확인해주세요.");

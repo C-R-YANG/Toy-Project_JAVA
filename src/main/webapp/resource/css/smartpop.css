@@ -6,7 +6,7 @@
 .smartPop_top {position:relative; height:33px; overflow:hidden; cursor:default;}
 .smartPop_top_content {margin-right:1px; text-align:center; overflow:hidden; height:23px; padding:5px;}
 
-.smartPop_bottom {position:relative; overflow:hidden; height:100%; right bottom repeat-y; top:0; right:0; bottom:0; left:0;}
+.smartPop_bottom {position:relative; overflow:hidden; height:100%; top:0; right:0; bottom:0; left:0;}
 .smartPop_bottom_content {position:relative; height:100%; margin-right:5px; padding:5px 10px 20px 15px;}
 
 .smartPop_content {display:none; padding:2px; overflow:hidden; cursor:default; height: 100%}
@@ -15,4 +15,4 @@
 .smartPop_log {display:none; position:fixed; top:10px; left:10px; overflow:auto; width:200px; height:400px; background:#fff; border:solid 1px #444; padding:10px; z-index:3;}
 
 .smartPop_close {position:absolute; width:48px; height:48px; z-index: 9; background:url(../img/smartpop/btn_close.png); right:20px; top:20px; cursor:pointer;}
-.smartPop_loading {position:relative; margin:10px auto 0 auto; width:16px; height:16px; background:url(../img/smartpop/loading.gif); cursor:wait;}
+.smartPop_loading {position:relative; margin:10px auto 0 auto; width:16px; height:16px; cursor:wait;}

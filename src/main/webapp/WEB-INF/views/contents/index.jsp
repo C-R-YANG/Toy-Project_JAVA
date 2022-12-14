@@ -98,7 +98,6 @@
     .sub_box_btn {
         width: 85px;
         height: 35px;
-        line-height: 35px;
         background: #E8995B;
         font-size: 14px;
     }
@@ -120,7 +119,7 @@
     }
 
     .array_click {
-        color: red;
+        font-weight: 600;
     }
 
 </style>
@@ -198,6 +197,14 @@
             const opt = contentsFlag.children("#opt").val();
 
             location.href = "/contents/register?opt=" + opt;
+    }
+
+    function arrayClick(obj) {
+        const paramObj  = $(obj),
+            arrayList = paramObj.parent().parent().find("div");
+
+        arrayList.removeClass("array_click");
+        paramObj.addClass("array_click");
     }
 </script>
 
@@ -296,9 +303,9 @@
     <div class="sub_box flex">
         <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl(this)">
         <div class="sub_box_array flex">
-            <div class="array array_click">최신순</div>
-            <div class="array">조회순</div>
-            <div class="array">리뷰 많은순</div>
+            <div class="array array_click" onclick="arrayClick(this)">최신순</div>
+            <div class="array" onclick="arrayClick(this)">조회순</div>
+            <div class="array" onclick="arrayClick(this)">리뷰 많은순</div>
         </div>
 
     </div>

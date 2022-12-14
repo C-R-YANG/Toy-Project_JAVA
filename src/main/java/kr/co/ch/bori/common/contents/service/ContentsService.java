@@ -19,7 +19,7 @@ public class ContentsService {
                 isBeauty   = opt == 3;
 
         String engNm = isFood ? "FOOD" : isCafe ? "CAFE" : isHospital ? "HOSPITAL" : "BEAUTY",
-               korNm = isFood ? "식당" :  isCafe ? "카페" :  isHospital ? "병원"     : "미용";
+               korNm = isFood ? "식당"  : isCafe ? "카페"  : isHospital ? "병원"     : "미용";
 
         List<String> sortList = new ArrayList<>();
 

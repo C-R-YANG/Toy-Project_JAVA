@@ -20,7 +20,7 @@
     .content1 {
         width: 750px;
         height: 100%;
-        padding: 30px 30px 10px;
+        padding: 50px 50px 20px;
         background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -44,7 +44,7 @@
     }
 
     .content1_title span:first-child {
-        font-size: 24px;
+        font-size: 26px;
         font-weight: 600;
     }
 
@@ -90,12 +90,6 @@
         padding-bottom: 20px;
     }
 
-    .last {
-        font-size: 14px;
-        font-style: italic;
-        color: #acacac;
-    }
-
     .content2 {
         width: 300px;
         height: 100%;
@@ -105,7 +99,7 @@
         width: 200px;
         height: 50px;
         text-align: center;
-        margin: 30px auto;
+        margin: 20px auto;
         font-size: 18px;
         padding: 10px;
     }
@@ -118,7 +112,7 @@
         text-align: center;
         font-size: 24px;
         font-weight: 600;
-        padding: 30px 0px;
+        padding: 50px 0px;
     }
 
     .review {
@@ -134,7 +128,7 @@
     }
 
     .review_list {
-        padding: 15px 0;
+        padding: 20px 0;
     }
 
     .review_list_date {
@@ -245,6 +239,12 @@
         background-color: beige;
     }
 
+    .text_box p:first-child {
+        font-size: 18px;
+        font-weight: 600;
+        padding-bottom: 10px;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -320,23 +320,23 @@
         <hr class="content1_line"/>
         <div class="content1_text">
             <div class="text_box">
-                <h4>주소</h4>
+                <p>주소</p>
                 <p>광주 동구 장동로 11 2층 시바카레</p>
             </div>
             <div class="text_box">
-                <h4>전화번호</h4>
+                <p>전화번호</p>
                 <p>0507-1413-0824</p>
             </div>
             <div class="text_box">
-                <h4>영업시간</h4>
+                <p>영업시간</p>
                 <p>11:30 - 21:00</p>
             </div>
             <div class="text_box">
-                <h4>휴뮤</h4>
+                <p>휴뮤</p>
                 <p>매주 수요일</p>
             </div>
-            <div>
-                <h4>주차</h4>
+            <div class="text_box">
+                <p>주차</p>
                 <p>불가</p>
             </div>
         </div>

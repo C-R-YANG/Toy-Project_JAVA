@@ -4,7 +4,7 @@
     #contents {
         width: 600px;
         height: 100%;
-        margin: 120px auto;
+        margin: 150px auto;
         text-align: center;
     }
 

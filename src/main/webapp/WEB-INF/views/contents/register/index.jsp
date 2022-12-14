@@ -22,7 +22,7 @@
         padding-bottom: 20px;
     }
 
-    .input_box {
+    .input_box, .radio_box, .img_box {
         width: 100%;
         height: 35px;
         margin-bottom: 20px;
@@ -33,7 +33,7 @@
         height: 35px;
     }
 
-    .input_box > label, .address label {
+    .input_box > label, .address label, .img_box > label {
         display: inline-block;
         width: 120px;
     }
@@ -116,6 +116,12 @@
         box-shadow: none;
         border: 1px solid #ccc;
     }
+
+    #img_list {
+        font-size: 14px;
+        padding: 10px 0px 0px 145px;
+    }
+
 </style>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -154,11 +160,33 @@
         }
     }
 
-    function register(obj) {
-        const opt = register.children("#opt").val();
+    function cancel(obj) {
+        const opt = $("#register_flag").children("#opt").val();
 
-        location.href = "/contents/list?opt=" + opt;
+        location.href = "/contents/index?opt=" + opt;
     }
+
+    function register(obj) {
+        const opt = $("#register_flag").children("#opt").val();
+
+        alert("등록이 완료되었습니다.");
+        location.href = "/contents/index?opt=" + opt;
+    }
+
+    function imgList() {
+        let imgList    = $("#img")[0].files,
+            imgListTag = "";
+
+        for(i=0; i<imgList.length; i++) {
+            imgListTag += "<li>"+imgList[i].name+"</li>";
+        }
+
+        if(imgList.length > 1){
+            $("#img_list").html(imgListTag);
+        }
+    }
+
+
 </script>
 
 <div id="register_flag">
@@ -210,6 +238,11 @@
             <label for="parking_y">가능</label>
             <input type="radio" id="parking_n" name="parking">
             <label for="parking_n">불가능</label>
+        </div>
+        <div class="img_box">
+            <label for="img">사진 첨부</label>
+            <input type="file" id="img" name="img[]" accept="image/*" multiple onchange="imgList()">
+            <ul id="img_list"></ul>
         </div>
     </div>
 </div>

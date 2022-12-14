@@ -88,6 +88,11 @@
 
         location.href = "/contents/index?opt=" + opt;
     }
+
+    function moveMypage() {
+        location.href = "/mypage/index";
+    }
+
 </script>
 
 <div class="logo" onclick="moveHomeUrl()">
@@ -99,7 +104,7 @@
     <div data-opt="1" onclick="moveMenuUrl(this);">CAFE</div>
     <div data-opt="2" onclick="moveMenuUrl(this);">HOSPITAL</div>
     <div data-opt="3" onclick="moveMenuUrl(this);">BEAUTY</div>
-    <div data-opt="4" onclick="moveMenuUrl(this);">MYPAGE</div>
+    <div onclick="moveMypage();">MYPAGE</div>
 </div>
 
 <sec:authorize access="isAuthenticated()">
