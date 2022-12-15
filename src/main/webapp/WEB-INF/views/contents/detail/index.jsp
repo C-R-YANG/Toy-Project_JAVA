@@ -19,7 +19,7 @@
 
     .content1 {
         width: 750px;
-        height: 100%;
+        height: 550px;
         padding: 50px 50px 20px;
         background-color: #fff;
         border: 1px solid #ddd;
@@ -92,7 +92,7 @@
 
     .content2 {
         width: 300px;
-        height: 100%;
+        height: 550px;
     }
 
     .content2_review_btn {
@@ -115,122 +115,39 @@
         padding: 50px 0px;
     }
 
-    .review {
-        padding: 0px 30px;
-        background: #fff;
+    .table_box {
+        width: 100%;
+        height: 350px;
+        padding: 0px 20px;
+        background-color: #fff;
         border: 1px solid #ddd;
         border-radius: 5px;
-        box-shadow: 1px 1px 2px #ececec;;
+        box-shadow: 1px 1px 2px #ececec;
+        overflow-y: auto;
     }
 
-    .review > div:not(:first-of-type) {
-        border-top: 1px solid rgb(221, 221, 221);
+    table {
+        border-collapse: collapse
     }
 
-    .review_list {
-        padding: 20px 0;
-    }
-
-    .review_list_date {
-        font-size: 12px;
-    }
-
-    .review_list_star {
-        color: #9bc76c;
-        padding: 10px 0;
-    }
-
-    .review_modal_bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.2);
-        top: 0;
-        left: 0;
-    }
-
-    .review_modal {
-        width: 700px;
-        height: 500px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 30px 50px;
-        background-color: #fff;
-        border: 1px solid #acacac;
-        border-radius: 10px;
-    }
-
-    .review_modal_top {
+    .main_grid img {
         width: 100%;
     }
 
-    .review_modal_top > img {
-        width: 21px;
-        vertical-align: middle;
+    tr {
+        border-bottom: 1px solid #ddd;
     }
 
-    .review_modal_top > span {
-        font-size: 18px;
-        vertical-align: middle;
+    td {
+        padding: 10px 5px;
     }
 
-    .review_modal_title {
-        width: 100%;
-        margin: 25px auto;
-        text-align: center;
-        font-size: 20px;
+    col:first-child {
+        width: 30%;
     }
 
-    .review_modal_text > textarea {
-        width: 100%;
-        height: 150px;
-        padding: 15px;
-        outline: none;
-        border: 1px solid #dcdcdc;
-        border-radius: 10px;
-        resize: none;
-    }
-
-    .review_modal_img {
-        width: 100%;
-        padding: 10px 0 20px;
-    }
-
-    .review_modal_img > span {
-        font-size: 12px;
-        color: #acacac;
-    }
-
-    .review_modal_btn {
-        justify-content: flex-end;
-    }
-
-    .review_modal_btn > .write_btn {
-        width: 70px;
-        height: 40px;
-        font-size: 16px;
-    }
-
-    .review_modal_btn > .close_btn {
-        width: 70px;
-        height: 40px;
-        font-size: 16px;
-        background-color: #fff;
-        color: #000;
-        box-shadow: none;
-        border: 1px solid #ccc;
-    }
-
-    .review_star {
-        text-decoration: none;
-        color: #acacac;
-        cursor: pointer;
-    }
-
-    .review_star.on {
-        color: #9bc76c;
+    col:last-child {
+        width: 70%;
     }
 
     .map {
@@ -245,6 +162,33 @@
         padding-bottom: 10px;
     }
 
+    .review_star {
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #9bc76c;
+    }
+
+    .right {
+        font-size: 12px;
+        color: #acacac;
+    }
+
+    .top {
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .middle {
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .bottom {
+        font-size: 13px;
+        height: 20px;
+        line-height: 20px;
+    }
 </style>
 
 <script type="text/javascript">
@@ -255,33 +199,17 @@
     })
 
     function showReviewModal() {
-        contents.find(".review_modal_bg").removeClass("none");
-        contents.find(".review_modal").removeClass("none");
-        contents.find(".review_modal_text").children().focus();
-    }
+        const url = "/contents/detail/review";
 
-    function hideReviewModal() {
-        contents.find(".review_modal_bg").addClass("none");
-        contents.find(".review_modal").addClass("none");
-        contents.find(".review_modal_text").children().val("");
-    }
-
-    function writeBtn() {
-
-        if(contents.find(".review_modal_text").children().val() === "") {
-            alert("내용을 입력해주세요.");
-            contents.find(".review_modal_text").children().focus();
-        } else {
-            alert("리뷰가 등록되었습니다.");
-            contents.find(".review_modal_bg").addClass("none");
-            contents.find(".review_modal").addClass("none");
-            contents.find(".review_modal_text").children().val("");
-        }
-    }
-
-    function starBtn(obj) {
-        $(obj).parent().children("span").removeClass("on");
-        $(obj).addClass("on").prevAll("span").addClass("on");
+        $.post(url, {}, function (data) {
+            $.smartPop.open({
+                title  : "리뷰 쓰기",
+                id     : "review_modal",
+                width  : 680,
+                height : 450,
+                html   : data,
+            })
+        })
     }
 
 </script>
@@ -343,66 +271,76 @@
     </div>
 
     <div class="content2">
-
         <p class="review_title">방문자 리뷰</p>
-        <div class="review">
-            <div class="review_list">
-                <div>
-                    <span>로로미</span>
-                    <span class="review_list_date">2022년 9월 6일</span>
-                </div>
-                <div class="review_list_star">★★★★★</div>
-                <div>추천합니다.</div>
-            </div>
-            <div class="review_list">
-                <div>
-                    <span>로로미</span>
-                    <span class="review_list_date">2022년 9월 6일</span>
-                </div>
-                <div class="review_list_star">★★★★★</div>
-                <div>추천합니다.</div>
-            </div>
-            <div class="review_list">
-                <div>
-                    <span>로로미</span>
-                    <span class="review_list_date">2022년 9월 6일</span>
-                </div>
-                <div class="review_list_star">★★★★★</div>
-                <div>추천합니다.</div>
-            </div>
-        </div>
+        <div class="table_box">
+        <table>
+            <colgroup>
+                <col>
+                <col>
+            </colgroup>
+            <tbody id="file_grid_body">
+                <tr class="main_grid">
+                    <td>
+                        <img src="/resource/img/시바카레2.jpg" alt="">
+                    </td>
+                    <td>
+                        <div class="flex top">
+                            <div class="left">id</div>
+                            <div class="right">2022년 12월30일</div>
+                        </div>
+                        <div class="review_star middle">★</div>
+                        <div class="bottom">존맛탱</div>
+                    </td>
+                </tr>
+                <tr class="main_grid">
+                    <td>
+                        <img src="/resource/img/시바카레3.jpg" alt="">
+                    </td>
+                    <td>
+                        <div class="flex">
+                            <div class="left">id</div>
+                            <div class="right">2022년 12월30일</div>
+                        </div>
+                        <div class="review_star">★★★</div>
+                        <div>존맛탱</div>
+                    </td>
+                </tr>
+                <tr class="main_grid">
+                    <td>
+                        <img src="/resource/img/시바카레2.jpg" alt="">
+                    </td>
+                    <td>
+                        <div class="flex">
+                            <div class="left">id</div>
+                            <div class="right">2022년 12월30일</div>
+                        </div>
+                        <div class="review_star">★★★★★</div>
+                        <div>존맛탱</div>
+                    </td>
+                </tr>
+                <tr class="main_grid">
+                    <td>
+                        <img src="/resource/img/시바카레4.jpg" alt="">
+                    </td>
+                    <td>
+                        <div class="flex">
+                            <div class="left">id</div>
+                            <div class="right">2022년 12월30일</div>
+                        </div>
+                        <div class="review_star">★★★★★</div>
+                        <div>존맛탱</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
         <div class="content2_review_btn btn" onclick="showReviewModal()">리뷰쓰기</div>
     </div>
 </div>
 
-<div class="review_modal_bg none">
-    <div class="review_modal none">
-        <div class="review_modal_top">
-            <img src="/resource/img/edit.png" alt="">
-            <span>리뷰쓰기</span>
-        </div>
-        <div class="review_modal_title">
-            <h3>시바카레</h3>
-            <div class="review_star_box">
-                <span class="review_star on" onclick="starBtn(this)">★</span>
-                <span class="review_star" onclick="starBtn(this)">★</span>
-                <span class="review_star" onclick="starBtn(this)">★</span>
-                <span class="review_star" onclick="starBtn(this)">★</span>
-                <span class="review_star" onclick="starBtn(this)">★</span>
-            </div>
-        </div>
-        <div class="review_modal_text">
-            <textarea placeholder="내용을 입력해주세요."></textarea>
-        </div>
-        <div class="review_modal_img">
-            <input type="file" accept="image/*" multiple>
-        </div>
-        <div class="review_modal_btn flex">
-            <input type="button" class="write_btn btn" value="등록" onclick="writeBtn()">
-            <input type="button" class="close_btn btn" value="닫기" onclick="hideReviewModal()">
-        </div>
-    </div>
-</div>
+<%--<div class="review_modal_bg none">--%>
+<%--    --%>
+<%--</div>--%>
 
 <div class="map">
     지도다.

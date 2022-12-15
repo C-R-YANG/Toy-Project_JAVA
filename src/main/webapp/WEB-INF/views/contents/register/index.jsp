@@ -41,6 +41,8 @@
     .radio_box > span {
         display: inline-block;
         width: 120px;
+        height: 35px;
+        line-height: 35px;
     }
 
     .radio_box > label {
@@ -50,6 +52,11 @@
 
     .radio_box > input {
         accent-color: #9bc76c;
+    }
+
+    .img_box > input {
+        height: 35px;
+        line-height: 35px;
     }
 
     .register_contents > div:nth-child(3) > input {
@@ -147,17 +154,16 @@
         }).open();
     }
 
-    function chkNum() {
-        const numVal      = $("#number").val();
-        const numValCheck = /^[0-9,-]+$/
+    function chkNum(obj) {
+        const paramObj = $(obj),
+              value    = paramObj.val();
 
+        value.substr(0, 4) === "0505" ? paramObj.attr("alt", "tel2") :
+        value.substr(0, 3) === "010"  ? paramObj.attr("alt", "phone-kr") :
+        value.substr(0, 2) === "02"   ? paramObj.attr("alt", "tel3") :
+                                        paramObj.attr("alt", "tel");
 
-        if (numVal.length > 0) {
-            if(!numVal.match(numValCheck)) {
-                alert("숫자, 하이픈(-)만 입력해주세요.");
-                $("#number").val("");
-            }
-        }
+        paramObj.setMask();
     }
 
     function cancel(obj) {
@@ -220,7 +226,7 @@
         </div>
         <div class="input_box">
             <label for="number">전화번호</label>
-            <input type="text" id="number" onkeyup="chkNum();" >
+            <input type="text" id="number" onkeyup="chkNum(this);" >
         </div>
         <div class="input_box">
             <label for="start">영업시간</label>

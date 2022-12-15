@@ -3,6 +3,7 @@
 <script type="text/javascript" src="${url}/resource/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${url}/resource/js/common/common.js"></script>
 <script type="text/javascript" src="${url}/resource/js/common/plugin/jquery.smartpop.js"></script>
+<script type="text/javascript" src="${url}/resource/js/common/plugin/jquery.meio.mask.min.js"></script>
 
 <link type="text/css" rel="stylesheet" href="${url}/resource/css/common.css">
 <link type="text/css" rel="stylesheet" href="${url}/resource/css/smartpop.css">

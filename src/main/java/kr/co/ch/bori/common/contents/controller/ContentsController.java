@@ -40,4 +40,9 @@ public class ContentsController {
 
         return "main/contents/register/index";
     }
+
+    @PostMapping("/detail/review")
+    public String review() {
+        return "contents/detail/review";
+    }
 }

@@ -20,6 +20,12 @@
         padding: 50px 0;
     }
 
+    input[type=password] {
+        padding: 5px;
+        border: 1px solid #acacac;
+        outline: none;
+    }
+
     .input_box {
         width: 100%;
         height: 40px;

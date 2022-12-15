@@ -44,7 +44,7 @@
         border: 1px solid #acacac;
         border-radius: 3px;
         top: 30px;
-        padding: 5px;
+        padding: 10px 5px;
         background-color: #fff;
     }
 
@@ -64,7 +64,7 @@
     .dropdown_list {
         height: 30px;
         margin-left: 50px;
-        line-height: 40px;
+        line-height: 30px;
         accent-color: #9bc76c;
     }
 
@@ -73,7 +73,7 @@
         line-height: 30px;
         width: 60px;
         height: 30px;
-        margin: 20px auto 10px;
+        margin: 10px auto;
     }
 
     .search_btn {

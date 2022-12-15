@@ -70,8 +70,7 @@
 .bdt1 {border-top: 1px solid #acacac;}
 .bdt2 {border-top: 2px solid #acacac;}
 
-input {
-    height: 30px;
+input[type=text] {
     padding: 5px;
     border: 1px solid #acacac;
     border-radius: 3px;
@@ -84,4 +83,14 @@ input {
 
 .red {
     color: red;
+}
+
+.left {
+    margin-right: auto;
+    align-items: center;
+}
+
+.right {
+    margin-left: auto;
+    align-items: center;
 }

@@ -26,6 +26,12 @@
         margin-bottom: 35px;
     }
 
+    input[type=password] {
+        padding: 5px;
+        border: 1px solid #acacac;
+        outline: none;
+    }
+
     .input_box > input {
         width: 300px;
         border-radius: 10px;
