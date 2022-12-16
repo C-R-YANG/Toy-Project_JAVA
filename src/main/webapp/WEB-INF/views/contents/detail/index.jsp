@@ -108,6 +108,17 @@
         background-color: #66B875;
     }
 
+    .review_layout {
+        width: 100%;
+        height: 350px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 1px 1px 2px #ececec;
+        overflow-y: scroll
+    }
+
     .review_title {
         text-align: center;
         font-size: 24px;
@@ -115,39 +126,49 @@
         padding: 50px 0px;
     }
 
-    .table_box {
+    .review_contents {
+        padding: 10px 0px;
+    }
+
+    .review_layout > div:not(:last-child) {
+        border-bottom: 1px solid #ececec;
+    }
+
+    .review_img {
+        width: 80px;
+        height: 80px;
+    }
+    .review_img > img {
         width: 100%;
-        height: 350px;
-        padding: 0px 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: 1px 1px 2px #ececec;
-        overflow-y: auto;
+        height: 100%;
     }
 
-    table {
-        border-collapse: collapse
+    .review_text {
+        width: 200px;
+        padding: 10px;
     }
 
-    .main_grid img {
-        width: 100%;
+    .review_text .id {
+        font-size: 13px;
     }
 
-    tr {
-        border-bottom: 1px solid #ddd;
+    .review_text .text {
+        width: 184px;
+        font-size: 13px;
+        white-space: normal;
+        word-break: break-all;
     }
 
-    td {
-        padding: 10px 5px;
+    .review_text .date {
+        font-size: 10px;
+        color: #acacac;
     }
 
-    col:first-child {
-        width: 30%;
-    }
-
-    col:last-child {
-        width: 70%;
+    .review_star {
+        padding: 5px 0px;
+        color: #9bc76c;
+        font-size: 12px;
+        line-height: 13px;
     }
 
     .map {
@@ -156,39 +177,6 @@
         background-color: beige;
     }
 
-    .text_box p:first-child {
-        font-size: 18px;
-        font-weight: 600;
-        padding-bottom: 10px;
-    }
-
-    .review_star {
-        height: 20px;
-        line-height: 20px;
-        font-size: 12px;
-        color: #9bc76c;
-    }
-
-    .right {
-        font-size: 12px;
-        color: #acacac;
-    }
-
-    .top {
-        height: 20px;
-        line-height: 20px;
-    }
-
-    .middle {
-        height: 20px;
-        line-height: 20px;
-    }
-
-    .bottom {
-        font-size: 13px;
-        height: 20px;
-        line-height: 20px;
-    }
 </style>
 
 <script type="text/javascript">
@@ -271,76 +259,51 @@
     </div>
 
     <div class="content2">
-        <p class="review_title">방문자 리뷰</p>
-        <div class="table_box">
-        <table>
-            <colgroup>
-                <col>
-                <col>
-            </colgroup>
-            <tbody id="file_grid_body">
-                <tr class="main_grid">
-                    <td>
-                        <img src="/resource/img/시바카레2.jpg" alt="">
-                    </td>
-                    <td>
-                        <div class="flex top">
-                            <div class="left">id</div>
-                            <div class="right">2022년 12월30일</div>
-                        </div>
-                        <div class="review_star middle">★</div>
-                        <div class="bottom">존맛탱</div>
-                    </td>
-                </tr>
-                <tr class="main_grid">
-                    <td>
-                        <img src="/resource/img/시바카레3.jpg" alt="">
-                    </td>
-                    <td>
-                        <div class="flex">
-                            <div class="left">id</div>
-                            <div class="right">2022년 12월30일</div>
-                        </div>
-                        <div class="review_star">★★★</div>
-                        <div>존맛탱</div>
-                    </td>
-                </tr>
-                <tr class="main_grid">
-                    <td>
-                        <img src="/resource/img/시바카레2.jpg" alt="">
-                    </td>
-                    <td>
-                        <div class="flex">
-                            <div class="left">id</div>
-                            <div class="right">2022년 12월30일</div>
-                        </div>
-                        <div class="review_star">★★★★★</div>
-                        <div>존맛탱</div>
-                    </td>
-                </tr>
-                <tr class="main_grid">
-                    <td>
-                        <img src="/resource/img/시바카레4.jpg" alt="">
-                    </td>
-                    <td>
-                        <div class="flex">
-                            <div class="left">id</div>
-                            <div class="right">2022년 12월30일</div>
-                        </div>
-                        <div class="review_star">★★★★★</div>
-                        <div>존맛탱</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="review_title">방문자 리뷰</div>
+        <div class="review_layout">
+            <div class="review_contents flex">
+                <div class="review_img left">
+                    <img src="/resource/img/시바카레2.jpg" alt="">
+                </div>
+                <div class="review_text right">
+                    <div>
+                        <span class="id">id</span>
+                        <span class="date">2022년 12월 30일</span>
+                    </div>
+                    <div class="review_star">★★</div>
+                    <div class="text">존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱</div>
+                </div>
+            </div>
+            <div class="review_contents flex">
+                <div class="review_img">
+                    <img src="/resource/img/시바카레2.jpg" alt="">
+                </div>
+                <div class="review_text right">
+                    <div>
+                        <span class="id">id</span>
+                        <span class="date">2022년 12월 30일</span>
+                    </div>
+                    <div class="review_star">★★</div>
+                    <div class="text">존맛탱</div>
+                </div>
+            </div>
+            <div class="review_contents flex">
+                <div class="review_img">
+                    <img src="/resource/img/시바카레2.jpg" alt="">
+                </div>
+                <div class="review_text right">
+                    <div>
+                        <span class="id">id</span>
+                        <span class="date">2022년 12월 30일</span>
+                    </div>
+                    <div class="review_star">★★</div>
+                    <div class="text">존맛탱</div>
+                </div>
+            </div>
+        </div>
         <div class="content2_review_btn btn" onclick="showReviewModal()">리뷰쓰기</div>
     </div>
 </div>
-
-<%--<div class="review_modal_bg none">--%>
-<%--    --%>
-<%--</div>--%>
 
 <div class="map">
     지도다.

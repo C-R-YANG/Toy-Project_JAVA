@@ -98,7 +98,7 @@
         outline: none;
     }
 
-    #number, #closed {
+    #tel, #closed {
         width: 130px;
     }
 
@@ -134,6 +134,13 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script type="text/javascript">
+    let contents,
+        registerFlag;
+
+    $(document).ready(function() {
+        contents = $("#contents");
+        registerFlag = contents.children("#register_flag");
+    })
 
     function findAddr() {
         new daum.Postcode({
@@ -173,10 +180,30 @@
     }
 
     function register(obj) {
-        const opt = $("#register_flag").children("#opt").val();
+        const url = "/contents/register";
 
-        alert("등록이 완료되었습니다.");
-        location.href = "/contents/index?opt=" + opt;
+        const param = setParam();
+
+        $.post(url, param, function() {
+            alert("등록이 완료되었습니다.");
+
+            // location.href = "/contents/index?opt=" + param["opt"];
+        })
+    }
+
+    function setParam() {
+        return {
+            "opt"          : registerFlag.children("#opt").val(),
+            "title"        : contents.find("#title").val(),
+            "postCode"     : contents.find("#post_code").val(),
+            "mainAddress"  : contents.find("#main_address").val(),
+            "subAddress"   : contents.find("#sub_address").val(),
+            "tel"          : contents.find("#tel").val(),
+            "startTime"    : contents.find("#start_time").val(),
+            "endTime"      : contents.find("#end_time").val(),
+            "closeDay"     : contents.find("#close_day").val(),
+            "parking"      : contents.find("#parking_y").is(":checked"),
+        }
     }
 
     function imgList() {
@@ -225,18 +252,18 @@
             <input type="text" id="sub_address">
         </div>
         <div class="input_box">
-            <label for="number">전화번호</label>
-            <input type="text" id="number" onkeyup="chkNum(this);" >
+            <label for="tel">전화번호</label>
+            <input type="text" id="tel" onkeyup="chkNum(this);" >
         </div>
         <div class="input_box">
-            <label for="start">영업시간</label>
-            <input type="time" id="start">
-            <label for="end" style="width: 10px;">~</label>
-            <input type="time" id="end">
+            <label for="start_time">영업시간</label>
+            <input type="time" id="start_time">
+            <label for="end_time" style="width: 10px;">~</label>
+            <input type="time" id="end_time">
         </div>
         <div class="input_box">
-            <label for="closed">휴무일</label>
-            <input type="text" id="closed">
+            <label for="close_day">휴무일</label>
+            <input type="text" id="close_day">
         </div>
         <div class="radio_box">
             <span>주차</span>

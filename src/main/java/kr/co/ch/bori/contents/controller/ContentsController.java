@@ -1,14 +1,12 @@
-package kr.co.ch.bori.common.contents.controller;
+package kr.co.ch.bori.contents.controller;
 
-import kr.co.ch.bori.common.contents.service.ContentsService;
+import kr.co.ch.bori.contents.dto.PlaceDto;
+import kr.co.ch.bori.contents.service.ContentsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -34,12 +32,20 @@ public class ContentsController {
         return "main/contents/detail/index";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/register/index")
     public String register(@RequestParam(value = "opt", required = false)int opt, Model model) {
         model.addAttribute("opt", opt);
 
         return "main/contents/register/index";
     }
+
+    @ResponseBody
+    @PostMapping("/register")
+    public void insertRegisterData(PlaceDto placeDto) {
+        contentsService.insertRegisterData(placeDto);
+    }
+
+
 
     @PostMapping("/detail/review")
     public String review() {

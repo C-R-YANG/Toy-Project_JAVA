@@ -1,6 +1,8 @@
-package kr.co.ch.bori.common.contents.service;
+package kr.co.ch.bori.contents.service;
 
-import kr.co.ch.bori.common.contents.dto.ContentsDto;
+import kr.co.ch.bori.contents.dao.ContentsDao;
+import kr.co.ch.bori.contents.dto.ContentsDto;
+import kr.co.ch.bori.contents.dto.PlaceDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ContentsService {
+    private final ContentsDao contentsDao;
+
     public ContentsDto getBaseDto(int opt) {
         boolean isFood     = opt == 0,
                 isCafe     = opt == 1,
@@ -45,5 +49,9 @@ public class ContentsService {
         contentsDto.setSortList(sortList);
 
         return contentsDto;
+    }
+
+    public void insertRegisterData(PlaceDto placeDto) {
+        contentsDao.insertRegisterData(placeDto);
     }
 }

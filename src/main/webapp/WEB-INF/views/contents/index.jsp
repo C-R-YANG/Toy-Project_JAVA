@@ -196,7 +196,7 @@
     function moveRegisterUrl(obj) {
             const opt = contentsFlag.children("#opt").val();
 
-            location.href = "/contents/register?opt=" + opt;
+            location.href = "/contents/register/index?opt=" + opt;
     }
 
     function arrayClick(obj) {

@@ -2,9 +2,11 @@ package kr.co.ch.bori.common.user.dao;
 
 import kr.co.ch.bori.common.mybatis.CommonDaos;
 import kr.co.ch.bori.common.user.dto.UserDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Slf4j
 public class UserDao extends CommonDaos {
 
     public String login(UserDto userDto) {
@@ -37,6 +39,7 @@ public class UserDao extends CommonDaos {
     }
 
     public void updatePw(UserDto userDto) {
+        log.info("aaa");
         boridaengdaengCommonDao.updateData("User.updatePw", userDto);
     }
 }

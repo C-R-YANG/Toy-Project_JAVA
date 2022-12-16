@@ -1,4 +1,4 @@
-package kr.co.ch.bori.common.contents.dto;
+package kr.co.ch.bori.contents.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Contents">
+    <insert id="insertRegisterData" parameterType="kr.co.ch.bori.contents.dto.PlaceDto">
+        INSERT INTO place (
+            opt
+          , title
+          , post_code
+          , main_address
+          , sub_address
+          , tel
+          , start_time
+          , end_time
+          , close_day
+          , parking
+        )
+        VALUES (
+            #{opt}
+          , #{title}
+          , #{postCode}
+          , #{mainAddress}
+          , #{subAddress}
+          , #{tel}
+          , #{startTime}
+          , #{endTime}
+          , #{closeDay}
+          , #{parking}
+        )
+    </insert>
+</mapper>

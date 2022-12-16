@@ -270,23 +270,3 @@
     <span class="bottom_find_id"  onclick="showFindIdModal()">아이디 찾기</span>
     <span class="bottom_find_pw" onclick="showFindPwModal()">비밀번호 찾기</span>
 </div>
-
-<%--<div class="join">--%>
-<%--    <div class="modal_bg none">--%>
-<%--        <div class="modal z_display none">--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-
-<%--<div class="find_id">--%>
-<%--    <div class="modal_bg none">--%>
-<%--        <div class="modal z_display none">--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--<div class="find_pw">--%>
-<%--    <div class="modal_bg none">--%>
-<%--        <div class="modal z_display none">--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>

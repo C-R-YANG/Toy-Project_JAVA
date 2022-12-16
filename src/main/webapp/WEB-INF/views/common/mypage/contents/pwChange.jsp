@@ -81,17 +81,7 @@
         contents = $("#contents");
     });
 
-    function pwChk() {
-        // const url   = "/pwCheck",
-        //       param = { "pw" : $("#pw").val() }
-        //
-        // $.post(url, param, function(data) {
-        //     data ? pwChange() : alert("비밀번호를 다시 확인해주세요.");
-        // })
-        pwChange();
-    }
-
-    function pwChange() {
+    function changeBtn() {
         contents.find(".new").addClass("none");
         contents.find(".new").removeClass("none");
         contents.find(".old").addClass("none");
@@ -119,20 +109,34 @@
         if (isErr) {
             alert(errMsg);
         } else {
+            alert("비밀번호가 변경되었습니다.")
             setMypagePwChange();
             // pwData();
         }
     }
 
-    function dbChk() {
+    function pwChk() {
+        const pwValCheck  = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,12}$/,
+              pwCondition = contents.find(".pw_condition");
+
+        if(!pwValCheck.test(contents.find("#new_pw").val())) {
+            pwCondition.css("color","red");
+        } else {
+            pwCondition.css("color","#008a5b");
+        }
+    }
+
+    function doubleChk() {
+        const pwChkMsg =  contents.find(".pw_chk_msg");
+
         if(contents.find("#new_pw").val() == contents.find("#new_pw_chk").val()){
-            contents.find(".pw_chk_msg").html("* 비밀번호가 일치합니다.");
-            contents.find(".pw_chk_msg").css("color","#008a5b");
-            contents.find(".pw_chk_msg").css("font-size","12px");
+            pwChkMsg.html("* 비밀번호가 일치합니다.");
+            pwChkMsg.css("color","#008a5b");
+            pwChkMsg.css("font-size","12px");
         } else{
-            contents.find(".pw_chk_msg").html("* 비밀번호가 일치하지 않습니다.");
-            contents.find(".pw_chk_msg").css("color","red");
-            contents.find(".pw_chk_msg").css("font-size","12px");
+            pwChkMsg.html("* 비밀번호가 일치하지 않습니다.");
+            pwChkMsg.css("color","red");
+            pwChkMsg.css("font-size","12px");
         }
     }
 
@@ -161,18 +165,18 @@
         </div>
         <div class="input_box new none">
             <label for="new_pw">새 비밀번호</label>
-            <input type="password" id="new_pw">
+            <input type="password" id="new_pw" onkeyup="pwChk();">
             <div class="pw_condition"></div>
         </div>
         <div class="input_box new none">
             <label for="new_pw_chk">새 비밀번호 확인</label>
-            <input type="password" id="new_pw_chk" onkeyup="dbChk();">
+            <input type="password" id="new_pw_chk" onkeyup="doubleChk();">
             <div class="pw_chk_msg"></div>
         </div>
     </div>
 
     <div class="button_box1">
-        <button class="change_btn btn" onclick="pwChk()">변경하기</button>
+        <button class="change_btn btn" onclick="changeBtn()">변경하기</button>
     </div>
 
     <div class="button_box2 none">
