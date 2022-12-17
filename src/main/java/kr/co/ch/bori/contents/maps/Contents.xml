@@ -6,9 +6,12 @@
         INSERT INTO place (
             opt
           , title
+          , category
           , post_code
           , main_address
           , sub_address
+          , district
+          , neighborhood
           , tel
           , start_time
           , end_time
@@ -18,9 +21,12 @@
         VALUES (
             #{opt}
           , #{title}
+          , #{category}
           , #{postCode}
           , #{mainAddress}
           , #{subAddress}
+          , #{district}
+          , #{neighborhood}
           , #{tel}
           , #{startTime}
           , #{endTime}
@@ -28,4 +34,24 @@
           , #{parking}
         )
     </insert>
+
+    <select id="getContentsList" parameterType="kr.co.ch.bori.contents.dto.ParamDto" resultType="kr.co.ch.bori.contents.dto.PlaceDto">
+        SELECT
+            T1.*
+          , C1.cd_nm AS district_nm
+            <if test="opt == 0 || opt == 2">
+          , C2.cd_nm AS category_nm
+            </if>
+        FROM
+            place T1
+            LEFT JOIN cdmgr C1 ON ( C1.cd = 'district' AND C1.key_cd = T1.district )
+            <if test="opt == 0">
+                LEFT JOIN cdmgr C2 ON ( C2.cd = 'food' AND C2.key_cd = T1.category )
+            </if>
+            <if test="opt == 2">
+                LEFT JOIN cdmgr C2 ON ( C2.cd = 'hospital' AND C2.key_cd = T1.category )
+            </if>
+        WHERE
+            opt = #{opt}
+    </select>
 </mapper>

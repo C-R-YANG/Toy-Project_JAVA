@@ -11,21 +11,29 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class PlaceDto {
+    int views = 0;
+
     boolean parking = true;
+
+    String categoryNm = "";
 
     Date retDt = new Date();
 
     int cd,
+        category,
         opt;
 
     String title,
            postCode,
+           district,
+           neighborhood,
            mainAddress,
            subAddress,
            tel,
            startTime,
            endTime,
-           closeDay;
+           closeDay,
+           districtNm;
 
     Date uptDt,
          delDt;

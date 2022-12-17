@@ -2,6 +2,7 @@ package kr.co.ch.bori.contents.service;
 
 import kr.co.ch.bori.contents.dao.ContentsDao;
 import kr.co.ch.bori.contents.dto.ContentsDto;
+import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContentsService {
     private final ContentsDao contentsDao;
+
+    public List<PlaceDto> getContentsList(ParamDto paramDto) {
+        return contentsDao.getContentsList(paramDto);
+    }
 
     public ContentsDto getBaseDto(int opt) {
         boolean isFood     = opt == 0,

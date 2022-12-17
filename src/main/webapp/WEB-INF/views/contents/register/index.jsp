@@ -26,6 +26,7 @@
         width: 100%;
         height: 35px;
         margin-bottom: 20px;
+        position: relative;
     }
 
     .input_box > input {
@@ -129,6 +130,21 @@
         padding: 10px 0px 0px 145px;
     }
 
+    .sub_label {
+        position: absolute;
+        top: 12px;
+        left: 65px;
+        font-size: 10px;
+    }
+
+    .input_box > select {
+        padding: 5px;
+        border: 1px solid #acacac;
+        border-radius: 10px;
+        outline: none;
+        width: 100px;
+        margin-left: 5px;
+    }
 </style>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -165,10 +181,10 @@
         const paramObj = $(obj),
               value    = paramObj.val();
 
-        value.substr(0, 4) === "0505" ? paramObj.attr("alt", "tel2") :
-        value.substr(0, 3) === "010"  ? paramObj.attr("alt", "phone-kr") :
-        value.substr(0, 2) === "02"   ? paramObj.attr("alt", "tel3") :
-                                        paramObj.attr("alt", "tel");
+        value.substr(0, 3) === "050" ? paramObj.attr("alt", "tel2") :
+        value.substr(0, 3) === "010" ? paramObj.attr("alt", "phone-kr") :
+        value.substr(0, 2) === "02"  ? paramObj.attr("alt", "tel3") :
+                                       paramObj.attr("alt", "tel");
 
         paramObj.setMask();
     }
@@ -192,25 +208,33 @@
     }
 
     function setParam() {
-        return {
+        const param = {
             "opt"          : registerFlag.children("#opt").val(),
             "title"        : contents.find("#title").val(),
             "postCode"     : contents.find("#post_code").val(),
             "mainAddress"  : contents.find("#main_address").val(),
             "subAddress"   : contents.find("#sub_address").val(),
+            "district"     : contents.find("#district").val(),
+            "neighborhood" : contents.find("#neighborhood").val(),
             "tel"          : contents.find("#tel").val(),
             "startTime"    : contents.find("#start_time").val(),
             "endTime"      : contents.find("#end_time").val(),
             "closeDay"     : contents.find("#close_day").val(),
             "parking"      : contents.find("#parking_y").is(":checked"),
         }
+
+        if (contents.find("#category").length > 0) {
+            param["category"] = contents.find("#category").val();
+        }
+
+        return param;
     }
 
     function imgList() {
         let imgList    = $("#img")[0].files,
             imgListTag = "";
 
-        for(i=0; i<imgList.length; i++) {
+        for(let i = 0; i < imgList.length; i++) {
             imgListTag += "<li>"+imgList[i].name+"</li>";
         }
 
@@ -231,9 +255,28 @@
         <h2>장소 등록하기</h2>
     </div>
     <div class="register_contents">
-        <div class="input_box">
-            <label for="title">장소명</label>
-            <input type="text" id="title">
+        <div class="input_box flex">
+            <label for="title" style="line-height: 35px">장소명</label>
+            <c:if test="${opt == 0 || opt == 2}">
+                <span class="sub_label" style="left: 50px">(카테고리)</span>
+            </c:if>
+            <input type="text" id="title" style="width: 385px; margin-left: 5px">
+            <c:if test="${opt == 0 || opt == 2}">
+                <select id="category" style="margin-left: 5px">
+                    <c:if test="${opt == 0}">
+                        <option value="0">한식</option>
+                        <option value="1">일식</option>
+                        <option value="2">중식</option>
+                        <option value="3">양식</option>
+                        <option value="4">분식</option>
+                    </c:if>
+                    <c:if test="${opt == 2}">
+                        <option value="0">평일진료</option>
+                        <option value="1">야간진료</option>
+                        <option value="2">공휴일진료</option>
+                    </c:if>
+                </select>
+            </c:if>
         </div>
         <div class="input_box address flex">
             <div style="width: 236px;">
@@ -247,9 +290,19 @@
             </div>
         </div>
 
-        <div class="input_box">
-            <label for="sub_address">상세주소</label>
-            <input type="text" id="sub_address">
+        <div class="input_box flex">
+            <label for="sub_address" style="line-height: 35px">상세주소</label>
+            <span class="sub_label">(구/동/상세)</span>
+            <select id="district">
+                <option value="0">동구</option>
+                <option value="1">서구</option>
+                <option value="2">남구</option>
+                <option value="3">북구</option>
+                <option value="4">광산구</option>
+            </select>
+            <input type="text" id="neighborhood" style="margin-left: 5px; width: 100px;"/>
+            <input type="text" id="sub_address" style="width: 280px; margin-left: 5px">
+
         </div>
         <div class="input_box">
             <label for="tel">전화번호</label>

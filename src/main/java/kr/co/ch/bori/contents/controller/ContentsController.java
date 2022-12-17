@@ -1,5 +1,6 @@
 package kr.co.ch.bori.contents.controller;
 
+import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
 import kr.co.ch.bori.contents.service.ContentsService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,9 @@ public class ContentsController {
     }
 
     @PostMapping("/list")
-    public String list() {
+    public String getContentsList(ParamDto paramDto, Model model) {
+        model.addAttribute("contentsList", contentsService.getContentsList(paramDto));
+
         return "contents/list/index";
     }
 

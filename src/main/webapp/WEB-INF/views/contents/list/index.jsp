@@ -89,29 +89,23 @@
 </script>
 
 <div class="list_box flex">
-    <div class="list_content" onclick="moveDetailUrl(this)">
-        <div class="content_img">
-            <img src="/resource/img/시바카레.jpg" alt="시바카레">
+    <c:forEach items="${contentsList}" var="list" varStatus="loog">
+        <div class="list_content" onclick="moveDetailUrl(this)">
+            <div class="content_img">
+                <img src="/resource/img/시바카레.jpg" alt="시바카레">
+            </div>
+            <div class="content_text">
+                <span class="title">${list.title}</span>
+                <span class="sort">${list.categoryNm}</span>
+                <p class="address">${list.districtNm} / ${list.neighborhood}</p>
+                <p class="closed">${list.closeDay} 휴무</p>
+            </div>
+            <div class="content_bottom">
+                <img src="/resource/img/eye.png" alt="">
+                <span>${list.views}</span>
+                <img src="/resource/img/favorite.png" alt="">
+                <span>10</span>
+            </div>
         </div>
-        <div class="content_text">
-            <span class="title">시바카레</span>
-            <span class="sort">카레</span>
-            <p class="address">동구 / 장동</p>
-            <p class="closed">매주 수요일 휴무</p>
-        </div>
-        <div class="content_bottom">
-            <img src="/resource/img/eye.png" alt="">
-            <span>50</span>
-            <img src="/resource/img/favorite.png" alt="">
-            <span>10</span>
-        </div>
-    </div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
-    <div class="list_content"></div>
+    </c:forEach>
 </div>

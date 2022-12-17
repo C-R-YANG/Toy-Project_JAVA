@@ -127,22 +127,33 @@
 <script type="text/javascript">
     let contents,
         contentsFlag,
+        searchLayout,
         listLayout;
 
     $(document).ready(function() {
         contents     = $("#contents");
         contentsFlag = contents.children("#contents_flag");
+        searchLayout = contents.children("#search_layout");
         listLayout   = contents.children("#list_layout");
 
         setLayoutList();
     })
 
     function setLayoutList() {
-        const url = "/contents/list"
+        const url = "/contents/list";
 
-        $.post(url, {}, function(data){
+        $.post(url, setParam(), function(data){
+
+
             listLayout.html(data);
         })
+    }
+
+    function setParam() {
+        return {
+            "opt"   : contentsFlag.find("#opt").val(),
+            "title" : searchLayout.find("#search_name").val(),
+        }
     }
 
     function showDropDown(obj) {
@@ -201,7 +212,7 @@
 
     function arrayClick(obj) {
         const paramObj  = $(obj),
-            arrayList = paramObj.parent().parent().find("div");
+              arrayList = paramObj.parent().parent().find("div");
 
         arrayList.removeClass("array_click");
         paramObj.addClass("array_click");
