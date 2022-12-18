@@ -12,7 +12,8 @@ import java.util.List;
 public class ParamDto {
     int parking = 0;
 
-    int opt;
+    int opt,
+        cd;
 
     String title;
 

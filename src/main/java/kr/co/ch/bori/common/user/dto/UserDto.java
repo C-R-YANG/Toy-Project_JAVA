@@ -16,6 +16,8 @@ public class UserDto {
 
     private Date regDt = new Date();
 
+    private int cd;
+
     private String id,
                    pw,
                    email;

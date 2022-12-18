@@ -76,13 +76,35 @@
     })
 
     function writeBtn() {
-        if(!modal.find("textarea").val()) {
+        if (!modal.find("textarea").val()) {
             alert("내용을 입력해주세요.");
-        } else {
+
+            return false;
+        }
+
+        const url = "/contents/detail/review/insert";
+
+        $.post(url, setParam(), function() {
             alert("리뷰가 등록되었습니다.");
 
             $.smartPop.close("review_modal");
+        })
+    }
+
+    function setParam() {
+        let param = {
+            "placeCd"  : contents.find("#cd").val(),
+            "contents" : modal.find("#review_contents").val(),
         }
+
+        let score = 0;
+        modal.find(".review_modal_star").each(function() {
+            $(this).hasClass("on") ? score++ : score;
+        })
+
+        param["score"] = score;
+
+        return param;
     }
 
     function starBtn(obj) {
@@ -107,7 +129,7 @@
         </div>
     </div>
     <div class="review_modal_text">
-        <textarea placeholder="내용을 입력해주세요."></textarea>
+        <textarea id="review_contents" placeholder="내용을 입력해주세요."></textarea>
     </div>
     <div class="review_modal_img">
         <input type="file" accept="image/*" multiple>

@@ -1,12 +1,17 @@
 package kr.co.ch.bori.contents.service;
 
+import com.google.gson.Gson;
+import kr.co.ch.bori.common.security.session.SecuritySession;
 import kr.co.ch.bori.contents.dao.ContentsDao;
 import kr.co.ch.bori.contents.dto.ContentsDto;
 import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
+import kr.co.ch.bori.contents.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.el.util.Validation;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +24,18 @@ public class ContentsService {
 
     public List<PlaceDto> getContentsList(ParamDto paramDto) {
         return contentsDao.getContentsList(paramDto);
+    }
+
+    @Transactional
+    public PlaceDto getContentsDataByCd(ParamDto paramDto) {
+        PlaceDto placeDto = contentsDao.getContentsDataByCd(paramDto);
+
+        if (placeDto != null) {
+            // 조회수 상승
+            contentsDao.updateViewsContentsByCd(paramDto.getCd());
+        }
+
+        return placeDto;
     }
 
     public ContentsDto getBaseDto(int opt) {
@@ -58,5 +75,15 @@ public class ContentsService {
 
     public void insertRegisterData(PlaceDto placeDto) {
         contentsDao.insertRegisterData(placeDto);
+    }
+
+    public List<ReviewDto> getPlaceReviewList(int cd) {
+        return contentsDao.getPlaceReviewList(cd);
+    }
+
+    public void insertPlaceReviewData(ReviewDto reviewDto) {
+        reviewDto.setUserCd(SecuritySession.getCurrentMember().getCd());
+
+        contentsDao.insertPlaceReviewData(reviewDto);
     }
 }

@@ -203,7 +203,7 @@
         $.post(url, param, function() {
             alert("등록이 완료되었습니다.");
 
-            // location.href = "/contents/index?opt=" + param["opt"];
+            location.href = "/contents/index?opt=" + param["opt"];
         })
     }
 

@@ -80,17 +80,26 @@
 </style>
 
 <script type="text/javascript">
+    let listLayout;
+
+    $(document).ready(function() {
+        listLayout = contents.find("#list_layout");
+    })
 
     function moveDetailUrl(obj) {
-        const opt = contentsFlag.children("#opt").val();
+        const opt = contentsFlag.children("#opt").val(),
+              cd  = $(obj).find(".cd").text();
 
-        location.href = "/contents/detail?opt=" + opt;
+        location.href = "/contents/detail?opt=" + opt + "&cd=" + cd;
     }
 </script>
 
 <div class="list_box flex">
-    <c:forEach items="${contentsList}" var="list" varStatus="loog">
+    <c:set var="cnt" value="0" />
+
+    <c:forEach items="${contentsList}" var="list" varStatus="loop">
         <div class="list_content" onclick="moveDetailUrl(this)">
+            <div class="cd none">${list.cd}</div>
             <div class="content_img">
                 <img src="/resource/img/시바카레.jpg" alt="시바카레">
             </div>
@@ -98,7 +107,7 @@
                 <span class="title">${list.title}</span>
                 <span class="sort">${list.categoryNm}</span>
                 <p class="address">${list.districtNm} / ${list.neighborhood}</p>
-                <p class="closed">${list.closeDay} 휴무</p>
+                <p class="closed">${list.closeDay == "" ? "휴무 없음" : list.closeDay += " 휴무"}</p>
             </div>
             <div class="content_bottom">
                 <img src="/resource/img/eye.png" alt="">
@@ -107,5 +116,11 @@
                 <span>10</span>
             </div>
         </div>
+        <c:set var="cnt" value="${cnt + 1}" />
+    </c:forEach>
+
+
+    <c:forEach var="i" begin="1" end="${9 - cnt}">
+        <div class="list_content"></div>
     </c:forEach>
 </div>

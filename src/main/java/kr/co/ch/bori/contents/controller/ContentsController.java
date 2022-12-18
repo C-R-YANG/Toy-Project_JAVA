@@ -1,7 +1,10 @@
 package kr.co.ch.bori.contents.controller;
 
+import com.google.gson.Gson;
+import freemarker.template.utility.StringUtil;
 import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
+import kr.co.ch.bori.contents.dto.ReviewDto;
 import kr.co.ch.bori.contents.service.ContentsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +34,21 @@ public class ContentsController {
     }
 
     @GetMapping("/detail")
-    public String detail() {
-        return "main/contents/detail/index";
+    public String getContentsDataByCd(ParamDto paramDto, Model model) {
+        PlaceDto placeDto = contentsService.getContentsDataByCd(paramDto);
+
+        String url = "";
+        if (placeDto == null) {
+            url = "main/contents/index";
+
+            model.addAttribute("contentsDto", contentsService.getBaseDto(paramDto.getOpt()));
+        } else {
+            url = "main/contents/detail/index";
+
+            model.addAttribute("place", contentsService.getContentsDataByCd(paramDto));
+        }
+
+        return url;
     }
 
     @GetMapping("/register/index")
@@ -48,10 +64,21 @@ public class ContentsController {
         contentsService.insertRegisterData(placeDto);
     }
 
-
-
     @PostMapping("/detail/review")
+    public String getPlaceReviewList(int cd, Model model) {
+        model.addAttribute("reviewList", contentsService.getPlaceReviewList(cd));
+
+        return "contents/detail/review/index";
+    }
+
+    @PostMapping("/detail/review/write")
     public String review() {
-        return "contents/detail/review";
+        return "contents/detail/review/write";
+    }
+
+    @ResponseBody
+    @PostMapping("/detail/review/insert")
+    public void insertPlaceReviewData(ReviewDto reviewDto) {
+        contentsService.insertPlaceReviewData(reviewDto);
     }
 }

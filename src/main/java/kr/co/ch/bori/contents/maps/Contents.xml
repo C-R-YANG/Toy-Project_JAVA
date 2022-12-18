@@ -35,6 +35,36 @@
         )
     </insert>
 
+    <update id="updateViewsContentsByCd" parameterType="int">
+        UPDATE
+            place
+        SET
+            views = views + 1
+        WHERE
+            cd = #{cd}
+    </update>
+
+    <select id="getContentsDataByCd" parameterType="kr.co.ch.bori.contents.dto.ParamDto" resultType="kr.co.ch.bori.contents.dto.PlaceDto">
+        SELECT
+            T1.*
+          , C1.cd_nm AS district_nm
+            <if test="opt == 0 || opt == 2">
+          , C2.cd_nm AS category_nm
+            </if>
+        FROM
+            place T1
+            LEFT JOIN cdmgr C1 ON ( C1.cd = 'district' AND C1.key_cd = T1.district )
+            <if test="opt == 0">
+            LEFT JOIN cdmgr C2 ON ( C2.cd = 'food' AND C2.key_cd = T1.category )
+            </if>
+            <if test="opt == 2">
+            LEFT JOIN cdmgr C2 ON ( C2.cd = 'hospital' AND C2.key_cd = T1.category )
+            </if>
+        WHERE
+            T1.cd  = #{cd}
+    </select>
+
+
     <select id="getContentsList" parameterType="kr.co.ch.bori.contents.dto.ParamDto" resultType="kr.co.ch.bori.contents.dto.PlaceDto">
         SELECT
             T1.*
@@ -54,4 +84,35 @@
         WHERE
             opt = #{opt}
     </select>
+
+    <select id="getPlaceReviewList" parameterType="int" resultType="kr.co.ch.bori.contents.dto.ReviewDto">
+        SELECT
+            T1.*
+          , T2.id AS user_id
+        FROM
+            place_review T1
+            INNER JOIN user T2 ON (T2.cd = T1.user_cd)
+        WHERE
+              T1.place_cd = #{cd}
+          AND T1.del_dt IS NULL
+          AND T2.del_dt IS NULL
+        ORDER BY
+            reg_dt DESC
+    </select>
+
+    <insert id="insertPlaceReviewData" parameterType="kr.co.ch.bori.contents.dto.ReviewDto">
+        INSERT INTO place_review(
+            place_cd
+          , user_cd
+          , file_cd
+          , contents
+          , score
+        ) VALUES (
+            #{placeCd}
+          , #{userCd}
+          , #{fileCd}
+          , #{contents}
+          , #{score}
+        )
+    </insert>
 </mapper>

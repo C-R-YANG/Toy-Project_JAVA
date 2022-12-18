@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <style type="text/css">
     .image_layout {
@@ -126,51 +127,6 @@
         padding: 50px 0px;
     }
 
-    .review_contents {
-        padding: 10px 0px;
-    }
-
-    .review_layout > div:not(:last-child) {
-        border-bottom: 1px solid #ececec;
-    }
-
-    .review_img {
-        width: 80px;
-        height: 80px;
-    }
-    .review_img > img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .review_text {
-        width: 200px;
-        padding: 10px;
-    }
-
-    .review_text .id {
-        font-size: 13px;
-    }
-
-    .review_text .text {
-        width: 184px;
-        font-size: 13px;
-        white-space: normal;
-        word-break: break-all;
-    }
-
-    .review_text .date {
-        font-size: 10px;
-        color: #acacac;
-    }
-
-    .review_star {
-        padding: 5px 0px;
-        color: #9bc76c;
-        font-size: 12px;
-        line-height: 13px;
-    }
-
     .map {
         width: 100%;
         height: 300px;
@@ -180,27 +136,51 @@
 </style>
 
 <script type="text/javascript">
-    let contents;
+    let contents,
+        placeFlag;
 
     $(document).ready(function() {
-        contents = $("#contents");
+        contents  = $("#contents");
+        placeFlag = contents.children("#place_flag");
+
+        getPlaceReviewList();
     })
 
-    function showReviewModal() {
+    function getPlaceReviewList() {
         const url = "/contents/detail/review";
 
-        $.post(url, {}, function (data) {
-            $.smartPop.open({
-                title  : "리뷰 쓰기",
-                id     : "review_modal",
-                width  : 680,
-                height : 450,
-                html   : data,
-            })
+        const param = {
+            "cd" : placeFlag.children("#cd").val(),
+        }
+
+        $.post(url, param, function(html) {
+            console.log(contents)
+            console.log(contents.find("#review_layout"))
+            contents.find("#review_layout").html(html);
         })
     }
 
+    function showReviewModal() {
+        const url = "/contents/detail/review/write";
+
+        $.post(url, {}, function (html) {
+            $.smartPop.open({
+                title    : "리뷰 쓰기",
+                id       : "review_modal",
+                width    : 680,
+                height   : 450,
+                html     : html,
+                callback : function() {
+                    getPlaceReviewList();
+                }
+            })
+        })
+    }
 </script>
+
+<div id="place_flag">
+    <input type="hidden" id="cd" value="${place.cd}" />
+</div>
 
 <div class="image_layout">
     <img src="/resource/img/시바카레1.jpg" alt="">
@@ -214,7 +194,7 @@
         <div class="content1_top flex">
             <div class="content1_title">
                 <span>시바카레</span>
-                <span>카레</span>
+                <span>${place.categoryNm}</span>
             </div>
             <div class="content1_top_icon flex">
                 <div>
@@ -229,7 +209,7 @@
         </div>
         <div class="content1_icon">
             <img src="/resource/img/eye.png" alt="">
-            <span>50</span>
+            <span>${place.views}</span>
             <img src="/resource/img/favorite.png" alt="">
             <span>10</span>
         </div>
@@ -237,71 +217,36 @@
         <div class="content1_text">
             <div class="text_box">
                 <p>주소</p>
-                <p>광주 동구 장동로 11 2층 시바카레</p>
+                <p>${place.mainAddress} ${place.subAddress}</p>
             </div>
             <div class="text_box">
                 <p>전화번호</p>
-                <p>0507-1413-0824</p>
+                <p>${place.tel}</p>
             </div>
             <div class="text_box">
                 <p>영업시간</p>
-                <p>11:30 - 21:00</p>
+                <p>${place.startTime} - ${place.endTime}</p>
             </div>
             <div class="text_box">
                 <p>휴뮤</p>
-                <p>매주 수요일</p>
+                <p>${place.closeDay == "" ? "없음" : place.closeDay}</p>
             </div>
             <div class="text_box">
                 <p>주차</p>
-                <p>불가</p>
+                <p>${place.parking ? "가능" : "불가"}</p>
             </div>
         </div>
     </div>
 
     <div class="content2">
         <div class="review_title">방문자 리뷰</div>
-        <div class="review_layout">
-            <div class="review_contents flex">
-                <div class="review_img left">
-                    <img src="/resource/img/시바카레2.jpg" alt="">
-                </div>
-                <div class="review_text right">
-                    <div>
-                        <span class="id">id</span>
-                        <span class="date">2022년 12월 30일</span>
-                    </div>
-                    <div class="review_star">★★</div>
-                    <div class="text">존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱존맛탱</div>
-                </div>
-            </div>
-            <div class="review_contents flex">
-                <div class="review_img">
-                    <img src="/resource/img/시바카레2.jpg" alt="">
-                </div>
-                <div class="review_text right">
-                    <div>
-                        <span class="id">id</span>
-                        <span class="date">2022년 12월 30일</span>
-                    </div>
-                    <div class="review_star">★★</div>
-                    <div class="text">존맛탱</div>
-                </div>
-            </div>
-            <div class="review_contents flex">
-                <div class="review_img">
-                    <img src="/resource/img/시바카레2.jpg" alt="">
-                </div>
-                <div class="review_text right">
-                    <div>
-                        <span class="id">id</span>
-                        <span class="date">2022년 12월 30일</span>
-                    </div>
-                    <div class="review_star">★★</div>
-                    <div class="text">존맛탱</div>
-                </div>
-            </div>
-        </div>
-        <div class="content2_review_btn btn" onclick="showReviewModal()">리뷰쓰기</div>
+        <div id="review_layout" class="review_layout"></div>
+        <sec:authorize access="isAuthenticated()">
+            <div class="content2_review_btn btn" onclick="showReviewModal()">리뷰쓰기</div>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+            <div class="content2_review_btn btn" onclick="moveLoginUrl()">로그인</div>
+        </sec:authorize>
     </div>
 </div>
 
