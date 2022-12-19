@@ -94,3 +94,7 @@ input[type=text] {
     margin-left: auto;
     align-items: center;
 }
+
+.pink {
+    color: #ff435c;
+}

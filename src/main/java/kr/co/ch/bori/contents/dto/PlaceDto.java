@@ -11,7 +11,8 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class PlaceDto {
-    int views = 0;
+    int views = 0,
+        likes = 0;
 
     boolean parking = true;
 

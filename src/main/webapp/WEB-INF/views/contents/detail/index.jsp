@@ -133,6 +133,10 @@
         background-color: beige;
     }
 
+    .content1_top_icon .like:first-child {
+        height: 19px;
+        line-height: 17px;
+    }
 </style>
 
 <script type="text/javascript">
@@ -142,6 +146,8 @@
     $(document).ready(function() {
         contents  = $("#contents");
         placeFlag = contents.children("#place_flag");
+
+        getLikeData();
 
         getPlaceReviewList();
     })
@@ -154,8 +160,6 @@
         }
 
         $.post(url, param, function(html) {
-            console.log(contents)
-            console.log(contents.find("#review_layout"))
             contents.find("#review_layout").html(html);
         })
     }
@@ -174,6 +178,38 @@
                     getPlaceReviewList();
                 }
             })
+        })
+    }
+
+    function getLikeData() {
+        const url = '/contents/detail/like';
+
+        const param = {
+            "placeCd" : placeFlag.children("#cd").val(),
+        }
+
+        $.post(url, param, function(data) {
+            const isLike  = data["likeYn"],
+                  likeTag = contents.find(".like");
+
+            likeTag.eq(0).text(isLike ? "💗" : "🖤");
+
+            isLike ? likeTag.addClass("pink") : likeTag.removeClass("pink");
+
+            contents.find("#tot_like").text(data["cnt"]);
+        })
+    }
+
+    function mergeLikeData() {
+        const url = '/contents/detail/like/merge';
+
+        const param = {
+            "placeCd" : placeFlag.children("#cd").val(),
+        }
+
+        $.post(url, param, function() {
+            // 좋아요 조회
+            getLikeData();
         })
     }
 </script>
@@ -197,9 +233,11 @@
                 <span>${place.categoryNm}</span>
             </div>
             <div class="content1_top_icon flex">
-                <div>
-                    <img src="/resource/img/favorite.png" alt="">
-                    <p>좋아요</p>
+                <div <sec:authorize access="isAuthenticated()">onclick="mergeLikeData();" </sec:authorize>>
+                    <div class="like">♡</div>
+                    <p class="like">
+                        좋아요
+                    </p>
                 </div>
                 <div>
                     <img src="/resource/img/link.png" alt="">
@@ -211,7 +249,7 @@
             <img src="/resource/img/eye.png" alt="">
             <span>${place.views}</span>
             <img src="/resource/img/favorite.png" alt="">
-            <span>10</span>
+            <span id="tot_like">10</span>
         </div>
         <hr class="content1_line"/>
         <div class="content1_text">

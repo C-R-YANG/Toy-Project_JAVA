@@ -3,13 +3,11 @@ package kr.co.ch.bori.contents.service;
 import com.google.gson.Gson;
 import kr.co.ch.bori.common.security.session.SecuritySession;
 import kr.co.ch.bori.contents.dao.ContentsDao;
-import kr.co.ch.bori.contents.dto.ContentsDto;
-import kr.co.ch.bori.contents.dto.ParamDto;
-import kr.co.ch.bori.contents.dto.PlaceDto;
-import kr.co.ch.bori.contents.dto.ReviewDto;
+import kr.co.ch.bori.contents.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.el.util.Validation;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,14 +71,47 @@ public class ContentsService {
         return contentsDto;
     }
 
+    @Transactional
     public void insertRegisterData(PlaceDto placeDto) {
         contentsDao.insertRegisterData(placeDto);
+    }
+
+    public LikeDto getPlaceLikeData(int placeCd) {
+        LikeDto likeDto = new LikeDto();
+
+        likeDto.setPlaceCd(placeCd);
+
+        if (SecuritySession.getCurrentMember() != null) {
+            likeDto.setUserCd(SecuritySession.getCurrentMember().getCd());
+        }
+
+        return contentsDao.getPlaceLikeData(likeDto);
+    }
+
+    @Transactional
+    public void mergePlaceData(int placeCd) {
+        LikeDto likeDto = new LikeDto();
+
+        likeDto.setPlaceCd(placeCd);
+
+        if (SecuritySession.getCurrentMember() != null) {
+            likeDto.setUserCd(SecuritySession.getCurrentMember().getCd());
+        }
+
+        if (getPlaceLikeData(placeCd).isLikeYn()) {
+            contentsDao.deletePlaceLikeData(likeDto);
+        } else {
+            contentsDao.insertPlaceLikeData(likeDto);
+        };
+
+
     }
 
     public List<ReviewDto> getPlaceReviewList(int cd) {
         return contentsDao.getPlaceReviewList(cd);
     }
 
+    @Transactional
     public void insertPlaceReviewData(ReviewDto reviewDto) {
         reviewDto.setUserCd(SecuritySession.getCurrentMember().getCd());
 

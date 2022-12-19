@@ -113,7 +113,7 @@
                 <img src="/resource/img/eye.png" alt="">
                 <span>${list.views}</span>
                 <img src="/resource/img/favorite.png" alt="">
-                <span>10</span>
+                <span>${list.likes}</span>
             </div>
         </div>
         <c:set var="cnt" value="${cnt + 1}" />

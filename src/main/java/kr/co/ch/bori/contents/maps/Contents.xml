@@ -72,6 +72,13 @@
             <if test="opt == 0 || opt == 2">
           , C2.cd_nm AS category_nm
             </if>
+          , ( SELECT
+                  COUNT( user_cd ) as cnt
+              FROM
+                  place_like
+              WHERE
+                  place_cd = T1.cd
+            ) AS likes
         FROM
             place T1
             LEFT JOIN cdmgr C1 ON ( C1.cd = 'district' AND C1.key_cd = T1.district )
@@ -84,6 +91,38 @@
         WHERE
             opt = #{opt}
     </select>
+
+    <select id="getPlaceLikeData" parameterType="kr.co.ch.bori.contents.dto.LikeDto" resultType="kr.co.ch.bori.contents.dto.LikeDto">
+        SELECT
+            COUNT( user_cd ) AS cnt
+          , ( SELECT
+                  IF( COUNT( user_cd ) = 0, 0, 1 ) AS like_yn
+              FROM
+                  place_like
+              WHERE
+                    place_cd = T1.place_cd
+                AND user_cd  = #{userCd}
+            ) AS like_yn
+        FROM
+            place_like T1
+        WHERE
+            place_cd = #{placeCd}
+    </select>
+
+    <insert id="insertPlaceLikeData" parameterType="kr.co.ch.bori.contents.dto.LikeDto">
+        INSERT INTO
+            place_like
+        VALUE
+            ( #{placeCd}, #{userCd} )
+    </insert>
+
+    <delete id="deletePlaceLikeData" parameterType="kr.co.ch.bori.contents.dto.LikeDto">
+        DELETE FROM
+            place_like
+        WHERE
+              place_cd = #{placeCd}
+          AND user_cd  = #{userCd}
+    </delete>
 
     <select id="getPlaceReviewList" parameterType="int" resultType="kr.co.ch.bori.contents.dto.ReviewDto">
         SELECT

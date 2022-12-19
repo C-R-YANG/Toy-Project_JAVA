@@ -2,6 +2,7 @@ package kr.co.ch.bori.contents.controller;
 
 import com.google.gson.Gson;
 import freemarker.template.utility.StringUtil;
+import kr.co.ch.bori.contents.dto.LikeDto;
 import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
 import kr.co.ch.bori.contents.dto.ReviewDto;
@@ -62,6 +63,18 @@ public class ContentsController {
     @PostMapping("/register")
     public void insertRegisterData(PlaceDto placeDto) {
         contentsService.insertRegisterData(placeDto);
+    }
+
+    @ResponseBody
+    @PostMapping("/detail/like")
+    public LikeDto getPlaceLikeData(int placeCd) {
+        return contentsService.getPlaceLikeData(placeCd);
+    }
+
+    @ResponseBody
+    @PostMapping("/detail/like/merge")
+    public void merPlaceData(int placeCd) {
+        contentsService.mergePlaceData(placeCd);
     }
 
     @PostMapping("/detail/review")

@@ -1,5 +1,6 @@
 package kr.co.ch.bori.contents.dao;
 
+import kr.co.ch.bori.contents.dto.LikeDto;
 import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
 import kr.co.ch.bori.common.mybatis.CommonDaos;
@@ -16,6 +17,18 @@ public class ContentsDao extends CommonDaos {
 
     public void insertPlaceReviewData(ReviewDto reviewDto) {
         boridaengdaengCommonDao.insertData("Contents.insertPlaceReviewData", reviewDto);
+    }
+
+    public LikeDto getPlaceLikeData(LikeDto likeDto) {
+        return boridaengdaengCommonDao.getData("Contents.getPlaceLikeData", likeDto);
+    }
+
+    public void insertPlaceLikeData(LikeDto likeDto) {
+        boridaengdaengCommonDao.insertData("Contents.insertPlaceLikeData", likeDto);
+    }
+
+    public void deletePlaceLikeData(LikeDto likeDto) {
+        boridaengdaengCommonDao.deleteData("Contents.deletePlaceLikeData", likeDto);
     }
 
     public List<ReviewDto> getPlaceReviewList(int cd) {

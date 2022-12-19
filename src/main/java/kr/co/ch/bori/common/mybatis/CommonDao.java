@@ -31,6 +31,10 @@ public class CommonDao {
         return sqlSession.selectOne(query, search);
     }
 
+    public int mergeData(String query, Object model) throws DataAccessException {
+        return sqlSession.update(query, model);
+    }
+
     public int updateData(String query, Object model) throws DataAccessException {
         return sqlSession.update(query, model);
     }
