@@ -165,6 +165,10 @@
     })
 
     function setShareBtn() {
+        const opt = placeFlag.find("#opt").val(),
+              cd  = placeFlag.find("#cd").val(),
+              url = 'http://127.0.0.1:8080/contents/detail?opt=' + opt + '&cd=' + cd;
+
         Kakao.Share.createDefaultButton({
             container: "#kakaotalk-sharing-btn",
             objectType: "feed",
@@ -175,8 +179,8 @@
                     "http://127.0.0.1:8080/resource/img/시바카레2.jpg",
                 link: {
                     // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
-                    mobileWebUrl: 'http://127.0.0.1:8080',
-                    webUrl: 'http://127.0.0.1:8080',
+                    mobileWebUrl: url,
+                    webUrl: url,
                 },
             },
             social: {
@@ -187,15 +191,15 @@
                 {
                     title: '웹으로 보기',
                     link: {
-                        mobileWebUrl: 'http://127.0.0.1:8080',
-                        webUrl: 'http://127.0.0.1:8080',
+                        mobileWebUrl: url,
+                        webUrl: url,
                     },
                 },
                 {
                     title: '앱으로 보기',
                     link: {
-                        mobileWebUrl: 'http://127.0.0.1:8080',
-                        webUrl: 'http://127.0.0.1:8080',
+                        mobileWebUrl: url,
+                        webUrl: url,
                     },
                 },
             ],
@@ -305,6 +309,7 @@
 </script>
 
 <div id="place_flag">
+    <input type="hidden" id="opt" value="${place.opt}" />
     <input type="hidden" id="cd" value="${place.cd}" />
 </div>
 
