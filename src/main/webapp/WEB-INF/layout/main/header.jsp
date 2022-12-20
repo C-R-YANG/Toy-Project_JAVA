@@ -104,7 +104,7 @@
     <div data-opt="1" onclick="moveMenuUrl(this);">CAFE</div>
     <div data-opt="2" onclick="moveMenuUrl(this);">HOSPITAL</div>
     <div data-opt="3" onclick="moveMenuUrl(this);">BEAUTY</div>
-    <div onclick="moveMypage();">MYPAGE</div>
+    <div <sec:authorize access="!isAuthenticated()">class="hidden"</sec:authorize>onclick="moveMypage();">MYPAGE</div>
 </div>
 
 <sec:authorize access="isAuthenticated()">

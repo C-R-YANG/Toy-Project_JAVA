@@ -98,3 +98,7 @@ input[type=text] {
 .pink {
     color: #ff435c;
 }
+
+.hidden {
+    visibility: hidden;
+}
