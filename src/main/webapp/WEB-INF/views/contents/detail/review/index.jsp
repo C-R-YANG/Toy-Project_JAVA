@@ -51,6 +51,7 @@
 <script type="text/javascript">
 </script>
 
+<c:set var="cnt" value="0" />
 <c:forEach items="${reviewList}" var="list" varStatus="loop">
     <div class="review_contents flex">
         <div class="review_img">
@@ -65,4 +66,8 @@
             <div class="text">${list.contents}</div>
         </div>
     </div>
+
+    <c:set var="cnt" value="${cnt + 1}" />
 </c:forEach>
+
+<input id="review_cnt" type="hidden" value="${cnt}">

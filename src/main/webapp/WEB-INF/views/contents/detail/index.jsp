@@ -127,17 +127,19 @@
         padding: 50px 0px;
     }
 
-    .map {
-        width: 100%;
-        height: 300px;
-        background-color: beige;
-    }
-
     .content1_top_icon .like:first-child {
         height: 19px;
         line-height: 17px;
     }
 </style>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=334aaab5b9f31f09bf262d728d52c76a&libraries=services"></script>
+
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+        integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
+<script>
+    Kakao.init('334aaab5b9f31f09bf262d728d52c76a'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
 
 <script type="text/javascript">
     let contents,
@@ -147,19 +149,107 @@
         contents  = $("#contents");
         placeFlag = contents.children("#place_flag");
 
-        getLikeData();
+        // 좋아요관련 데이터 조회
+        getLikeData().then(
+            // 리뷰리스트 조회
+            () => getPlaceReviewList().then(
+                () => {
+                    // 지도 위치 세팅
+                    setPlaceMap();
 
-        getPlaceReviewList();
+                    // 공유하기 세팅
+                    setShareBtn();
+                }
+            )
+        );
     })
 
-    function getPlaceReviewList() {
+    function setShareBtn() {
+        Kakao.Share.createDefaultButton({
+            container: "#kakaotalk-sharing-btn",
+            objectType: "feed",
+            content: {
+                title: "${place.title}",
+                description: "${place.categoryNm != '' ? '#' += place.categoryNm += ' ' : ''}#${place.neighborhood} #${opt == 0 ? '식당' : opt == 1 ? '카페' : opt == 2 ? '병원' : '미용'}",
+                imageUrl:
+                    "http://127.0.0.1:8080/resource/img/시바카레2.jpg",
+                link: {
+                    // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+                    mobileWebUrl: 'http://127.0.0.1:8080',
+                    webUrl: 'http://127.0.0.1:8080',
+                },
+            },
+            social: {
+                likeCount: Number(contents.find("#tot_like").text()),
+                commentCount: Number(contents.find("#review_cnt").val()),
+            },
+            buttons: [
+                {
+                    title: '웹으로 보기',
+                    link: {
+                        mobileWebUrl: 'http://127.0.0.1:8080',
+                        webUrl: 'http://127.0.0.1:8080',
+                    },
+                },
+                {
+                    title: '앱으로 보기',
+                    link: {
+                        mobileWebUrl: 'http://127.0.0.1:8080',
+                        webUrl: 'http://127.0.0.1:8080',
+                    },
+                },
+            ],
+        });
+    }
+
+
+    function setPlaceMap() {
+        const mapContainer = contents.children('#place_map')[0], // 지도를 표시할 div
+              mapOption = {
+                  center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                  level: 3 // 지도의 확대 레벨
+              };
+
+        // 지도를 생성합니다
+        const map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch("${place.mainAddress}", function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+                const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                const marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                const infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">${place.title}</div>',
+                });
+
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
+        });
+    }
+
+    async function getPlaceReviewList() {
         const url = "/contents/detail/review";
 
         const param = {
             "cd" : placeFlag.children("#cd").val(),
         }
 
-        $.post(url, param, function(html) {
+        await $.post(url, param, function(html) {
             contents.find("#review_layout").html(html);
         })
     }
@@ -181,14 +271,14 @@
         })
     }
 
-    function getLikeData() {
+    async function getLikeData() {
         const url = '/contents/detail/like';
 
         const param = {
             "placeCd" : placeFlag.children("#cd").val(),
         }
 
-        $.post(url, param, function(data) {
+        await $.post(url, param, function(data) {
             const isLike  = data["likeYn"],
                   likeTag = contents.find(".like");
 
@@ -229,18 +319,21 @@
     <div class="content1">
         <div class="content1_top flex">
             <div class="content1_title">
-                <span>시바카레</span>
+                <span>${place.title}</span>
                 <span>${place.categoryNm}</span>
             </div>
             <div class="content1_top_icon flex">
                 <div <sec:authorize access="isAuthenticated()">onclick="mergeLikeData();" </sec:authorize>>
-                    <div class="like">♡</div>
+                    <div class="like">🖤</div>
                     <p class="like">
                         좋아요
                     </p>
                 </div>
                 <div>
-                    <img src="/resource/img/link.png" alt="">
+                    <a id="kakaotalk-sharing-btn" href="javascript:;">
+                        <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+                             alt="카카오톡 공유 보내기 버튼" />
+                    </a>
                     <p>공유하기</p>
                 </div>
             </div>
@@ -249,7 +342,7 @@
             <img src="/resource/img/eye.png" alt="">
             <span>${place.views}</span>
             <img src="/resource/img/favorite.png" alt="">
-            <span id="tot_like">10</span>
+            <span id="tot_like">0</span>
         </div>
         <hr class="content1_line"/>
         <div class="content1_text">
@@ -288,6 +381,4 @@
     </div>
 </div>
 
-<div class="map">
-    지도다.
-</div>
+<div id="place_map" style="width: 100%; height: 400px"></div>
