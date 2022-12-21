@@ -73,6 +73,9 @@ public class ContentsService {
 
     @Transactional
     public void insertRegisterData(PlaceDto placeDto) {
+        placeDto.get
+
+        // 장소 정보 저장
         contentsDao.insertRegisterData(placeDto);
     }
 

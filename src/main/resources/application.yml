@@ -6,6 +6,11 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+    multipart:
+      max-file-size: 1MB
+      max-request-size: 10MB
+
+file: dir=D:/Developer/ch/src/main/webapp/WEB-INF/upload/
 
 mybatis:
   mapper-locations: classpath*:kr/co/ch/bori/**/maps/*xml

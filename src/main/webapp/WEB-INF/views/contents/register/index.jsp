@@ -198,7 +198,7 @@
     function register(obj) {
         const url = "/contents/register";
 
-        const param = setParam();
+        const param = jsonToForm(setParam());
 
         $.post(url, param, function() {
             alert("등록이 완료되었습니다.");
@@ -227,10 +227,28 @@
             param["category"] = contents.find("#category").val();
         }
 
+        const imgList = $("#img")[0].files;
+
+        if (imgList.length > 0) {
+            let fileList = [];
+
+            for(let i = 0; i < imgList.length; i++) {
+                const file = {
+                    "file" : imgList[i],
+                };
+
+                fileList.push(file);
+            }
+
+            param["file"] = fileList;
+        }
+
         return param;
     }
 
     function imgList() {
+        $("#img_list").html("");
+
         let imgList    = $("#img")[0].files,
             imgListTag = "";
 

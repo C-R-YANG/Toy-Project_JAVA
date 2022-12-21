@@ -4,38 +4,42 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class PlaceDto {
-    int views = 0,
-        likes = 0;
+    private int views = 0,
+                likes = 0;
 
-    boolean parking = true;
+    private boolean parking = true;
 
-    String categoryNm = "";
+    private String categoryNm = "";
 
-    Date retDt = new Date();
+    private Date retDt = new Date();
 
-    int cd,
-        category,
-        opt;
+    private int cd,
+                category,
+                opt;
 
-    String title,
-           postCode,
-           district,
-           neighborhood,
-           mainAddress,
-           subAddress,
-           tel,
-           startTime,
-           endTime,
-           closeDay,
-           districtNm;
+    private String title,
+                   postCode,
+                   district,
+                   neighborhood,
+                   mainAddress,
+                   subAddress,
+                   tel,
+                   startTime,
+                   endTime,
+                   closeDay,
+                   districtNm;
 
-    Date uptDt,
-         delDt;
+    private Date uptDt,
+                 delDt;
+
+    private List<MultipartFile> multipartFileList;
 }
