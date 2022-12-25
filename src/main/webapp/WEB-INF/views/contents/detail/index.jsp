@@ -321,12 +321,14 @@
                 <span>${place.categoryNm}</span>
             </div>
             <div class="content1_top_icon flex">
-                <div <sec:authorize access="isAuthenticated()">onclick="mergeLikeData();" </sec:authorize>>
-                    <div class="like">🖤</div>
-                    <p class="like">
-                        좋아요
-                    </p>
-                </div>
+                <sec:authorize access="isAuthenticated()">
+                    <div onclick="mergeLikeData();" >
+                        <div class="like">🖤</div>
+                        <p class="like">
+                            좋아요
+                        </p>
+                    </div>
+                </sec:authorize>
                 <div>
                     <a id="kakaotalk-sharing-btn" href="javascript:;">
                         <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
