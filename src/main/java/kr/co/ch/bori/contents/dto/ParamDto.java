@@ -10,7 +10,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class ParamDto {
-    int recordSize = 9,
+    int page = 1,
+        recordSize = 9,
         pageSize = 5;
 
     Integer parking,
@@ -18,8 +19,7 @@ public class ParamDto {
 
     int opt,
         cd,
-        page = 1,
-        searchOpt;
+        order;
 
     String title;
 

@@ -152,6 +152,7 @@
         const param = {
             "opt"   : contentsFlag.children("#opt").val(),
             "page"  : contentsFlag.children("#page").val(),
+            "order" : contentsFlag.children("#order").val(),
         }
 
         const title        = searchLayout.find("#search_name").val().trim(),
@@ -240,10 +241,16 @@
 
     function arrayClick(obj) {
         const paramObj  = $(obj),
+              dataOpt   = paramObj.data("opt"),
               arrayList = paramObj.parent().parent().find("div");
 
         arrayList.removeClass("array_click");
         paramObj.addClass("array_click");
+
+        contentsFlag.children("#order").val(dataOpt);
+
+        // 장소 리스트 조회
+        setLayoutList();
     }
 </script>
 
@@ -254,6 +261,7 @@
     <input type="hidden" id="parking"       value="">
     <input type="hidden" id="page"          value="1">
     <input type="hidden" id="max_page"      value="${maxPage}">
+    <input type="hidden" id="order"         value="0">
 </div>
 
 <div id="title_layout">
@@ -349,9 +357,9 @@
             <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl()">
         </sec:authorize>
         <div class="sub_box_array flex">
-            <div class="array array_click" onclick="arrayClick(this)">최신순</div>
-            <div class="array" onclick="arrayClick(this)">조회순</div>
-            <div class="array" onclick="arrayClick(this)">좋아요 순</div>
+            <div class="array array_click" data-opt="0" onclick="arrayClick(this)">최신순</div>
+            <div class="array" data-opt="1" onclick="arrayClick(this)">조회순</div>
+            <div class="array" data-opt="2" onclick="arrayClick(this)">좋아요 순</div>
         </div>
     </div>
     <hr/>

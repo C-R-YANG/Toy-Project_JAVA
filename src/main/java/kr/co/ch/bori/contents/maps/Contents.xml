@@ -125,7 +125,9 @@
               </foreach>
           </if>
         ORDER BY
-            T1.cd DESC
+            <if test="order == 0">T1.cd DESC</if>
+            <if test="order == 1">likes DESC</if>
+            <if test="order == 2">T1.views DESC</if>
         LIMIT
             #{offset}, #{recordSize}
     </select>
