@@ -261,6 +261,32 @@
             setLayoutList();
         }
     }
+
+    function refreshFilter() {
+        // 페이지네이션 초기화
+        contentsFlag.children("#page").val("1");
+
+        // 검색 필터 초기화
+        contentsFlag.children("#district_list").val("");
+        contentsFlag.children("#category_list").val("");
+        contentsFlag.children("#parking").val("");
+
+        const searchDropdown = contents.find(".search_dropdown");
+
+        searchDropdown.children(".search_title").text("전체");
+        searchDropdown.find("input").prop("checked", true);
+        contents.find("#search_name").val("");
+
+        // 정렬 관련 초기화
+        contentsFlag.children("#order").val("0");
+
+        const orderList = contents.find(".sub_box_array").children("div");
+        orderList.removeClass("array_click");
+        orderList.eq(0).addClass("array_click");
+
+        // 장소 리스트 조회
+        setLayoutList();
+    }
 </script>
 
 <div id="contents_flag">
@@ -354,7 +380,7 @@
                 </div>
             </div>
         </div>
-        <div class="img_reset">
+        <div class="img_reset" onclick="refreshFilter();">
             <img src="/resource/img/reset.png">
         </div>
     </div>
