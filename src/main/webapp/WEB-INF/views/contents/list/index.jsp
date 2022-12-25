@@ -104,24 +104,14 @@
         listLayout = contents.find("#list_layout");
         pageIdx    = listLayout.find("#page_idx");
 
-        // pageNation 관련 Visible 처리
-        setPageIdx();
+        // max페이지 세팅
+        setMaxPage();
     })
 
-    function setPageIdx() {
-        const maxPageInput = contentsFlag.children("#max_page"),
-              maxPage = Number(maxPageInput.val());
+    function setMaxPage() {
+        const maxPageInput = contentsFlag.children("#max_page");
 
         maxPageInput.val(${maxPage});
-
-        pageIdx.children("div").each(function() {
-            const thisObj = $(this),
-                  pageNum = Number(thisObj.text());
-
-            if (pageNum < 1 || pageNum > maxPage) {
-                thisObj.addClass("none");
-            }
-        })
     }
 
     function moveDetailUrl(obj) {
@@ -205,8 +195,14 @@
     <div onclick="moveFirstPage()"><<</div>
     <div onclick="movePage(-1);"><</div>
     <div id="page_idx" class="flex">
-        <c:set var="start" value="${paramDto.page - 4 < 1 ? 1 : paramDto.page - 4}"></c:set>
-        <c:set var="end"   value="${paramDto.page + 4 > maxPage ? maxPage : paramDto.page + 4}"></c:set>
+        <c:set var="start" value="${paramDto.page - 2 < 1       ? 1       : paramDto.page - 2}"></c:set>
+        <c:set var="end"   value="${paramDto.page + 2 > maxPage ? maxPage : paramDto.page + 2}"></c:set>
+
+        <c:set var="startCnt" value="${5 - (end - paramDto.page)   - 1}"></c:set>
+        <c:set var="endCnt"   value="${5 - (paramDto.page - start) - 1}"></c:set>
+
+        <c:set var="start" value="${paramDto.page - startCnt < 1       ? 1       : paramDto.page - startCnt}"></c:set>
+        <c:set var="end"   value="${paramDto.page + endCnt   > maxPage ? maxPage : paramDto.page + endCnt  }"></c:set>
         <c:forEach var="i" begin="${start}" end="${end}">
             <div onclick="moveThisPage(Number($(this).text()));"
             <c:if test="${i == paramDto.page}">
