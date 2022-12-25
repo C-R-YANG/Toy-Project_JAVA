@@ -123,7 +123,6 @@
         <span>리뷰쓰기</span>
     </div>
     <div class="review_modal_title">
-        <h3>시바카레</h3>
         <div class="review_modal_star_box">
             <span class="review_modal_star on" onclick="starBtn(this)">★</span>
             <span class="review_modal_star" onclick="starBtn(this)">★</span>
