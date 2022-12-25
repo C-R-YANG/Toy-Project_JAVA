@@ -145,7 +145,7 @@
 
         const page = thisPage + idx < 1       ? 1 :
                      thisPage + idx > maxPage ? maxPage :
-                     thisPage;
+                     thisPage + idx;
 
         pageInput.val(page);
 
