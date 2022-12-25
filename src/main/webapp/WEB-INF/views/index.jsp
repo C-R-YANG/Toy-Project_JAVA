@@ -125,12 +125,12 @@
   .home_monitor img {
     width: 500px;
     height: 400px;
-    margin: 60px 30px;
+    margin: 70px 20px;
   }
 
   .content2_title {
     font-size: 30px;
-    margin-top: 110px;
+    padding-top: 150px;
   }
 
   .content2_title span {
@@ -174,7 +174,7 @@
 
   .content3_title {
     font-size: 30px;
-    margin: 100px 0px 100px 150px;
+    padding: 175px 0px 100px 150px;
   }
 
   .content3_title span {
@@ -274,7 +274,7 @@
 <div class="home_content2">
   <div class="content2_left">
     <div class="home_monitor">
-      <img src="${url}/resource/img/computer.png" alt="" />
+      <img src="${url}/resource/img/computer1.jpg" alt="" />
     </div>
   </div>
   <div class="content2_right">
@@ -299,7 +299,7 @@
   </div>
   <div class="content3_right">
     <div class="home_monitor">
-      <img src="${url}/resource/img/computer.png" alt="" />
+      <img src="${url}/resource/img/computer2.jpg" alt="" />
     </div>
   </div>
 </div>
