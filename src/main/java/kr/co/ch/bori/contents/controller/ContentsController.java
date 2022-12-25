@@ -26,8 +26,10 @@ public class ContentsController {
     private final FileService fileService;
 
     @GetMapping("/index")
-    public String index(@RequestParam(value = "opt", required = false)int opt, Model model) {
-        model.addAttribute("contentsDto", contentsService.getBaseDto(opt));
+    public String index(ParamDto paramDto, Model model) {
+
+        model.addAttribute("contentsDto", contentsService.getBaseDto(paramDto));
+        model.addAttribute("maxPage", contentsService.getMaxPage(paramDto));
 
         return "main/contents/index";
     }
@@ -35,6 +37,8 @@ public class ContentsController {
     @PostMapping("/list")
     public String getContentsList(ParamDto paramDto, Model model) {
         model.addAttribute("contentsList", contentsService.getContentsList(paramDto));
+        model.addAttribute("paramDto", paramDto);
+        model.addAttribute("maxPage", contentsService.getMaxPage(paramDto));
 
         return "contents/list/index";
     }

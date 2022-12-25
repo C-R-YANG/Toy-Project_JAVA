@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +38,29 @@ public class ContentsService {
         return placeDto;
     }
 
-    public ContentsDto getBaseDto(int opt) {
+    public int getMaxPage(ParamDto paramDto) {
+        return contentsDao.getMaxPage(paramDto);
+    }
+
+    public ContentsDto getBaseDto(ParamDto paramDto) {
+        int opt = paramDto.getOpt();
+
+        Integer district = paramDto.getDistrict();
+
         boolean isFood     = opt == 0,
                 isCafe     = opt == 1,
-                isHospital = opt == 2,
-                isBeauty   = opt == 3;
+                isHospital = opt == 2;
+
+        String districtNm;
+
+        if (district != null) {
+            districtNm = district == 0 ? "동구" :
+                         district == 1 ? "서구" :
+                         district == 2 ? "남구" :
+                         district == 3 ? "북구" : "광산구";
+        } else {
+            districtNm = "전체";
+        }
 
         String engNm = isFood ? "FOOD" : isCafe ? "CAFE" : isHospital ? "HOSPITAL" : "BEAUTY",
                korNm = isFood ? "식당"  : isCafe ? "카페"  : isHospital ? "병원"     : "미용";
@@ -68,6 +87,9 @@ public class ContentsService {
         contentsDto.setEngNm(engNm);
         contentsDto.setKorNm(korNm);
         contentsDto.setSortList(sortList);
+        contentsDto.setDistrictNm(districtNm);
+        contentsDto.setTitle(paramDto.getTitle());
+        contentsDto.setDistrict(paramDto.getDistrict());
 
         return contentsDto;
     }

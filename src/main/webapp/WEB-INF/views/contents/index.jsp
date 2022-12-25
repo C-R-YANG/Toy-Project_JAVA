@@ -136,6 +136,7 @@
         searchLayout = contents.children("#search_layout");
         listLayout   = contents.children("#list_layout");
 
+        // 장소 리스트 조회
         setLayoutList();
     })
 
@@ -143,17 +144,27 @@
         const url = "/contents/list";
 
         $.post(url, setParam(), function(data){
-
-
             listLayout.html(data);
         })
     }
 
     function setParam() {
-        return {
-            "opt"   : contentsFlag.find("#opt").val(),
-            "title" : searchLayout.find("#search_name").val(),
+        const param = {
+            "opt"   : contentsFlag.children("#opt").val(),
+            "page"  : contentsFlag.children("#page").val(),
         }
+
+        const title        = searchLayout.find("#search_name").val().trim(),
+              districtList = contentsFlag.children("#district_list").val(),
+              categoryList = contentsFlag.children("#category_list").val(),
+              parking      = contentsFlag.children("#parking").val();
+
+        if (title)        param["title"] = title.trim();
+        if (districtList) param["districtList"] = districtList.trim();
+        if (categoryList) param["categoryList"] = categoryList.trim();
+        if (parking)      param["parking"] = parking.trim();
+
+        return param;
     }
 
     function showDropDown(obj) {
@@ -184,16 +195,33 @@
 
     function inputText(obj) {
         const paramObj  = $(obj),
-              divList   = paramObj.parent().children("div:nth-child(n+2):nth-child(-n+6)"),
-              list      = divList.children("input"),
-              checkList = divList.children("input:checked"),
+              dataOpt   = paramObj.data("opt"),
+              divBox    = paramObj.parent(),
+              list      = divBox.find("input"),
+              checkList = divBox.find("input:checked"),
               divText   = paramObj.parent().parent().children("div:first"),
-              chkArray  = [];
+              chkArray  = [],
+              dataList  = [],
+              dataInput = dataOpt === 0 ? contentsFlag.children("#district_list") :
+                          dataOpt === 1 ? contentsFlag.children("#category_list") :
+                                          contentsFlag.children("#parking");
 
         const listLen      = list.length,
               checkListLen = checkList.length;
 
-        checkList.each(function () { chkArray.push($(this).val()); })
+        checkList.each(function() {
+            const thisObj = $(this);
+
+            chkArray.push(thisObj.next().text());
+
+            if (thisObj.val() !== "-1") {
+                dataList.push(thisObj.val());
+            } else {
+                return false;
+            }
+        })
+
+        if (dataList.length > 0) dataInput.val(dataList);
 
         const textVal = checkListLen === 1                           ? chkArray[0] :
                         checkListLen !== 0 && checkListLen < listLen ? chkArray[0] + " 외 " + (checkListLen - 1) + "건" :
@@ -204,10 +232,10 @@
         paramObj.parent().addClass("none");
     }
 
-    function moveRegisterUrl(obj) {
-            const opt = contentsFlag.children("#opt").val();
+    function moveRegisterUrl() {
+        const opt = contentsFlag.children("#opt").val();
 
-            location.href = "/contents/register/index?opt=" + opt;
+        location.href = "/contents/register/index?opt=" + opt;
     }
 
     function arrayClick(obj) {
@@ -220,7 +248,12 @@
 </script>
 
 <div id="contents_flag">
-    <input type="hidden" id="opt" value="${contentsDto.opt}">
+    <input type="hidden" id="opt"           value="${contentsDto.opt}">
+    <input type="hidden" id="district_list" value="${contentsDto.district}">
+    <input type="hidden" id="category_list" value="">
+    <input type="hidden" id="parking"       value="">
+    <input type="hidden" id="page"          value="1">
+    <input type="hidden" id="max_page"      value="${maxPage}">
 </div>
 
 <div id="title_layout">
@@ -232,38 +265,38 @@
     <div class="search_box flex_row flex_space_between">
         <div class="flex_row">
             <label for="search_name">${contentsDto.korNm}명</label>
-            <input id="search_name" type="text"/>
+            <input id="search_name" type="text" value="${contentsDto.title}"/>
         </div>
         <div class="flex_row">
             <div>지역</div>
             <div class="search_dropdown">
-                <div class="search_title" onclick="showDropDown(this)">전체</div>
+                <div class="search_title" onclick="showDropDown(this)">${contentsDto.districtNm}</div>
                 <div class="search_list flex_column flex_space_between none">
                     <div class="dropdown_list" >
-                        <input id="area_all" type="checkbox" value="전체" onclick="allChk(this)" checked/>
+                        <input id="area_all" type="checkbox" value="-1" onclick="allChk(this)" checked/>
                         <label for="area_all">전체</label>
                     </div>
                     <div class="dropdown_list" >
-                        <input id="list_east" type="checkbox" value="동구" onclick="checkBox(this)" checked/>
+                        <input id="list_east" type="checkbox" value="0" onclick="checkBox(this)" checked/>
                         <label for="list_east">동구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_west" type="checkbox" value="서구" onclick="checkBox(this)" checked/>
+                        <input id="list_west" type="checkbox" value="1" onclick="checkBox(this)" checked/>
                         <label for="list_west">서구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_south" type="checkbox" value="남구" onclick="checkBox(this)" checked/>
+                        <input id="list_south" type="checkbox" value="2" onclick="checkBox(this)" checked/>
                         <label for="list_south">남구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_north" type="checkbox" value="북구" onclick="checkBox(this)" checked/>
+                        <input id="list_north" type="checkbox" value="3" onclick="checkBox(this)" checked/>
                         <label for="list_north">북구</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="list_other" type="checkbox" value="광산구" onclick="checkBox(this)" checked/>
+                        <input id="list_other" type="checkbox" value="4" onclick="checkBox(this)" checked/>
                         <label for="list_other">광산구</label>
                     </div>
-                    <div class="btn" onclick="inputText(this)">적용</div>
+                    <div class="btn" data-opt="0" onclick="inputText(this)">적용</div>
                 </div>
             </div>
         </div>
@@ -273,13 +306,13 @@
                 <div class="search_dropdown">
                     <div class="search_title" onclick="showDropDown(this)">전체</div>
                     <div class="search_list flex_column flex_space_between none">
-                        <c:forEach var="item" items="${contentsDto.sortList}">
+                        <c:forEach var="item" items="${contentsDto.sortList}" varStatus="loop">
                             <div class="dropdown_list" <c:if test="${contentsDto.opt == 2}">style="margin-left: 35px" </c:if>>
-                                <input id="list_${item}" type="checkbox" value="${item}" onclick="allChk(this)" checked/>
+                                <input id="list_${item}" type="checkbox" value="${loop.index - 1}" onclick=${loop.index == 0 ? "allChk(this)" : "checkBox(this)"} checked/>
                                 <label for="list_${item}">${item}</label>
                             </div>
                         </c:forEach>
-                        <div class="btn" onclick="inputText(this)">적용</div>
+                        <div class="btn" data-opt="1" onclick="inputText(this)">적용</div>
                     </div>
                 </div>
             </div>
@@ -290,17 +323,17 @@
                 <div class="search_title" onclick="showDropDown(this)">전체</div>
                 <div class="search_list flex_column flex_space_between none">
                     <div class="dropdown_list">
-                        <input id="parking_all" type="checkbox" value="전체" onclick="allChk(this)" checked/>
+                        <input id="parking_all" type="checkbox" value="-1" onclick="allChk(this)" checked/>
                         <label for="parking_all">전체</label>
                     </div><div class="dropdown_list">
-                        <input id="possible" type="checkbox" value="가능" onclick="checkBox(this)" checked/>
+                        <input id="possible" type="checkbox" value="1" onclick="checkBox(this)" checked/>
                         <label for="possible">가능</label>
                     </div>
                     <div class="dropdown_list">
-                        <input id="impossble" type="checkbox" value="불가능" onclick="checkBox(this)" checked/>
+                        <input id="impossble" type="checkbox" value="0" onclick="checkBox(this)" checked/>
                         <label for="impossble">불가능</label>
                     </div>
-                    <div class="btn" onclick="inputText(this)">적용</div>
+                    <div class="btn" data-opt="2" onclick="inputText(this)">적용</div>
                 </div>
             </div>
         </div>
@@ -309,18 +342,17 @@
         </div>
     </div>
 
-    <button type="button" class="search_btn btn">SEARCH</button>
+    <button type="button" class="search_btn btn" onclick="setLayoutList();">SEARCH</button>
 
     <div class="sub_box flex">
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl(this)">
+            <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl()">
         </sec:authorize>
         <div class="sub_box_array flex">
             <div class="array array_click" onclick="arrayClick(this)">최신순</div>
             <div class="array" onclick="arrayClick(this)">조회순</div>
-            <div class="array" onclick="arrayClick(this)">리뷰 많은순</div>
+            <div class="array" onclick="arrayClick(this)">좋아요 순</div>
         </div>
-
     </div>
     <hr/>
 </div>

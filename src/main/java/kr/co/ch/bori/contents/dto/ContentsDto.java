@@ -12,10 +12,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class ContentsDto {
-    private int opt;
+    private int opt,
+                maxPage = 1;
+
+    private Integer district;
 
     private String engNm,
-                   korNm;
+                   korNm,
+                   title,
+                   districtNm;
 
     private List<String> sortList;
 }

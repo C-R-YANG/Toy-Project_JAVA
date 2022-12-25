@@ -10,13 +10,23 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class ParamDto {
-    int parking = 0;
+    int recordSize = 9,
+        pageSize = 5;
+
+    Integer parking,
+            district;
 
     int opt,
-        cd;
+        cd,
+        page = 1,
+        searchOpt;
 
     String title;
 
     List<Integer> districtList;
     List<Integer> categoryList;
+
+    public int getOffset() {
+        return (page - 1) * recordSize;
+    }
 }

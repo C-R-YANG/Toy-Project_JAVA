@@ -105,7 +105,56 @@
                 LEFT JOIN cdmgr C2 ON ( C2.cd = 'hospital' AND C2.key_cd = T1.category )
             </if>
         WHERE
+              T1.opt = #{opt}
+          <if test="title != null">
+              AND T1.title LIKE CONCAT_WS('', '%', #{title}, '%')
+          </if>
+          <if test="parking != null">
+              AND T1.parking = #{parking}
+          </if>
+          <if test="categoryList != null">
+              AND T1.category IN
+              <foreach collection="categoryList" item="category" open="(" separator="," close=")">
+                  #{category}
+              </foreach>
+          </if>
+          <if test="districtList != null">
+              AND T1.district IN
+              <foreach collection="districtList" item="district" open="(" separator="," close=")">
+                  #{district}
+              </foreach>
+          </if>
+        ORDER BY
+            T1.cd DESC
+        LIMIT
+            #{offset}, #{recordSize}
+    </select>
+
+    <select id="getMaxPage" parameterType="kr.co.ch.bori.contents.dto.ParamDto" resultType="int">
+        SELECT
+            CEIL( COUNT( cd ) / #{recordSize} ) AS CNT
+        FROM
+            place
+        WHERE
             opt = #{opt}
+        <if test="title != null">
+            AND title LIKE CONCAT_WS('', '%', #{title}, '%')
+        </if>
+        <if test="parking != null">
+            AND parking = #{parking}
+        </if>
+        <if test="categoryList != null">
+            AND category IN
+            <foreach collection="categoryList" item="category" open="(" separator="," close=")">
+                #{category}
+            </foreach>
+        </if>
+        <if test="districtList != null">
+            AND district IN
+            <foreach collection="districtList" item="district" open="(" separator="," close=")">
+                #{district}
+            </foreach>
+        </if>
     </select>
 
     <select id="getPlaceLikeData" parameterType="kr.co.ch.bori.contents.dto.LikeDto" resultType="kr.co.ch.bori.contents.dto.LikeDto">

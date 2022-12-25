@@ -2,9 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style type="text/css">
-    .array_wrap {
-        width: 300px;
-    }
     .list_box {
         justify-content: space-around;
         flex-wrap: wrap;
@@ -74,23 +71,103 @@
         padding-right: 5px;
     }
 
-    .list_btn {
-        width: 120px;
+    .page_nation {
+        display: flex;
+        justify-content: center;
+    }
+
+    .page_nation > div:not(#page_idx) {
+        width: 25px;
+        border: 1px solid black;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    #page_idx > div {
+        width: 25px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .page_on {
+        background-color: #9bc76c;
+        color: white;
+        border-radius: 5px;
     }
 </style>
 
 <script type="text/javascript">
-    let listLayout;
+    let listLayout,
+        pageIdx;
 
     $(document).ready(function() {
         listLayout = contents.find("#list_layout");
+        pageIdx    = listLayout.find("#page_idx");
+
+        // pageNation 관련 Visible 처리
+        setPageIdx();
     })
+
+    function setPageIdx() {
+        const maxPageInput = contentsFlag.children("#max_page"),
+              maxPage = Number(maxPageInput.val());
+
+        maxPageInput.val(${maxPage});
+
+        pageIdx.children("div").each(function() {
+            const thisObj = $(this),
+                  pageNum = Number(thisObj.text());
+
+            if (pageNum < 1 || pageNum > maxPage) {
+                thisObj.addClass("none");
+            }
+        })
+    }
 
     function moveDetailUrl(obj) {
         const opt = contentsFlag.children("#opt").val(),
               cd  = $(obj).find(".cd").text();
 
         location.href = "/contents/detail?opt=" + opt + "&cd=" + cd;
+    }
+
+    function moveThisPage(page) {
+        contentsFlag.children("#page").val(page);
+
+        // 장소 리스트 조회
+        setLayoutList();
+    }
+
+    function movePage(idx) {
+        const pageInput = contentsFlag.children("#page"),
+              thisPage  = Number(pageInput.val()),
+              maxPage   = Number(contentsFlag.children("#max_page").val());
+
+        const page = thisPage + idx < 1       ? 1 :
+                     thisPage + idx > maxPage ? maxPage :
+                     thisPage;
+
+        pageInput.val(page);
+
+        // 장소 리스트 조회
+        setLayoutList();
+    }
+
+
+    function moveFirstPage() {
+        contentsFlag.children("#page").val(1);
+
+        // 장소 리스트 조회
+        setLayoutList();
+    }
+
+    function moveLastPage() {
+        const maxPage   = Number(contentsFlag.children("#max_page").val());
+
+        contentsFlag.children("#page").val(maxPage);
+
+        // 장소 리스트 조회
+        setLayoutList();
     }
 </script>
 
@@ -119,8 +196,24 @@
         <c:set var="cnt" value="${cnt + 1}" />
     </c:forEach>
 
-
-    <c:forEach var="i" begin="1" end="${9 - cnt}">
+    <c:forEach var="i" begin="1" end="${paramDto.recordSize - cnt}">
         <div class="list_content"></div>
     </c:forEach>
+</div>
+
+<div class="page_nation">
+    <div onclick="moveFirstPage()"><<</div>
+    <div onclick="movePage(-1);"><</div>
+    <div id="page_idx" class="flex">
+        <c:set var="start" value="${paramDto.page - 4 < 1 ? 1 : paramDto.page - 4}"></c:set>
+        <c:set var="end"   value="${paramDto.page + 4 > maxPage ? maxPage : paramDto.page + 4}"></c:set>
+        <c:forEach var="i" begin="${start}" end="${end}">
+            <div onclick="moveThisPage(Number($(this).text()));"
+            <c:if test="${i == paramDto.page}">
+                class="page_on"
+            </c:if>>${i}</div>
+        </c:forEach>
+    </div>
+    <div onclick="movePage(1);">></div>
+    <div onclick="moveLastPage()">>></div>
 </div>

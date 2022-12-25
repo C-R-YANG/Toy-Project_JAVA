@@ -45,6 +45,10 @@ public class ContentsDao extends CommonDaos {
         return boridaengdaengCommonDao.getList("Contents.getContentsList", paramDto);
     }
 
+    public int getMaxPage(ParamDto paramDto) {
+        return boridaengdaengCommonDao.getCount("Contents.getMaxPage", paramDto);
+    }
+
     public void updateViewsContentsByCd(int cd) {
         boridaengdaengCommonDao.updateData("Contents.updateViewsContentsByCd", cd);
     }

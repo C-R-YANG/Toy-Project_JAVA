@@ -193,6 +193,18 @@
     content2 = contents.children(".home_content2");
   });
 
+  function movePlace() {
+    const opt      = content1.find("#opt").val();
+
+    let district = content1.find("#district").val(),
+        title    = content1.find("#title").val();
+
+    district = district !== "-1" ? "&district=" + district : "";
+    title    = title ? "&title=" + title : "";
+
+    location.href = "/contents/index?opt=" + opt + district + title;
+  }
+
   function showDropDown(obj) {
     const paramObj = $(obj),
           dropDown = paramObj.children(":last"),
@@ -204,9 +216,12 @@
   function dropDownText(obj) {
     const paramObj = $(obj),
           text     = paramObj.text(),
-          button   = paramObj.parent().parent().children("button");
+          dataOpt  = paramObj.data("opt"),
+          button   = paramObj.parent().parent().children("button"),
+          input    = paramObj.parent().parent().children("input");
 
-    button.text(text);
+    button.text(text)
+    input.val(dataOpt);
   }
 
 </script>
@@ -217,33 +232,35 @@
   </h2>
   <div class="content1_search_box">
     <div class="content1_dropdown" onclick="showDropDown(this);">
-      <button>전체</button>
+      <button>식당</button>
+      <input id="opt" type="hidden" value="0" />
       <img src="${url}/resource/img/dropdown.png" alt="dropdown"/>
       <div class="content1_dropdown_list none">
-        <div onclick="dropDownText(this)">식당</div>
-        <div onclick="dropDownText(this)">카페</div>
-        <div onclick="dropDownText(this)">병원</div>
-        <div onclick="dropDownText(this)">미용</div>
+        <div data-opt="0" onclick="dropDownText(this)">식당</div>
+        <div data-opt="1" onclick="dropDownText(this)">카페</div>
+        <div data-opt="2" onclick="dropDownText(this)">병원</div>
+        <div data-opt="3" onclick="dropDownText(this)">미용</div>
       </div>
     </div>
     <div class="content1_dropdown" onclick="showDropDown(this);">
       <button>전체</button>
+      <input id="district" type="hidden" value="-1" />
       <img src="${url}/resource/img/dropdown.png" alt="dropdown"/>
       <div class="content1_dropdown_list none">
-        <div onclick="dropDownText(this)">전체</div>
-        <div onclick="dropDownText(this)">동구</div>
-        <div onclick="dropDownText(this)">서구</div>
-        <div onclick="dropDownText(this)">남구</div>
-        <div onclick="dropDownText(this)">북구</div>
-        <div onclick="dropDownText(this)">광산구</div>
+        <div data-opt="-1" onclick="dropDownText(this)">전체</div>
+        <div data-opt="0" onclick="dropDownText(this)">동구</div>
+        <div data-opt="1" onclick="dropDownText(this)">서구</div>
+        <div data-opt="2" onclick="dropDownText(this)">남구</div>
+        <div data-opt="3" onclick="dropDownText(this)">북구</div>
+        <div data-opt="4" onclick="dropDownText(this)">광산구</div>
       </div>
     </div>
-    <form action="" class="content1_search">
-      <input type="text" placeholder="검색어를 입력해주세요." />
-      <button>
+    <div class="content1_search">
+      <input id="title" type="text" placeholder="검색어를 입력해주세요." />
+      <button onclick="movePlace();">
         <img src="${url}/resource/img/search.png" alt="search"/>
       </button>
-    </form>
+    </div>
   </div>
 </div>
 
