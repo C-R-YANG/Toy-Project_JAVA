@@ -93,6 +93,10 @@
             focusTag.focus();
 
             alert(errMsg);
+        } else if($("input[name='checked_id']").val()=='') {
+            alert("아이디중복 확인을 해주세요.");
+        } else if($("input[name='checked_email']").val()=='') {
+            alert("이메일 중복 확인을 해주세요.");
         } else {
             insUserData();
         }
@@ -106,6 +110,8 @@
             data ? $("#hint_id").text("* 중복된 아이디가 존재합니다.") && $("#hint_id").css("color", "red") && $("#new_id").focus():
                    $("#hint_id").text("* 사용 가능한 아이디 입니다.") && $("#hint_id").css("color", "#008a5b") && $("#new_pw").focus();
         })
+
+        $("input[name=checked_id]").val('y');
     }
 
     function overlapEmail() {
@@ -116,6 +122,8 @@
             data ? $("#hint_email").html("* 중복된 이메일이 존재합니다.") && $("#hint_email").css("color", "red") && $("#new_email").focus():
                    $("#hint_email").html("* 사용 가능한 이메일 입니다.") && $("#hint_email").css("color", "#008a5b");
         })
+
+        $("input[name=checked_email]").val('y');
     }
 
 
@@ -141,7 +149,7 @@
         };
 
         $.post(url, param, function() {
-            hideModal();
+            $.smartPop.close("join_modal");
 
             $("#userId").focus();
 
@@ -158,7 +166,7 @@
         <div class="modal_input_box">
             <div class="modal_input_sub_box flex">
                 <input type="text" id="new_id" name="id" placeholder="아이디">
-                <div class="db_chk" onclick="overlapId();">중복 확인</div>
+                <div class="db_chk overlap_id" onclick="overlapId();">중복 확인</div>
             </div>
             <p id="hint_id" class="join_condition green"> * 아이디는 영문, 숫자 포함 6 ~ 12자여야 합니다.</p>
         </div>
@@ -177,12 +185,14 @@
         <div class="modal_input_box">
             <div class="modal_input_sub_box flex">
                 <input type="email" id="new_email" name="email" placeholder="이메일">
-                <div class="db_chk" onclick="overlapEmail()">중복 확인</div>
+                <div class="db_chk overlap_email" onclick="overlapEmail()">중복 확인</div>
             </div>
             <div id="hint_email" class="join_condition"></div>
         </div>
     </div>
     <div class="join_bottom">
+        <input type="hidden" name="checked_id" value="">
+        <input type="hidden" name="checked_email" value="">
         <input type="button" class="btn join_btn" value="회원가입" onclick="joinSubmit()">
     </div>
 </div>

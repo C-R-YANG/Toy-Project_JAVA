@@ -40,6 +40,14 @@
             $.smartPop.close("find_id_modal");
         })
     }
+
+    function btnClick() {
+        const keyCode = event.keyCode;
+
+        if(keyCode === 13) {
+            $(".find_btn").click();
+        }
+    }
 </script>
 
 <div class="modal_box">
@@ -49,7 +57,7 @@
     <div class="modal_contents">
         <div class="modal_input_box">
             <div class="modal_input_sub_box flex">
-                <input type="email" id="find_id_email" placeholder="이메일" />
+                <input type="email" id="find_id_email" placeholder="이메일" onkeyup="btnClick();" />
             </div>
         </div>
     </div>

@@ -112,6 +112,22 @@
         })
     }
 
+    function moveEmail() {
+        const keyCode = event.keyCode;
+
+        if(keyCode === 13) {
+            $("#find_pw_email").focus();
+        }
+    }
+
+    function btnClick() {
+        const keyCode = event.keyCode;
+
+        if(keyCode === 13) {
+            $(".check_btn").click();
+        }
+    }
+
 </script>
 
 <div class="modal_box">
@@ -121,12 +137,12 @@
     <div class="modal_contents">
         <div class="modal_input_box ">
             <div class="modal_input_sub_box">
-                <input type="text" id="find_pw_id"placeholder="아이디">
+                <input type="text" id="find_pw_id"placeholder="아이디" onkeyup="moveEmail();">
             </div>
         </div>
         <div class="modal_input_box">
             <div class="modal_input_sub_box flex">
-                <input type="email" id="find_pw_email"placeholder="이메일 주소" />
+                <input type="email" id="find_pw_email"placeholder="이메일 주소" onkeyup="btnClick()"/>
             </div>
         </div>
         <div class="info_check">
