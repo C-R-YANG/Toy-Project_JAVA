@@ -36,10 +36,11 @@ public class PlaceDto {
                    startTime,
                    endTime,
                    closeDay,
-                   districtNm;
+                   districtNm,
+                   newNm;
 
     private Date uptDt,
                  delDt;
 
-    private List<MultipartFile> multipartFileList;
+    private List<MultipartFile> imgFileList;
 }

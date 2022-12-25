@@ -2,6 +2,7 @@
 
 <style type="text/css">
     #footer {
+        margin-top: 20px;
         width: 100%;
         height: 50px;
         background-color: rgb(245, 245, 245);

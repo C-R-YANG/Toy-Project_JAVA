@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="/WEB-INF/layout/commonTags.jspf"%>
 
 <style type="text/css">
     #title_layout {
@@ -312,7 +312,9 @@
     <button type="button" class="search_btn btn">SEARCH</button>
 
     <div class="sub_box flex">
-        <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl(this)">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <input type="button" class="sub_box_btn btn" value="등록하기" onclick="moveRegisterUrl(this)">
+        </sec:authorize>
         <div class="sub_box_array flex">
             <div class="array array_click" onclick="arrayClick(this)">최신순</div>
             <div class="array" onclick="arrayClick(this)">조회순</div>

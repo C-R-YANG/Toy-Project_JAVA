@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Contents">
-    <insert id="insertRegisterData" parameterType="kr.co.ch.bori.contents.dto.PlaceDto">
+    <select id="getPlaceSeq" resultType="int">
+        SELECT IFNULL( MAX(cd) + 1, 0 ) AS cnt FROM place
+    </select>
+
+    <insert id="insertPlaceData" parameterType="kr.co.ch.bori.contents.dto.PlaceDto">
         INSERT INTO place (
-            opt
+            cd
+          , opt
           , title
           , category
           , post_code
@@ -19,7 +24,8 @@
           , parking
         )
         VALUES (
-            #{opt}
+            #{cd}
+          , #{opt}
           , #{title}
           , #{category}
           , #{postCode}
@@ -79,6 +85,16 @@
               WHERE
                   place_cd = T1.cd
             ) AS likes
+          , ( SELECT
+                  new_nm as new_nm
+              FROM
+                  file
+              WHERE
+                  place_cd = T1.cd
+              ORDER BY
+                  cd
+              LIMIT 1
+            ) AS new_nm
         FROM
             place T1
             LEFT JOIN cdmgr C1 ON ( C1.cd = 'district' AND C1.key_cd = T1.district )
@@ -128,6 +144,14 @@
         SELECT
             T1.*
           , T2.id AS user_id
+          , ( SELECT
+                  new_nm as new_nm
+              FROM
+                  file
+              WHERE
+                    cd = T1.file_cd
+                AND place_cd = -1
+            ) AS new_nm
         FROM
             place_review T1
             INNER JOIN user T2 ON (T2.cd = T1.user_cd)

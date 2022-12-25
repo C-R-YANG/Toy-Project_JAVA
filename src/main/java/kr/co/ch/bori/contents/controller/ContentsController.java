@@ -7,11 +7,15 @@ import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
 import kr.co.ch.bori.contents.dto.ReviewDto;
 import kr.co.ch.bori.contents.service.ContentsService;
+import kr.co.ch.bori.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/contents")
 public class ContentsController {
     private final ContentsService contentsService;
+    private final FileService fileService;
 
     @GetMapping("/index")
     public String index(@RequestParam(value = "opt", required = false)int opt, Model model) {
@@ -36,20 +41,10 @@ public class ContentsController {
 
     @GetMapping("/detail")
     public String getContentsDataByCd(ParamDto paramDto, Model model) {
-        PlaceDto placeDto = contentsService.getContentsDataByCd(paramDto);
+        model.addAttribute("fileList", fileService.getPlaceFileList(paramDto));
+        model.addAttribute("place", contentsService.getContentsDataByCd(paramDto));
 
-        String url = "";
-        if (placeDto == null) {
-            url = "main/contents/index";
-
-            model.addAttribute("contentsDto", contentsService.getBaseDto(paramDto.getOpt()));
-        } else {
-            url = "main/contents/detail/index";
-
-            model.addAttribute("place", contentsService.getContentsDataByCd(paramDto));
-        }
-
-        return url;
+        return "main/contents/detail/index";
     }
 
     @GetMapping("/register/index")
@@ -61,8 +56,8 @@ public class ContentsController {
 
     @ResponseBody
     @PostMapping("/register")
-    public void insertRegisterData(PlaceDto placeDto) {
-        contentsService.insertRegisterData(placeDto);
+    public void insertPlaceData(PlaceDto placeDto) {
+        contentsService.insertPlaceData(placeDto);
     }
 
     @ResponseBody

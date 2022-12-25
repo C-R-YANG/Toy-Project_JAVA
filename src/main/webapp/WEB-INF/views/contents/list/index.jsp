@@ -101,7 +101,7 @@
         <div class="list_content" onclick="moveDetailUrl(this)">
             <div class="cd none">${list.cd}</div>
             <div class="content_img">
-                <img src="/resource/img/시바카레.jpg" alt="시바카레">
+                <img src="/resource/img/upload/place/${list.newNm}">
             </div>
             <div class="content_text">
                 <span class="title">${list.title}</span>

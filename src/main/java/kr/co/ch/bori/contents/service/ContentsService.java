@@ -4,10 +4,9 @@ import com.google.gson.Gson;
 import kr.co.ch.bori.common.security.session.SecuritySession;
 import kr.co.ch.bori.contents.dao.ContentsDao;
 import kr.co.ch.bori.contents.dto.*;
+import kr.co.ch.bori.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.el.util.Validation;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContentsService {
     private final ContentsDao contentsDao;
+
+    private final FileService fileService;
 
     public List<PlaceDto> getContentsList(ParamDto paramDto) {
         return contentsDao.getContentsList(paramDto);
@@ -72,11 +73,16 @@ public class ContentsService {
     }
 
     @Transactional
-    public void insertRegisterData(PlaceDto placeDto) {
-        placeDto.get
+    public void insertPlaceData(PlaceDto placeDto) {
+        int placeCd = contentsDao.getPlaceSeq();
+
+        placeDto.setCd(placeCd);
 
         // 장소 정보 저장
-        contentsDao.insertRegisterData(placeDto);
+        contentsDao.insertPlaceData(placeDto);
+
+        // 파일 관련 처리
+        fileService.insertPlaceFile(placeDto);
     }
 
     public LikeDto getPlaceLikeData(int placeCd) {
@@ -116,6 +122,14 @@ public class ContentsService {
 
     @Transactional
     public void insertPlaceReviewData(ReviewDto reviewDto) {
+        if (reviewDto.getImgFile() != null) {
+            // 파일 관련 처리
+            int fileCd = fileService.insertReviewFile(reviewDto);
+
+            reviewDto.setFileCd(fileCd);
+        }
+
+        // 리뷰 데이터 저장
         reviewDto.setUserCd(SecuritySession.getCurrentMember().getCd());
 
         contentsDao.insertPlaceReviewData(reviewDto);

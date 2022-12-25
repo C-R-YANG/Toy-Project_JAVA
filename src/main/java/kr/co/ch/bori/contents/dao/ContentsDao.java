@@ -5,14 +5,20 @@ import kr.co.ch.bori.contents.dto.ParamDto;
 import kr.co.ch.bori.contents.dto.PlaceDto;
 import kr.co.ch.bori.common.mybatis.CommonDaos;
 import kr.co.ch.bori.contents.dto.ReviewDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Slf4j
 @Repository
 public class ContentsDao extends CommonDaos {
-    public void insertRegisterData(PlaceDto placeDto) {
-        boridaengdaengCommonDao.insertData("Contents.insertRegisterData", placeDto);
+    public void insertPlaceData(PlaceDto placeDto) {
+        boridaengdaengCommonDao.insertData("Contents.insertPlaceData", placeDto);
+    }
+
+    public int getPlaceSeq() {
+        return boridaengdaengCommonDao.getSeq("Contents.getPlaceSeq");
     }
 
     public void insertPlaceReviewData(ReviewDto reviewDto) {

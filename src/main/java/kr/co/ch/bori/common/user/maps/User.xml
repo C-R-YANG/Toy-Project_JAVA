@@ -35,7 +35,7 @@
         INSERT INTO user
         (id, pw, email, use_yn, role)
         VALUES
-        (#{id}, #{pw}, #{email}, true, 9)
+        (#{id}, #{pw}, #{email}, true, 0)
     </insert>
 
     <select id="selId" parameterType="String" resultType="String">

@@ -195,12 +195,12 @@
         location.href = "/contents/index?opt=" + opt;
     }
 
-    function register(obj) {
+    function register() {
         const url = "/contents/register";
 
-        const param = jsonToForm(setParam());
+        const param = setParam();
 
-        $.post(url, param, function() {
+        postFormData(url, param, function() {
             alert("등록이 완료되었습니다.");
 
             location.href = "/contents/index?opt=" + param["opt"];
@@ -227,32 +227,43 @@
             param["category"] = contents.find("#category").val();
         }
 
-        const imgList = $("#img")[0].files;
+        const imgList = $("#img_file_list")[0].files;
+
 
         if (imgList.length > 0) {
-            let fileList = [];
-
-            for(let i = 0; i < imgList.length; i++) {
-                const file = {
-                    "file" : imgList[i],
-                };
-
-                fileList.push(file);
-            }
-
-            param["file"] = fileList;
+            param["imgFileList"] = imgList;
         }
 
         return param;
     }
 
-    function imgList() {
+    function imgList(obj) {
+        const paramObj = $(obj);
+
         $("#img_list").html("");
 
-        let imgList    = $("#img")[0].files,
+        let imgList    = paramObj[0].files,
             imgListTag = "";
 
+
+        if (imgList.length > 4) {
+            alert("이미지는 최대 4개까지 등록이 가능합니다.");
+            paramObj.val("");
+
+            return false;
+        }
+
         for(let i = 0; i < imgList.length; i++) {
+            const fileNm = imgList[i].name,
+                  ext    = fileNm.substring(fileNm.lastIndexOf(".") + 1, fileNm.length).toLowerCase();
+
+            if (ext !== 'png' && ext !== "jpg" && ext !== "jpeg") {
+                alert("pgn, jpg, jpeg 파일만 등록이 가능합니다.")
+                paramObj.val("");
+
+                return false;
+            }
+
             imgListTag += "<li>"+imgList[i].name+"</li>";
         }
 
@@ -344,8 +355,8 @@
             <label for="parking_n">불가능</label>
         </div>
         <div class="img_box">
-            <label for="img">사진 첨부</label>
-            <input type="file" id="img" name="img[]" accept="image/*" multiple onchange="imgList()">
+            <label for="img_file_list">사진 첨부</label>
+            <input type="file" id="img_file_list" multiple onchange="imgList(this)">
             <ul id="img_list"></ul>
         </div>
     </div>

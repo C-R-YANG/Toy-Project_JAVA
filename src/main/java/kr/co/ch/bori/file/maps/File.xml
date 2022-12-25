@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="File">
+    <select id="getSeq" resultType="int">
+        SELECT IFNULL( MAX(cd) + 1, 0 ) AS cnt FROM file
+    </select>
+
+    <insert id="insertData" parameterType="kr.co.ch.bori.file.dto.FileDto">
+        INSERT INTO file(
+            cd
+          , place_cd
+          , org_nm
+          , new_nm
+          , ext
+          , size
+        ) VALUES (
+            #{cd}
+          , #{placeCd}
+          , #{orgNm}
+          , #{newNm}
+          , #{ext}
+          , #{size}
+        )
+    </insert>
+
+    <select id="getPlaceFileList" parameterType="int" resultType="kr.co.ch.bori.file.dto.FileDto">
+        SELECT
+            cd
+          , place_cd
+          , org_nm
+          , new_nm
+          , ext
+          , size
+        FROM
+            file
+        WHERE
+            place_cd = #{placeCd}
+    </select>
+</mapper>

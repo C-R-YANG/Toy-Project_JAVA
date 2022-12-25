@@ -84,7 +84,7 @@
 
         const url = "/contents/detail/review/insert";
 
-        $.post(url, setParam(), function() {
+        postFormData(url, setParam(), function() {
             alert("리뷰가 등록되었습니다.");
 
             $.smartPop.close("review_modal");
@@ -103,6 +103,10 @@
         })
 
         param["score"] = score;
+
+        if (modal.find("#img_file")[0].files.length) {
+            param["imgFile"] = modal.find("#img_file")[0].files[0];
+        };
 
         return param;
     }
@@ -132,7 +136,7 @@
         <textarea id="review_contents" placeholder="내용을 입력해주세요."></textarea>
     </div>
     <div class="review_modal_img">
-        <input type="file" accept="image/*" multiple>
+        <input type="file" id="img_file">
     </div>
     <div class="review_modal_btn">
         <input type="button" class="write_btn btn" value="등록" onclick="writeBtn()">

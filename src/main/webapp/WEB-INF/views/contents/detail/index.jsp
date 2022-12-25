@@ -111,13 +111,7 @@
 
     .review_layout {
         width: 100%;
-        height: 350px;
-        padding: 10px;
         background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: 1px 1px 2px #ececec;
-        overflow-y: scroll
     }
 
     .review_title {
@@ -314,10 +308,9 @@
 </div>
 
 <div class="image_layout">
-    <img src="/resource/img/시바카레1.jpg" alt="">
-    <img src="/resource/img/시바카레2.jpg" alt="">
-    <img src="/resource/img/시바카레3.jpg" alt="">
-    <img src="/resource/img/시바카레4.jpg" alt="">
+    <c:forEach items="${fileList}" var="list" varStatus="loop">
+        <img src="/resource/img/upload/place/${list.newNm}" alt="">
+    </c:forEach>
 </div>
 
 <div class="content_layout flex">
@@ -375,7 +368,6 @@
     </div>
 
     <div class="content2">
-        <div class="review_title">방문자 리뷰</div>
         <div id="review_layout" class="review_layout"></div>
         <sec:authorize access="isAuthenticated()">
             <div class="content2_review_btn btn" onclick="showReviewModal()">리뷰쓰기</div>

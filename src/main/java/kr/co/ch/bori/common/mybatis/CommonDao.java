@@ -27,6 +27,10 @@ public class CommonDao {
         return model;
     }
 
+    public int getSeq(String query) throws DataAccessException {
+        return sqlSession.selectOne(query);
+    }
+
     public <E> E getData(String query, Object search) throws DataAccessException {
         return sqlSession.selectOne(query, search);
     }
