@@ -252,6 +252,15 @@
         // 장소 리스트 조회
         setLayoutList();
     }
+
+    function chkKey() {
+        const keyCode = event.keyCode;
+
+        if (keyCode === 13) {
+            // 장소 리스트 조회
+            setLayoutList();
+        }
+    }
 </script>
 
 <div id="contents_flag">
@@ -273,7 +282,7 @@
     <div class="search_box flex_row flex_space_between">
         <div class="flex_row">
             <label for="search_name">${contentsDto.korNm}명</label>
-            <input id="search_name" type="text" value="${contentsDto.title}"/>
+            <input id="search_name" type="text" value="${contentsDto.title}" onkeyup="chkKey();"/>
         </div>
         <div class="flex_row">
             <div>지역</div>

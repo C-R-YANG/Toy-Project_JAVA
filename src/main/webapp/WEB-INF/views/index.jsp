@@ -224,6 +224,13 @@
     input.val(dataOpt);
   }
 
+  function chkKey() {
+    const keyCode = event.keyCode;
+
+    if (keyCode === 13) {
+      movePlace();
+    }
+  }
 </script>
 
 <div class="home_content1">
@@ -256,7 +263,7 @@
       </div>
     </div>
     <div class="content1_search">
-      <input id="title" type="text" placeholder="검색어를 입력해주세요." />
+      <input id="title" type="text" placeholder="검색어를 입력해주세요." onkeyup="chkKey();"/>
       <button onclick="movePlace();">
         <img src="${url}/resource/img/search.png" alt="search"/>
       </button>
