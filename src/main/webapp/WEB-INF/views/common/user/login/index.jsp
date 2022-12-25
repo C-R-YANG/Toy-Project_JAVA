@@ -242,7 +242,7 @@
 </script>
 
 <div class="logo">
-    <img src="${url}/resource/img/보리댕댕.png" alt="보리댕댕" onclick="location.href=('/login')"/>
+    <img src="${url}/resource/img/보리댕댕.png" alt="보리댕댕" onclick="location.href=('/index')"/>
 </div>
 
 <hr/>
