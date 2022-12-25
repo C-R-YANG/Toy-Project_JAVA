@@ -77,14 +77,13 @@
     }
 
     .page_nation > div:not(#page_idx) {
-        width: 25px;
-        border: 1px solid black;
+        width: 30px;
         text-align: center;
         cursor: pointer;
     }
 
     #page_idx > div {
-        width: 25px;
+        width: 23px;
         text-align: center;
         cursor: pointer;
     }
@@ -92,7 +91,7 @@
     .page_on {
         background-color: #9bc76c;
         color: white;
-        border-radius: 5px;
+        border-radius: 15px;
     }
 </style>
 
