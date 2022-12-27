@@ -144,10 +144,12 @@
         const url = "/contents/list";
 
         $.post(url, setParam(), function(data){
+            // view resolver가 jstl을 찾아 model 속성의 이름을 확인해 값으로 변경해줌
             listLayout.html(data);
         })
     }
 
+    // 장소 리스트 조회 함수의 파라미터
     function setParam() {
         const param = {
             "opt"   : contentsFlag.children("#opt").val(),
@@ -159,6 +161,7 @@
               districtList = contentsFlag.children("#district_list").val(),
               categoryList = contentsFlag.children("#category_list").val(),
               parking      = contentsFlag.children("#parking").val();
+
 
         if (title)        param["title"] = title.trim();
         if (districtList) param["districtList"] = districtList.trim();
@@ -182,6 +185,7 @@
               inputList = paramObj.parent().parent().children("div:nth-child(n+2):nth-child(-n+6)").children("input"),
               isChk     = paramObj.is(":checked");
 
+        // 전체 input 체크시 2~6번 input check 박스를 checked 로 변경
         inputList.prop("checked", isChk);
     }
 
@@ -191,18 +195,21 @@
               checkboxList       = divList.children("input"),
               allChk             = paramObj.parent().parent().children("div:first").children("input");
 
+        // 체크박스에서 전체를 제외한 input의 개수와 체크되어있는 input의 개수가 같으면 전체에도 체크
         allChk.prop("checked", checkboxList.length == divList.children("input:checked").length);
     }
 
+    // 적용 버튼 클릭시 조회 관련 div 텍스트 변경
     function inputText(obj) {
         const paramObj  = $(obj),
               dataOpt   = paramObj.data("opt"),
               divBox    = paramObj.parent(),
-              list      = divBox.find("input"),
-              checkList = divBox.find("input:checked"),
+              list      = divBox.find("input"),         // 전체 Input 태그 리스트
+              checkList = divBox.find("input:checked"), // 체크된 Input 태그 리스트
               divText   = paramObj.parent().parent().children("div:first"),
-              chkArray  = [],
-              dataList  = [],
+              chkArray  = [],   // 체크 된 배열의 Label 텍스트 리스트
+              dataList  = [],   // 체크 된 배열의 Input Value 리스트
+              // dataOpt에 따라 contentsFlag에 있는 Input태그를 매칭해 변수에 세팅
               dataInput = dataOpt === 0 ? contentsFlag.children("#district_list") :
                           dataOpt === 1 ? contentsFlag.children("#category_list") :
                                           contentsFlag.children("#parking");
@@ -213,30 +220,32 @@
         checkList.each(function() {
             const thisObj = $(this);
 
+            // 배열에 check된 input의 label의 텍스트 값을 넣는다.
             chkArray.push(thisObj.next().text());
 
+            // 전체를 클릭 안했을 경우 dataList에 value 값 삽입
             if (thisObj.val() !== "-1") {
                 dataList.push(thisObj.val());
             } else {
+                dataInput.val("");
+
                 return false;
             }
         })
 
+        // dataList에 들어있는 value 값의 개수가 0보다 크면 dataInput에 dataList에 들어있는 value 값 삽입
         if (dataList.length > 0) dataInput.val(dataList);
 
+        // 체크된 input 개수가 1개면 chkArray 배열의 0번째 인덱스 값을 대입
+        // 0이 아니고, input의 개수보다 작으면 chkArray 배열의 0번째 인덱스 값 외 체크된 input 개수-1 건을 대입
         const textVal = checkListLen === 1                           ? chkArray[0] :
                         checkListLen !== 0 && checkListLen < listLen ? chkArray[0] + " 외 " + (checkListLen - 1) + "건" :
                         "전체";
 
+        // 조회 관련 div의 text 값을 textVal 값으로 적용
         divText.text(textVal);
 
         paramObj.parent().addClass("none");
-    }
-
-    function moveRegisterUrl() {
-        const opt = contentsFlag.children("#opt").val();
-
-        location.href = "/contents/register/index?opt=" + opt;
     }
 
     function arrayClick(obj) {
@@ -271,8 +280,10 @@
         contentsFlag.children("#category_list").val("");
         contentsFlag.children("#parking").val("");
 
+        // [선택한 옵션 한글출력 DIV] 부모 DIV 변수에 세팅
         const searchDropdown = contents.find(".search_dropdown");
 
+        // div text, input checkde, 검색어 기본값으로 초기화
         searchDropdown.children(".search_title").text("전체");
         searchDropdown.find("input").prop("checked", true);
         contents.find("#search_name").val("");
@@ -280,12 +291,22 @@
         // 정렬 관련 초기화
         contentsFlag.children("#order").val("0");
 
+        // 정렬관련 DIV 박스 하위 실제 정렬 기능하는 DIV 변수에 세팅
         const orderList = contents.find(".sub_box_array").children("div");
+        // 전체 정렬기능하는 DIV 선택 클래스 제거
         orderList.removeClass("array_click");
+        // 전체 정렬기능하는 클래스중 첫번째 DIV[최신순]에 선택 클래스 추가
         orderList.eq(0).addClass("array_click");
 
         // 장소 리스트 조회
         setLayoutList();
+    }
+
+    // 장소 등록 페이지 이동
+    function moveRegisterUrl() {
+        const opt = contentsFlag.children("#opt").val();
+
+        location.href = "/contents/register/index?opt=" + opt;
     }
 </script>
 

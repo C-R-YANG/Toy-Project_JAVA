@@ -16,6 +16,7 @@ public class UserDetail implements UserDetails {
     @Serial
     private static final long serialVersionUID = -8493085876825511929L;
 
+    // 세션 유저 권한 리스트
     private List<GrantedAuthority> authorities;
 
     private final UserDto userDTO;
@@ -36,7 +37,7 @@ public class UserDetail implements UserDetails {
     }
 
     public UserDto getUserDTO() {
-        return this.userDTO;
+        return userDTO;
     }
 
     public String getPassword() {

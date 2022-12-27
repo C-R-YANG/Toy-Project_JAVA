@@ -199,6 +199,7 @@
     let district = content1.find("#district").val(),
         title    = content1.find("#title").val();
 
+    // district(지역), title value 값에 따른 파라미터 세팅
     district = district !== "-1" ? "&district=" + district : "";
     title    = title ? "&title=" + title : "";
 
@@ -220,6 +221,7 @@
           button   = paramObj.parent().parent().children("button"),
           input    = paramObj.parent().parent().children("input");
 
+    // 선택한 옵션 한글 출력 div, input에 opt 값 삽입
     button.text(text)
     input.val(dataOpt);
   }

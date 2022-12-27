@@ -24,7 +24,8 @@ public class UserController {
     }
 
     @GetMapping("login")
-    public String login() {
+    public String login(String error) {
+        log.info(error);
         return "sub/common/user/login/index";
     }
 

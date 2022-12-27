@@ -33,9 +33,6 @@
         height: 100px;
         padding: 15px 20px 0px;
     }
-    .content_text > .title {
-
-    }
 
     .content_text > .sort {
         font-size: 12px;
@@ -103,7 +100,7 @@
         listLayout = contents.find("#list_layout");
         pageIdx    = listLayout.find("#page_idx");
 
-        // max페이지 세팅
+        // 최대 페이지 개수 세팅
         setMaxPage();
     })
 
@@ -113,6 +110,7 @@
         maxPageInput.val(${maxPage});
     }
 
+    // 장소 상세페이지 이동
     function moveDetailUrl(obj) {
         const opt = contentsFlag.children("#opt").val(),
               cd  = $(obj).find(".cd").text();
@@ -120,6 +118,7 @@
         location.href = "/contents/detail?opt=" + opt + "&cd=" + cd;
     }
 
+    // 페이지 네이션 - 현재 페이지
     function moveThisPage(page) {
         contentsFlag.children("#page").val(page);
 
@@ -127,6 +126,7 @@
         setLayoutList();
     }
 
+    // 페이지 네이션 - 이전페이지, 다음 페이지
     function movePage(idx) {
         const pageInput = contentsFlag.children("#page"),
               thisPage  = Number(pageInput.val()),
@@ -142,7 +142,7 @@
         setLayoutList();
     }
 
-
+    // 페이지 네이션 - 처음 페이지
     function moveFirstPage() {
         contentsFlag.children("#page").val(1);
 
@@ -150,6 +150,7 @@
         setLayoutList();
     }
 
+    // 페이지 네이션 - 다음 페이지
     function moveLastPage() {
         const maxPage   = Number(contentsFlag.children("#max_page").val());
 
@@ -161,8 +162,8 @@
 </script>
 
 <div class="list_box flex">
+<%--    왜 변수를 선언하고 나서 초기값을 세팅해주는건지 ??--%>
     <c:set var="cnt" value="0" />
-
     <c:forEach items="${contentsList}" var="list" varStatus="loop">
         <div class="list_content" onclick="moveDetailUrl(this)">
             <div class="cd none">${list.cd}</div>
@@ -184,7 +185,7 @@
         </div>
         <c:set var="cnt" value="${cnt + 1}" />
     </c:forEach>
-
+<%-- 시작이 1이고 끝이 9-cnt 동안 ??--%>
     <c:forEach var="i" begin="1" end="${paramDto.recordSize - cnt}">
         <div class="list_content"></div>
     </c:forEach>
@@ -200,8 +201,8 @@
         <c:set var="startCnt" value="${5 - (end - paramDto.page)   - 1}"></c:set>
         <c:set var="endCnt"   value="${5 - (paramDto.page - start) - 1}"></c:set>
 
-        <c:set var="start" value="${paramDto.page - startCnt < 1       ? 1       : paramDto.page - startCnt}"></c:set>
-        <c:set var="end"   value="${paramDto.page + endCnt   > maxPage ? maxPage : paramDto.page + endCnt  }"></c:set>
+        <c:set var="start" value="${paramDto.page - startCnt < 1       ? 1       : paramDto.page - startCnt}"></c:set> 1
+        <c:set var="end"   value="${paramDto.page + endCnt   > maxPage ? maxPage : paramDto.page + endCnt  }"></c:set> 5
         <c:forEach var="i" begin="${start}" end="${end}">
             <div onclick="moveThisPage(Number($(this).text()));"
             <c:if test="${i == paramDto.page}">

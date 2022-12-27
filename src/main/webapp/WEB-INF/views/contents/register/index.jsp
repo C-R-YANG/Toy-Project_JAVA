@@ -158,6 +158,7 @@
         registerFlag = contents.children("#register_flag");
     })
 
+    // kakao api - 우편번호 검색
     function findAddr() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -177,6 +178,7 @@
         }).open();
     }
 
+    // 전화번호 형식
     function chkNum(obj) {
         const paramObj = $(obj),
               value    = paramObj.val();
@@ -189,17 +191,21 @@
         paramObj.setMask();
     }
 
-    function cancel(obj) {
+    // contents index 페이지로 이동
+    function cancel() {
         const opt = $("#register_flag").children("#opt").val();
 
         location.href = "/contents/index?opt=" + opt;
     }
 
+    // 장소 등록 처리
     function register() {
-        const url = "/contents/register";
+        const url   = "/contents/register";
 
+        // 장소등록관련 Json 파라미터 세팅(장소정보, 파일리스트)
         const param = setParam();
 
+        // Json으로된 Param을 FormData로 변환후 post방식으로 ajax 요청
         postFormData(url, param, function() {
             alert("등록이 완료되었습니다.");
 
@@ -207,6 +213,7 @@
         })
     }
 
+    // 장소 등록 처리시 파라미터
     function setParam() {
         const param = {
             "opt"          : registerFlag.children("#opt").val(),
@@ -223,13 +230,15 @@
             "parking"      : contents.find("#parking_y").is(":checked"),
         }
 
+        // 카테고리가 하나 이상 존재하면 param 배열에 category에 담음
         if (contents.find("#category").length > 0) {
             param["category"] = contents.find("#category").val();
         }
 
+        // 이미지 파일들을 imgList변수에 세팅
         const imgList = $("#img_file_list")[0].files;
 
-
+        // imgList 개수가 하나 이상 존재할때만 param의 imgFileList라는 Key에 이미지배열을 담음
         if (imgList.length > 0) {
             param["imgFileList"] = imgList;
         }
@@ -364,5 +373,5 @@
 
 <div class="btn_box">
     <button class="write_btn btn" onclick="register(this)">등록</button>
-    <button class="close_btn btn" onclick="cancel(this)">취소</button>
+    <button class="close_btn btn" onclick="cancel()">취소</button>
 </div>

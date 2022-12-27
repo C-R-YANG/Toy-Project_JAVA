@@ -35,7 +35,7 @@ public class FileConfig {
             projectPath = projectPath.substring(1);
         }
 
-        uploadPath = Paths.get(projectPath, "ch","src", "main", "webapp", "resource", "img", FileConfig.UPLOAD_FOLDER_NAME);
+        uploadPath = Paths.get(projectPath, "src", "main", "webapp", "resource", "img", this.UPLOAD_FOLDER_NAME);
 
         return uploadPath.toString();
     }

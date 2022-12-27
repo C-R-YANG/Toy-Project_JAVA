@@ -21,12 +21,12 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        //클라이언트에서 넘어온 패스워드
+        // 로그인 폼에서 넘어온 패스워드
         String password = authentication.getCredentials().toString();
 
         log.info("userDetails.getUsername() : {} , userDetails.getPassword() : {}", userDetails.getUsername(), userDetails.getPassword());
 
-        // 비밀번호가 다르다
+        // BCrypt match 함수로 암호화 되지않은 패스워드와 DB에 저장된 암호화된 패스워드를 비교
         if(!BCryptService.matches(password, userDetails.getPassword())){
             throw new AuthenticationServiceException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badPassword", "no available!!"));
         }

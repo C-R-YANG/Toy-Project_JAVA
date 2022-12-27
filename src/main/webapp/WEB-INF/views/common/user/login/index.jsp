@@ -235,9 +235,7 @@
 
         const param = { "id" : contents.find("#userId").val(), "pw" : contents.find("#password").val()};
 
-        $.post(url, param, function() {
-           data ? alert("아이디 또는 비밀번호를 확인해주세요.") : "";
-        })
+        $.post(url, param, function() {})
     }
 </script>
 

@@ -75,6 +75,7 @@
         modal = $("#review_modal");
     })
 
+    // 리뷰 등록
     function writeBtn() {
         if (!modal.find("textarea").val()) {
             alert("내용을 입력해주세요.");
@@ -84,6 +85,7 @@
 
         const url = "/contents/detail/review/insert";
 
+        // common.js - postFormData
         postFormData(url, setParam(), function() {
             alert("리뷰가 등록되었습니다.");
 

@@ -71,8 +71,6 @@
                     <img src="/resource/img/upload/review/${list.newNm}" alt="">
                 </c:if>
             </div>
-
-
             <div class="review_text right">
                 <div>
                     <span class="id">${list.userId}</span>

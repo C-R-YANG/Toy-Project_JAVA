@@ -26,8 +26,8 @@ public class ContentsController {
     private final FileService fileService;
 
     @GetMapping("/index")
+    // 파라미터 값에 따른 카테고리별 메뉴 페이지 세팅
     public String index(ParamDto paramDto, Model model) {
-
         model.addAttribute("contentsDto", contentsService.getBaseDto(paramDto));
         model.addAttribute("maxPage", contentsService.getMaxPage(paramDto));
 
@@ -35,6 +35,7 @@ public class ContentsController {
     }
 
     @PostMapping("/list")
+    // 장소 리스트 조회
     public String getContentsList(ParamDto paramDto, Model model) {
         model.addAttribute("contentsList", contentsService.getContentsList(paramDto));
         model.addAttribute("paramDto", paramDto);
@@ -43,15 +44,8 @@ public class ContentsController {
         return "contents/list/index";
     }
 
-    @GetMapping("/detail")
-    public String getContentsDataByCd(ParamDto paramDto, Model model) {
-        model.addAttribute("fileList", fileService.getPlaceFileList(paramDto));
-        model.addAttribute("place", contentsService.getContentsDataByCd(paramDto));
-
-        return "main/contents/detail/index";
-    }
-
     @GetMapping("/register/index")
+    // 장소 페이지 이동 요청
     public String register(@RequestParam(value = "opt", required = false)int opt, Model model) {
         model.addAttribute("opt", opt);
 
@@ -60,10 +54,19 @@ public class ContentsController {
 
     @ResponseBody
     @PostMapping("/register")
+    // 장소 등록
     public void insertPlaceData(PlaceDto placeDto) {
         contentsService.insertPlaceData(placeDto);
     }
 
+    @GetMapping("/detail")
+    // 상세 페이지 이동
+    public String getContentsDataByCd(ParamDto paramDto, Model model) {
+        model.addAttribute("fileList", fileService.getPlaceFileList(paramDto));
+        model.addAttribute("place", contentsService.getContentsDataByCd(paramDto));
+
+        return "main/contents/detail/index";
+    }
     @ResponseBody
     @PostMapping("/detail/like")
     public LikeDto getPlaceLikeData(int placeCd) {
@@ -77,6 +80,7 @@ public class ContentsController {
     }
 
     @PostMapping("/detail/review")
+    // 리뷰 리스트 조회
     public String getPlaceReviewList(int cd, Model model) {
         model.addAttribute("reviewList", contentsService.getPlaceReviewList(cd));
 
@@ -84,12 +88,14 @@ public class ContentsController {
     }
 
     @PostMapping("/detail/review/write")
+    // 리뷰 모달창
     public String review() {
         return "contents/detail/review/write";
     }
 
     @ResponseBody
     @PostMapping("/detail/review/insert")
+    // 리뷰 등록
     public void insertPlaceReviewData(ReviewDto reviewDto) {
         contentsService.insertPlaceReviewData(reviewDto);
     }

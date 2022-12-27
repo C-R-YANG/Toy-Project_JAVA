@@ -240,6 +240,7 @@
         });
     }
 
+    // 리뷰 리스트 조회
     async function getPlaceReviewList() {
         const url = "/contents/detail/review";
 
@@ -252,6 +253,7 @@
         })
     }
 
+    // 리뷰 쓰기 모달창
     function showReviewModal() {
         const url = "/contents/detail/review/write";
 
@@ -269,25 +271,7 @@
         })
     }
 
-    async function getLikeData() {
-        const url = '/contents/detail/like';
-
-        const param = {
-            "placeCd" : placeFlag.children("#cd").val(),
-        }
-
-        await $.post(url, param, function(data) {
-            const isLike  = data["likeYn"],
-                  likeTag = contents.find(".like");
-
-            likeTag.eq(0).text(isLike ? "💗" : "🖤");
-
-            isLike ? likeTag.addClass("pink") : likeTag.removeClass("pink");
-
-            contents.find("#tot_like").text(data["cnt"]);
-        })
-    }
-
+    // 좋아요
     function mergeLikeData() {
         const url = '/contents/detail/like/merge';
 
@@ -298,6 +282,25 @@
         $.post(url, param, function() {
             // 좋아요 조회
             getLikeData();
+        })
+    }
+
+    async function getLikeData() {
+        const url = '/contents/detail/like';
+
+        const param = {
+            "placeCd" : placeFlag.children("#cd").val(),
+        }
+
+        await $.post(url, param, function(data) {
+            const isLike  = data["likeYn"],
+                likeTag = contents.find(".like");
+
+            likeTag.eq(0).text(isLike ? "💗" : "🖤");
+
+            isLike ? likeTag.addClass("pink") : likeTag.removeClass("pink");
+
+            contents.find("#tot_like").text(data["cnt"]);
         })
     }
 </script>

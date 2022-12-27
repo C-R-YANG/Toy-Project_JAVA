@@ -39,7 +39,6 @@ public class UserDao extends CommonDaos {
     }
 
     public void updatePw(UserDto userDto) {
-        log.info("aaa");
         boridaengdaengCommonDao.updateData("User.updatePw", userDto);
     }
 }

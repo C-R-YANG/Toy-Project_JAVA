@@ -36,8 +36,12 @@
               param = { "email" : $("#find_id_email").val() }
 
         $.post(url, param, function(data) {
-            data ? alert("아이디는 (" + data + ") 입니다.") : alert("이메일을 다시 확인해주세요.");
-            $.smartPop.close("find_id_modal");
+            if(data) {
+                alert("아이디는 (" + data + ") 입니다.")
+                $.smartPop.close("find_id_modal");
+            } else {
+                alert("이메일을 다시 확인해주세요.");
+            }
         })
     }
 

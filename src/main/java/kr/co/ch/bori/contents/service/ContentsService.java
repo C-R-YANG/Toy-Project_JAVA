@@ -7,6 +7,7 @@ import kr.co.ch.bori.contents.dto.*;
 import kr.co.ch.bori.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ public class ContentsService {
     private final FileService fileService;
 
     public List<PlaceDto> getContentsList(ParamDto paramDto) {
+        // 장소 리스트 호출
         return contentsDao.getContentsList(paramDto);
     }
 
@@ -47,12 +49,14 @@ public class ContentsService {
 
         Integer district = paramDto.getDistrict();
 
+        // 메뉴별 opt 값 세팅
         boolean isFood     = opt == 0,
                 isCafe     = opt == 1,
                 isHospital = opt == 2;
 
         String districtNm;
 
+        // district 값에 따른 districtNm 세팅
         if (district != null) {
             districtNm = district == 0 ? "동구" :
                          district == 1 ? "서구" :
@@ -62,11 +66,13 @@ public class ContentsService {
             districtNm = "전체";
         }
 
+        // 메뉴별 영어, 한글 이름 세팅
         String engNm = isFood ? "FOOD" : isCafe ? "CAFE" : isHospital ? "HOSPITAL" : "BEAUTY",
                korNm = isFood ? "식당"  : isCafe ? "카페"  : isHospital ? "병원"     : "미용";
 
         List<String> sortList = new ArrayList<>();
 
+        // FOOD, HOSPITAL 메뉴에만 sortList 추가
         if (isFood) {
             sortList.add("전체");
             sortList.add("한식");
@@ -83,6 +89,7 @@ public class ContentsService {
 
         ContentsDto contentsDto = new ContentsDto();
 
+        // contentsDto 데이터 삽입
         contentsDto.setOpt(opt);
         contentsDto.setEngNm(engNm);
         contentsDto.setKorNm(korNm);
@@ -96,8 +103,10 @@ public class ContentsService {
 
     @Transactional
     public void insertPlaceData(PlaceDto placeDto) {
+        // 파일저장시(file.place_cd)에도 place.cd 사용해야하기때문에 place.MAX(cd) + 1 값을 미리 조회
         int placeCd = contentsDao.getPlaceSeq();
 
+        // 조회한 place.cd값을 세팅
         placeDto.setCd(placeCd);
 
         // 장소 정보 저장
@@ -121,17 +130,22 @@ public class ContentsService {
 
     @Transactional
     public void mergePlaceData(int placeCd) {
-        LikeDto likeDto = new LikeDto();
+        // 이장소에 내가 좋아요 누른여부, 이장소의 총 좋아요 개수
+        LikeDto likeDto = this.getPlaceLikeData(placeCd);
 
+        // 장소코드 세팅
         likeDto.setPlaceCd(placeCd);
 
+        // 유저코드 세팅
         if (SecuritySession.getCurrentMember() != null) {
             likeDto.setUserCd(SecuritySession.getCurrentMember().getCd());
         }
 
-        if (getPlaceLikeData(placeCd).isLikeYn()) {
+        if (likeDto.isLikeYn()) {
+            // 좋아요를 누른상태로 눌렀을경우 삭제처리
             contentsDao.deletePlaceLikeData(likeDto);
         } else {
+            // 좋아요를 안누른상태로 눌렀을경우 추가처리
             contentsDao.insertPlaceLikeData(likeDto);
         };
 
